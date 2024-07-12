@@ -1,0 +1,40 @@
+.search-form {
+    top: 20vh;
+    position: absolute;
+    left: 20vw;
+}
+
+.search-form:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.search-bar {
+    width: 55vw;
+    height: 3.5vh;
+    font-size: 16px;
+    padding-left: 15px;
+    border-radius: 6px;
+    border: 2px solid black;
+    outline: none;
+    position: relative;
+}
+
+.submit {
+    width: 7vh;
+    height: 3vh;
+    background: none;
+    position: absolute;
+    top: 0.65vh;
+    right: 0.5vw;
+    background-color: #007BFF;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    border: none;
+}
+
+.submit:hover {
+    background-color: #0084ff;
+}

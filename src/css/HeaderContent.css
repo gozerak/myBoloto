@@ -1,0 +1,40 @@
+.header-name {
+    font-family: 'Inknut Antiqua';
+    font-size: 32px;
+    font-weight: 600;
+    display: flex;
+    width: 15vw;
+    margin-left: 3vw
+}
+
+.chapters {
+    font-family: 'Kanit';
+    font-size: 24px;
+    display: flex;
+    width: 10vw;
+    margin-right: 5vw;
+    margin-left: 5vw;
+}
+
+.login {
+    width: 106px;
+    height: 36px;
+    margin-left: 30vw;
+    background-color: #0056B3;
+    color: white;
+    border-radius: 8px;
+    font-size: 20px;
+    border: none;
+}
+
+#for-executor {
+    margin-right: 2vw;
+}
+
+#for-customer {
+    margin-left: 2vw;
+}
+
+.login:hover {
+    background-color: #0773e7;
+}
