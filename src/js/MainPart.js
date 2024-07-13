@@ -1,6 +1,7 @@
 import Search from "./Search";
 import "../css/MainPart.css";
 import OrderCard from "./OrderCard";
+import Filters from "./Filters";
 
 
 export default function MainPart () {
@@ -8,6 +9,7 @@ export default function MainPart () {
         <div className="main">
             <Search />
             <OrderCard />
+            <Filters />
         </div>
     )
 }

@@ -1,6 +1,65 @@
 .order-card{
-    position: absolute;
-    left: 20vw;
-    width: 30vw;
+    position: relative;
+    top: 20vh;
+    left: 19.5vw;
+    width: 40vw;
     height: auto;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 10px;
+    background-color: #FEF6E1;
+}
+
+.order-card:hover {
+    background-color: #f5e1b0;
+}
+
+.card-cost {
+    position: absolute;
+    top: 1vh;
+    right: 2vw;
+}
+
+.card-employer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2vh;
+}
+
+.card-employer {
+    margin: 0;
+    margin-bottom: 2vh;
+}
+
+.respond-btn {
+    margin-left: 20px;
+    margin-bottom: 1vh;
+    width: 7vw;
+    height: 4vh;
+    background: none;
+    background-color: #28A745;
+    border-radius: 16px;
+    color: white;
+    font-size: 16px;
+    border: none;
+}
+
+.respond-btn:hover {
+    background-color:#22b946 ;
+}
+
+.card-header,
+.card-main-info {
+    margin-top: 20px;
+}
+
+.hr-line {
+    border: 0;
+    height: 1px;
+    background: #ccc;
+    margin: 5px 0;
 }

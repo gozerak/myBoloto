@@ -1,0 +1,93 @@
+.filters {
+    position: absolute;
+    top: 31vh;
+    right: 14.5vw;
+    width: 22vw;
+    border: 1px solid black;
+    background-color: #FEF6E1;
+}
+
+.filters-names {
+    margin-left: 0.5vw;
+    margin-bottom: 0.6vh;
+}
+
+.dropdown-select {
+    width: 80%;
+    height: 4vh;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    margin-left: 0.5vw;
+}
+
+.filters-header {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+}
+
+#filter-hdr {
+    position: relative;
+}
+
+.undo-btn {
+    border: none;
+    background-color: #FEF6E1;
+}
+
+.undo-btn:hover {
+    background-color: #f8edd0;
+}
+
+.datetime {
+    display: flex;
+    flex-direction: row;
+    height: 3vh;
+    align-items: center;
+}
+
+.date {
+    margin: 0 0.5vw 0 0.5vw;
+    height: 3vh;
+}
+
+.input-cost {
+    margin-left: 0.5vw;
+    height: 3vh;
+    width: 80%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.other-filters {
+    margin-bottom: 0vh;
+}
+
+#sortby {
+    width: 90%;
+}
+
+.total-found-block {
+    display: flex;
+    justify-content: center;
+}
+
+.total-found-button {
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    width: auto;
+    height: 4vh;
+    background-color: #FD7E14;
+    border-radius: 4px;
+    color: white;
+    border: 1px solid black;
+}
+
+.total-found-button:hover {
+    background-color: #ff8f33;
+}
