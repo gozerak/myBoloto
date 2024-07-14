@@ -4,16 +4,8 @@
     font-weight: 600;
     display: flex;
     width: 15vw;
-    margin-left: 3vw
-}
-
-.chapters {
-    font-family: 'Kanit';
-    font-size: 24px;
-    display: flex;
-    width: 10vw;
-    margin-right: 5vw;
-    margin-left: 5vw;
+    margin-left: 3vw;
+    user-select: none;
 }
 
 .login {
@@ -37,4 +29,69 @@
 
 .login:hover {
     background-color: #0773e7;
+}
+
+.chapter-executor,
+.chapter-customer {
+    background-color: white;
+    border: none;
+    width: 13vw;
+    height: 10vh;
+    margin-left: 3vw;
+    align-items: center;
+    font-family: 'Kanit';
+    font-size: 24px;
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.chapter-executor:active {
+    border-bottom: 3px solid red;
+    background-color: #ebebee;
+    text-decoration: none;
+}
+
+.chapter-executor:hover {
+    background-color: #ebebee;
+    cursor:pointer;
+    text-decoration: none;
+}
+
+
+
+.chapter-customer:active {
+    border-bottom: 3px solid red;
+    background-color: #ebebee;
+    text-decoration: none;
+}
+
+.chapter-customer:hover {
+    background-color: #ebebee;
+    cursor:pointer;
+    text-decoration: none;
+}
+
+#for-executor {
+    height: 10vh;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+    margin-right: 0;
+    user-select: none;
+    text-decoration: none;
+    color: black;
+}
+
+#for-customer {
+    height: 10vh;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+    margin-right: 0;
+    margin-left: 0;
+    user-select: none;
+    text-decoration: none;
+    color: black;
 }
