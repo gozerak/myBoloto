@@ -6,6 +6,7 @@
     width: 15vw;
     margin-left: 3vw;
     user-select: none;
+    white-space: nowrap
 }
 
 .login {
@@ -47,7 +48,7 @@
     text-decoration: none;
 }
 
-.chapter-executor:active {
+.active-link {
     border-bottom: 3px solid red;
     background-color: #ebebee;
     text-decoration: none;

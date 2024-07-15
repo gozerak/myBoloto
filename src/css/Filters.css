@@ -1,11 +1,3 @@
-.filters {
-    position: absolute;
-    top: 31vh;
-    right: 14.5vw;
-    width: 22vw;
-    border: 1px solid black;
-    background-color: #FEF6E1;
-}
 
 .filters-names {
     margin-left: 0.5vw;

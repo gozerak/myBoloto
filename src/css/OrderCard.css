@@ -1,8 +1,6 @@
 .order-card{
     position: relative;
-    top: 20vh;
-    left: 19.5vw;
-    width: 40vw;
+    width: 50vw;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -11,6 +9,7 @@
     border-radius: 4px;
     padding: 10px;
     background-color: #FEF6E1;
+    margin-bottom: 10px;
 }
 
 .order-card:hover {
@@ -38,7 +37,7 @@
 .respond-btn {
     margin-left: 20px;
     margin-bottom: 1vh;
-    width: 7vw;
+    width: auto;
     height: 4vh;
     background: none;
     background-color: #28A745;
@@ -62,4 +61,15 @@
     height: 1px;
     background: #ccc;
     margin: 5px 0;
+}
+
+.card-header{
+    font-size: 24px;
+    font-weight: 550;
+}
+
+.card-cost,
+.card-main-info,
+.card-employer{
+    font-size: 20px;
 }

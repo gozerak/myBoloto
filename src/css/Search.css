@@ -1,6 +1,6 @@
 .search-form {
-    top: 20vh;
-    position: absolute;
+    top: 5vh;
+    position: relative;
     left: 20vw;
 }
 
@@ -25,9 +25,9 @@
     width: 7vh;
     height: 3vh;
     background: none;
-    position: absolute;
-    top: 0.65vh;
-    right: 0.5vw;
+    position: relative;
+    top: 0.07vh;
+    right: 4.2vw;
     background-color: #007BFF;
     border-radius: 4px;
     color: white;

@@ -1,6 +1,6 @@
 import "../css/HeaderContent.css";
 import "@fontsource/inknut-antiqua";
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function HeaderName () {
     return (
@@ -11,12 +11,12 @@ function HeaderName () {
 export function HeaderChapters() {
     return(
         <>
-        <Link to="/" className="chapter-executor">
+        <NavLink to="/" className={({ isActive }) => isActive ? "chapter-executor active-link" : "chapter-executor"} >
         <div id="for-executor">Исполнителю</div>
-        </Link>
-        <Link to="/customer" className="chapter-customer">
+        </NavLink>
+        <NavLink to="/customer" className={({ isActive }) => isActive ? "chapter-customer active-link" : "chapter-customer"}>
         <div id="for-customer">Заказчику</div>
-        </Link>
+        </NavLink>
         </>
     )
 }
