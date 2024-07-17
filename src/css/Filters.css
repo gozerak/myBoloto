@@ -11,6 +11,11 @@
     border-radius: 4px;
     font-size: 1em;
     margin-left: 0.5vw;
+    color: #999;
+}
+
+.dropdown-select.active {
+    color: black;
 }
 
 .filters-header {
@@ -82,4 +87,12 @@ input::-webkit-inner-spin-button {
 
 .total-found-button:hover {
     background-color: #ff8f33;
+}
+
+.select-filters {
+    color: black;
+}
+
+.dropdown-select option.select-filters {
+    color: black;
 }

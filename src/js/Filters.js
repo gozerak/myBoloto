@@ -1,4 +1,6 @@
+import { useState } from "react"
 import "../css/Filters.css"
+import { useJobs } from "../hooks/useJobs"
 
 
 function Sortby () {
@@ -36,14 +38,25 @@ function Cost () {
     )
 }
 
-function OtherFilters ({title}) {
+function OtherFilters ({title, options =[]}) {
+    const [selectedValue, setSelectedValue] = useState('');
+
+    function handleChange(event) {
+        setSelectedValue(event.target.value);
+    }
+
     return (
         <div className="other-filters">
         <p className="filters-names">{title}</p>
-        <select className="dropdown-select">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
+        <select 
+                className={`dropdown-select ${selectedValue ? 'active' : ''}`} 
+                onChange={handleChange}
+                value={selectedValue}
+            >
+        <option className="selected-disabled" hidden value="">{title}</option>
+            {options.map(option => (
+                    <option className="select-filters" key={option.id} value={option.id}>{option.name}</option>
+                ))}
         </select>
         </div>
     )
@@ -59,6 +72,19 @@ function TotalFoundButton () {
 
 
 export default function Filters () {
+    const {actionTypes} = useJobs();
+    const {places} = useJobs();
+
+    const actionTypesOptions = Object.entries(actionTypes).map(([id, name]) => ({
+        id,
+        name
+    }));
+
+    const placesOptions = Object.entries(places).map(([id, name]) => ({
+        id,
+        name
+    }));
+
     return (
         <div className="filters">
             <div className="filters-header">
@@ -68,9 +94,9 @@ export default function Filters () {
         <Sortby />
         <Date />
         <Cost />
-        <OtherFilters title="Вид деятельности"/>
+        <OtherFilters title="Вид деятельности" options = {actionTypesOptions}/>
         <OtherFilters title="Регион"/>
-        <OtherFilters title="Город"/>
+        <OtherFilters title="Город"  options = {placesOptions}/>
         <OtherFilters title="Организация"/>
         <TotalFoundButton />
         </div>

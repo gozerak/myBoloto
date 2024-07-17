@@ -8,13 +8,6 @@ export default function MainPart () {
         <div className="main">
             <div className="order-cards">
             <OrderCard />
-            <OrderCard />
-            <OrderCard />
-            <OrderCard />
-            <OrderCard />
-            <OrderCard />
-            <OrderCard />
-            <OrderCard />
             </div>
             <Filters />
         </div>
