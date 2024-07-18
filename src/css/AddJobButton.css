@@ -1,0 +1,73 @@
+.add-job-btn {
+    top: 5vh;
+    width: auto;
+    height: 4vh;
+    background-color: #0bca1b;
+    border-radius: 6px;
+    color: white;
+    border:none;
+    border-radius: 4px;
+    position: relative
+}
+
+.add-job-btn:hover {
+    background-color: #1eff00;
+}
+
+.add-job-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-job-form label {
+    margin-bottom: 10px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.modal-buttons button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+div {
+    margin-bottom: 10px;
+}
+input {
+    border: 1px solid grey;
+    margin-left:5px;
+    height: 20px;
+}
+label{
+    margin-left:5px
+}
+select{
+    height: 30px;
+}
+
+.modal-btn-back {
+    background-color: #d63107;
+    color:white;
+    border:none;
+    border-radius: 4px;
+}
+
+.modal-btn-back:hover {
+    background-color: #ff3300;
+}
+
+.modal-btn-submit {
+    background-color: #0bca1b;
+    color:white;
+    border:none;
+    border-radius: 4px;
+}
+
+.modal-btn-submit:hover{
+    background-color: #1eff00;
+}

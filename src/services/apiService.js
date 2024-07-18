@@ -31,3 +31,13 @@ export const fetchPlaces = async () => {
         throw error;
     }
 }
+
+export const fetchOrganizations = async () => {
+    try {
+        const response = await axios.get (`${API_BASE_URL}/job_provider/get_all`)
+        return response.data;
+    } catch (error) {
+        console.error ('Error fetching organizations: ', error);
+        throw error;
+    }
+}

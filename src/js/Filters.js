@@ -74,6 +74,7 @@ function TotalFoundButton () {
 export default function Filters () {
     const {actionTypes} = useJobs();
     const {places} = useJobs();
+    const {organizations} = useJobs();
 
     const actionTypesOptions = Object.entries(actionTypes).map(([id, name]) => ({
         id,
@@ -81,6 +82,11 @@ export default function Filters () {
     }));
 
     const placesOptions = Object.entries(places).map(([id, name]) => ({
+        id,
+        name
+    }));
+
+    const organizationsOptions = Object.entries(organizations).map(([id, name]) => ({
         id,
         name
     }));
@@ -97,7 +103,7 @@ export default function Filters () {
         <OtherFilters title="Вид деятельности" options = {actionTypesOptions}/>
         <OtherFilters title="Регион"/>
         <OtherFilters title="Город"  options = {placesOptions}/>
-        <OtherFilters title="Организация"/>
+        <OtherFilters title="Организация" options={organizationsOptions}/>
         <TotalFoundButton />
         </div>
     )

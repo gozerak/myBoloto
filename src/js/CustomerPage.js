@@ -1,4 +1,5 @@
 import Header from "./Header";
+import MainCustomerPart from "./MainCustomerPart";
 import Search from "./Search";
 
 export default function CustomerPage() {
@@ -6,6 +7,7 @@ export default function CustomerPage() {
         <div className="CustomerApp">
             <Header />
             <Search />
+            <MainCustomerPart />
             </div>
     )
 }
