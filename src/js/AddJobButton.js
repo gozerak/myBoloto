@@ -79,6 +79,7 @@ export default function AddJobButton() {
                         <label>
                             Заголовок: 
                             <input
+                                autocomplete="off"
                                 type="text"
                                 name="title"
                                 value={formData.title}
@@ -91,6 +92,7 @@ export default function AddJobButton() {
                         <label>
                             Описание: 
                             <input
+                                autocomplete="off"  
                                 type="text"
                                 name="description"
                                 value={formData.description}
@@ -158,6 +160,7 @@ export default function AddJobButton() {
                         <label>
                             Стоимость заказа: 
                             <input
+                                autocomplete="off"
                                 type="number"
                                 name="price"
                                 value={formData.price}
@@ -186,6 +189,7 @@ export default function AddJobButton() {
                         <label>
                             Адрес: 
                             <input
+                                autocomplete="off"
                                 type="text"
                                 name="job_address"
                                 value={formData.job_address}

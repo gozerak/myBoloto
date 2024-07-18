@@ -33,7 +33,7 @@ function Cost () {
     return (
         <div>
         <p className="filters-names">Стоимость заказа</p>
-        <input type="number" className="input-cost"/>
+        <input type="number" autocomplete="off" className="input-cost"/>
         </div>
     )
 }
@@ -62,10 +62,10 @@ function OtherFilters ({title, options =[]}) {
     )
 }
 
-function TotalFoundButton () {
+function TotalFoundButton ({totalOrders}) {
  return (
     <div className="total-found-block">
-    <button className="total-found-button">Показать 16 заказов</button>
+    <button className="total-found-button">Показать {totalOrders} заказов</button>
     </div>
  )
 }
@@ -75,6 +75,7 @@ export default function Filters () {
     const {actionTypes} = useJobs();
     const {places} = useJobs();
     const {organizations} = useJobs();
+    const {jobsLength} = useJobs();
 
     const actionTypesOptions = Object.entries(actionTypes).map(([id, name]) => ({
         id,
@@ -104,7 +105,7 @@ export default function Filters () {
         <OtherFilters title="Регион"/>
         <OtherFilters title="Город"  options = {placesOptions}/>
         <OtherFilters title="Организация" options={organizationsOptions}/>
-        <TotalFoundButton />
+        <TotalFoundButton totalOrders={jobsLength}/>
         </div>
     )
 

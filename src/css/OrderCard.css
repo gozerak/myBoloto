@@ -50,6 +50,7 @@
 
 .respond-btn:hover {
     background-color:#22b946 ;
+    cursor: pointer;
 }
 
 .card-header,
@@ -74,3 +75,44 @@
 .card-employer{
     font-size: 20px;
 }
+
+.delete-card-btn {
+    margin-left: 20px;
+    margin-bottom: 1vh;
+    margin-right: 20px;
+    width: auto;
+    min-width: 120px;
+    height: 4vh;
+    background: none;
+    background-color: #c90f08;
+    border-radius: 16px;
+    color: white;
+    font-size: 16px;
+    border: none;
+}
+
+.delete-card-btn:hover {
+    background-color:#ff3300 ;
+    cursor: pointer;
+}
+
+.edit-card-btn {
+    margin-left: 20px;
+    margin-bottom: 1vh;
+    margin-right: 20px;
+    width: auto;
+    min-width: 120px;
+    height: 4vh;
+    background: none;
+    background-color: #e0960b;
+    border-radius: 16px;
+    color: white;
+    font-size: 16px;
+    border: none;
+}
+
+.edit-card-btn:hover {
+    background-color:#faa200 ;
+    cursor: pointer;
+}
+

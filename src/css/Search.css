@@ -37,6 +37,7 @@
 
 .submit:hover {
     background-color: #0084ff;
+    cursor: pointer;
 }
 
 .total-found {

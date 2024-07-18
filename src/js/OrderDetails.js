@@ -1,11 +1,26 @@
+import { useLocation } from "react-router-dom"
+
 function Respond () {
     return (
         <button className="respond-btn">Откликнуться</button>
     )
 }
 
+function DeleteCard () {
+    return (
+        <button className="delete-card-btn">Удалить</button>
+    )
+}
+
+function EditCard () {
+    return (
+        <button className="edit-card-btn">Редактировать</button>
+    )
+}
+
 export default function OrderDetails ({order}) {
-    console.log(order)
+    const location = useLocation();
+    const isCustomerPage = location.pathname === "/customer";
     return (
         <>
         <p className="card-header">{order.title}</p>
@@ -18,7 +33,14 @@ export default function OrderDetails ({order}) {
         <hr className="hr-line"/>
         <div className="card-employer-container">
                 <p className="card-employer">{order.organization}</p>
-                <Respond />
+                {isCustomerPage? (
+                    <div className="edit-delete-buttons">
+                    <EditCard />
+                    <DeleteCard/ >
+                    </div>
+                    )
+                : <Respond />
+                }
             </div>
         </>
     )

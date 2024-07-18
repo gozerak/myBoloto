@@ -12,6 +12,7 @@
 
 .add-job-btn:hover {
     background-color: #1eff00;
+    cursor: pointer;
 }
 
 .add-job-form {

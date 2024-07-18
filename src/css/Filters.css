@@ -12,6 +12,7 @@
     font-size: 1em;
     margin-left: 0.5vw;
     color: #999;
+    cursor: pointer;
 }
 
 .dropdown-select.active {
@@ -35,6 +36,7 @@
 
 .undo-btn:hover {
     background-color: #f8edd0;
+    cursor:pointer;
 }
 
 .datetime {
@@ -87,6 +89,7 @@ input::-webkit-inner-spin-button {
 
 .total-found-button:hover {
     background-color: #ff8f33;
+    cursor: pointer;
 }
 
 .select-filters {

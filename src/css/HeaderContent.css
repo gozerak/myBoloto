@@ -20,16 +20,17 @@
     border: none;
 }
 
+.login:hover {
+    background-color: #0773e7;
+    cursor: pointer;
+}
+
 #for-executor {
     margin-right: 2vw;
 }
 
 #for-customer {
     margin-left: 2vw;
-}
-
-.login:hover {
-    background-color: #0773e7;
 }
 
 .chapter-executor,
