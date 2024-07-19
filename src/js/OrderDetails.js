@@ -25,7 +25,7 @@ export default function OrderDetails ({order}) {
                 <p className="card-employer">{order.organization}</p>
                 {isCustomerPage? (
                     <div className="edit-delete-buttons">
-                    <EditCard />
+                    <EditCard order= {order}/>
                     <DeleteCard cardJob_id= {order.id} />
                     </div>
                     )
