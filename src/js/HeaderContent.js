@@ -1,6 +1,7 @@
 import "../css/HeaderContent.css";
 import "@fontsource/inknut-antiqua";
 import { NavLink } from 'react-router-dom';
+import HeaderLogin from "./HeaderLogin";
 
 function HeaderName () {
     return (
@@ -21,11 +22,7 @@ export function HeaderChapters() {
     )
 }
 
-function HeaderLogin () {
-    return (
-        <button className="login">Войти</button>
-    )
-}
+
 
 export default function HeaderContent() {
     return (

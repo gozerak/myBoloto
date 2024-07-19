@@ -31,9 +31,9 @@ function Date () {
 
 function Cost () {
     return (
-        <div>
+        <div autoComplete="off">
         <p className="filters-names">Стоимость заказа</p>
-        <input type="number" autocomplete="off" className="input-cost"/>
+        <input type="number"  className="input-cost"/>
         </div>
     )
 }
