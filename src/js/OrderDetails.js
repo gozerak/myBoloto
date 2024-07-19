@@ -1,20 +1,10 @@
 import { useLocation } from "react-router-dom"
+import EditCard from "./EditCard";
+import DeleteCard from "./DeleteCard";
 
 function Respond () {
     return (
         <button className="respond-btn">Откликнуться</button>
-    )
-}
-
-function DeleteCard () {
-    return (
-        <button className="delete-card-btn">Удалить</button>
-    )
-}
-
-function EditCard () {
-    return (
-        <button className="edit-card-btn">Редактировать</button>
     )
 }
 
@@ -36,7 +26,7 @@ export default function OrderDetails ({order}) {
                 {isCustomerPage? (
                     <div className="edit-delete-buttons">
                     <EditCard />
-                    <DeleteCard/ >
+                    <DeleteCard cardJob_id= {order.id} />
                     </div>
                     )
                 : <Respond />
