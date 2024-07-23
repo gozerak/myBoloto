@@ -1,13 +1,16 @@
 import { useState } from 'react';
-import '../css/HeaderLogin.css'
-import Modal from './Modal'
+import { useContext } from 'react';
+import '../css/HeaderLogin.css';
+import Modal from './Modal';
+import { UserContext } from './UserContext';
 
 export default function HeaderLogin () {
     const [isModalOpen, setModalOpen] = useState(false);
     const [loginData, setLoginData] = useState ( {
-        email: '',
+        username: '',
         password: '',
     });
+    const { setUserData } = useContext(UserContext);
 
     const handleChange = (e) => {
         const { name, value} = e.target;
@@ -20,7 +23,7 @@ export default function HeaderLogin () {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch("http://10.14.113.150:8010/login/getaccess", {
+            const response = await fetch("http://10.14.113.150:8010/auth/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -28,7 +31,32 @@ export default function HeaderLogin () {
                 body: JSON.stringify(loginData),
             });
             if (response.ok) {
+                const authData = await response.json()
+                const accessToken = authData.access_token;
+                const userId = authData.user
+                //запись userId в storage
+                localStorage.setItem('userId', userId);
+                //запись токена в куки
+                document.cookie = `accessToken=${accessToken}`;
                 console.log("Доступ получен");
+
+                try{
+                    const response = await fetch(`http://10.14.113.150:8010/user_manager/get_user_by_id?user_id=${userId}`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        }
+                    });
+                    if (response.ok) {
+                        const userData = await response.json()
+                        setUserData(userData);
+                        console.log('Данные пользователя успешно загружены')
+                    }
+                } catch (error) {
+                    console.log ("Error:", error)
+                }
+
+
                 setModalOpen(false);
                 //Логика получения кукиса
             } else {
@@ -50,8 +78,9 @@ export default function HeaderLogin () {
                         <div>
                             <input
                                 type="text"
-                                name="login"
-                                value={loginData.login}
+                                name="username"
+                                autoComplete='off'
+                                value={loginData.username}
                                 onChange={handleChange}
                                 required
                                 />
@@ -65,6 +94,7 @@ export default function HeaderLogin () {
                             <input
                                 type="password"
                                 name="password"
+                                autoComplete='off'
                                 value={loginData.password}
                                 onChange={handleChange}
                                 required

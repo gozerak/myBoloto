@@ -2,12 +2,14 @@ import "../css/HeaderContent.css";
 import "@fontsource/inknut-antiqua";
 import { NavLink } from 'react-router-dom';
 import HeaderLogin from "./HeaderLogin";
+import ProfileIcon from "./ProfileIcon";
 
 function HeaderName () {
     return (
         <p className="header-name">Job Search</p>
     )
 }
+
 
 export function HeaderChapters() {
     return(
@@ -25,11 +27,22 @@ export function HeaderChapters() {
 
 
 export default function HeaderContent() {
+    let accessToken = null;
+
+    if (localStorage.getItem('userId')) {
+      const cookieString = document.cookie;
+      const cookies = cookieString.split('; ').find(row => row.startsWith('accessToken'));
+    
+      if (cookies) {
+        accessToken = cookies.split('=')[1];
+      }
+    } 
+
     return (
         <>
         <HeaderName />
         <HeaderChapters />
-        <HeaderLogin />
+        {accessToken? <ProfileIcon /> : <HeaderLogin />}
         </>   
     )
     

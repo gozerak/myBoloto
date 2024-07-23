@@ -3,6 +3,7 @@
     height: 100vh;
     display: flex;
     gap: 22vw;
+    overflow: hidden;
 }
 
 .filters {
