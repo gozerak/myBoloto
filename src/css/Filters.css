@@ -1,42 +1,24 @@
 
-.filters-names {
-    margin-left: 0.5vw;
-    margin-bottom: 0.6vh;
+p {
+    margin-left: 1vw;
+    color: #000743;
+    margin-bottom: 10px;
 }
 
 .dropdown-select {
+    border: none;
     width: 80%;
     height: 4vh;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border-bottom: 1px solid #000743;
     font-size: 1em;
     margin-left: 0.5vw;
     color: #999;
     cursor: pointer;
+    outline: none;
 }
 
 .dropdown-select.active {
     color: black;
-}
-
-.filters-header {
-    display: flex;
-    flex-direction: row;
-    justify-content:space-around;
-}
-
-#filter-hdr {
-    position: relative;
-}
-
-.undo-btn {
-    border: none;
-    background-color: #FEF6E1;
-}
-
-.undo-btn:hover {
-    background-color: #f8edd0;
-    cursor:pointer;
 }
 
 .datetime {
@@ -51,10 +33,30 @@
     height: 3vh;
 }
 
+.cost-block {
+    border: 1px solid #000743;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    margin-left:0.5vw;
+    justify-content: center;
+    vertical-align: middle;
+    height: 30px;
+}
+
 .input-cost {
     margin-left: 0.5vw;
-    height: 3vh;
-    width: 80%;
+    height: 20px;
+    width: 40%;
+    border: none;
+    outline: none;
+}
+
+.ruble {
+    margin-bottom: 5px;
+    margin-left: 0;
+    margin-top: 3px;
 }
 
 input::-webkit-outer-spin-button,

@@ -6,8 +6,9 @@ import { useJobs } from "../hooks/useJobs"
 function Sortby () {
     return (
         <div>
-        <p className="filters-names">Сортировать</p>
-        <select className="dropdown-select" id="sortby">
+        <p className="sort-name">Сортировать</p>
+        <select className="dropdown-select" id="sortby" defaultValue={null}>
+            <option selected hidden value=""></option>
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -32,8 +33,13 @@ function Date () {
 function Cost () {
     return (
         <div autoComplete="off">
-        <p className="filters-names">Стоимость заказа</p>
+        <p className="filters-names">Уровень дохода</p>
+        <div className="cost-block">
         <input type="number"  className="input-cost"/>
+        <div>-</div>
+        <input type="number"  className="input-cost"/>
+        <p className="ruble">₽</p>
+        </div>
         </div>
     )
 }
@@ -53,7 +59,7 @@ function OtherFilters ({title, options =[]}) {
                 onChange={handleChange}
                 value={selectedValue}
             >
-        <option className="selected-disabled" hidden value="">{title}</option>
+        <option className="selected-disabled" hidden value=""></option>
             {options.map(option => (
                     <option className="select-filters" key={option.id} value={option.id}>{option.name}</option>
                 ))}
@@ -94,10 +100,6 @@ export default function Filters () {
 
     return (
         <div className="filters">
-            <div className="filters-header">
-        <p className="filters-name" id="filter-hdr">Фильтры</p>
-        <button className="undo-btn">Сбросить</button>
-        </div>
         <Sortby />
         <Date />
         <Cost />

@@ -11,8 +11,9 @@
     position: relative;
     top: 7vh;
     width: 22vw;
-    border: 1px solid black;
-    background-color: #FEF6E1;
+    border: 1px solid #F5F5F5;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .order-cards {

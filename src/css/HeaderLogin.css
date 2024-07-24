@@ -1,17 +1,18 @@
 .login {
     width: 106px;
-    height: 36px;
+    height: 26px;
     margin-left: 30vw;
-    background-color: #0056B3;
-    color: white;
-    border-radius: 8px;
-    font-size: 20px;
+    font-size: 16px;
     border: none;
+    text-decoration: none;
+    color: #000743;
+    background-color: white;
+    border-right: 1px solid #8A8686;
 }
 
 .login:hover {
-    background-color: #0773e7;
     cursor: pointer;
+    text-decoration: underline;
 }
 
 .add-login-form {

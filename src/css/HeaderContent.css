@@ -1,12 +1,15 @@
 .header-name {
-    font-family: 'Inknut Antiqua';
-    font-size: 32px;
+    font-family: 'Mulish';
+    font-size: 20px;
     font-weight: 600;
     display: flex;
-    width: 15vw;
-    margin-left: 3vw;
+    width: 85px;
+    margin-left: 1vw;
     user-select: none;
-    white-space: nowrap
+    white-space: normal;
+}
+img {
+    margin-left: 20vw;
 }
 
 #for-executor {
@@ -20,27 +23,29 @@
 .chapter-executor,
 .chapter-customer {
     background-color: white;
+    padding-top: 15px;
     border: none;
-    width: 13vw;
-    height: 10vh;
-    margin-left: 3vw;
+    width: 115px;
+    height: 78px;
+    margin-left: 5vw;
     align-items: center;
     font-family: 'Kanit';
-    font-size: 24px;
-    vertical-align: middle;
+    font-size: 18px;
+    vertical-align:text-bottom;
     display: flex;
     justify-content: center;
     text-decoration: none;
+    white-space: nowrap;
 }
 
 .active-link {
-    border-bottom: 3px solid red;
-    background-color: #ebebee;
+    border-bottom: 3px solid #000743;
+    /* background-color: #ebebee; */
     text-decoration: none;
 }
 
 .chapter-executor:hover {
-    background-color: #ebebee;
+    /* background-color: #ebebee; */
     cursor:pointer;
     text-decoration: none;
 }
@@ -48,13 +53,13 @@
 
 
 .chapter-customer:active {
-    border-bottom: 3px solid red;
-    background-color: #ebebee;
+    border-bottom: 3px solid #000743;
+    /* background-color: #ebebee; */
     text-decoration: none;
 }
 
 .chapter-customer:hover {
-    background-color: #ebebee;
+    /* background-color: #ebebee; */
     cursor:pointer;
     text-decoration: none;
 }
@@ -80,4 +85,10 @@
     user-select: none;
     text-decoration: none;
     color: black;
+}
+
+.report-problem {
+    font-size: 15px;
+    color: #8A8686;
+    margin-left: 1vw;
 }
