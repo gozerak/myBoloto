@@ -2,6 +2,7 @@ import "../css/HeaderContent.css";
 import "@fontsource/inknut-antiqua";
 import { NavLink } from 'react-router-dom';
 import HeaderLogin from "./HeaderLogin";
+import ProfileIcon from "./ProfileIcon";
 
 function HeaderName () {
     return (
@@ -36,12 +37,23 @@ function ReportProblem() {
 
 
 export default function HeaderContent() {
+    let accessToken = null;
+
+    if (localStorage.getItem('userId')) {
+      const cookieString = document.cookie;
+      const cookies = cookieString.split('; ').find(row => row.startsWith('accessToken'));
+    
+      if (cookies) {
+        accessToken = cookies.split('=')[1];
+      }
+    } 
+
     return (
         <>
         <HeaderLogo />
         <HeaderName />
         <HeaderChapters />
-        <HeaderLogin />
+        {accessToken? <ProfileIcon /> : <HeaderLogin />}
         <ReportProblem />
         </>   
     )

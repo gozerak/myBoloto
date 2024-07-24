@@ -4,5 +4,5 @@
     border-bottom: 1px solid #F5F5F5;
     display: flex;
     align-items: center;
-    justify-content: left;
+    justify-content: space-evenly;
 } 

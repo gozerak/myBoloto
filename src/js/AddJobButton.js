@@ -18,6 +18,7 @@ export default function AddJobButton() {
         is_active: true,
         job_address: "",
         organization_id: "",
+        owner_id: "7a88bbab-d86d-4ffa-912d-a07f2830bd0c",
     });
     const[isChecked,setIsChecked] = useState(false)
 
@@ -35,11 +36,13 @@ export default function AddJobButton() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(JSON.stringify(formData))
         try {
             const response = await fetch("http://10.14.113.150:8010/jobs/create", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*",
                 },
                 body: JSON.stringify(formData),
             });
