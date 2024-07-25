@@ -58,6 +58,7 @@ export default function HeaderLogin () {
 
 
                 setModalOpen(false);
+                window.location.reload()
                 //Логика получения кукиса
             } else {
                 console.error ('Доступ не получен')
