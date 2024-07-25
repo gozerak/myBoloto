@@ -1,8 +1,10 @@
 
 p {
-    margin-left: 1vw;
+    margin-left: 0.5vw;
     color: #000743;
     margin-bottom: 10px;
+    font-size: 18px ;
+    font-family: 'Mulish';
 }
 
 .dropdown-select {
@@ -10,15 +12,16 @@ p {
     width: 80%;
     height: 4vh;
     border-bottom: 1px solid #000743;
-    font-size: 1em;
+    font-size: 16px;
     margin-left: 0.5vw;
     color: #999;
     cursor: pointer;
     outline: none;
+    color:#000743;
 }
 
 .dropdown-select.active {
-    color: black;
+    color:#000743;
 }
 
 .datetime {
@@ -38,7 +41,7 @@ p {
     border-radius: 20px;
     display: flex;
     flex-direction: row;
-    width: 90%;
+    width: 60%;
     margin-left:0.5vw;
     justify-content: center;
     vertical-align: middle;
@@ -47,16 +50,27 @@ p {
 
 .input-cost {
     margin-left: 0.5vw;
+    padding-top: 5px;
     height: 20px;
-    width: 40%;
+    width: 30%;
     border: none;
     outline: none;
+    color:#000743;
+    font-size: 16px;
+}
+
+.dash {
+    font-size: 25px;
+    text-align: center;
+    margin-right: 0.2vw;
+    margin-left: 0.2vw;
+    margin-bottom: 25px
 }
 
 .ruble {
     margin-bottom: 5px;
-    margin-left: 0;
-    margin-top: 3px;
+    margin-left: 15px;
+    margin-top: 4px;
 }
 
 input::-webkit-outer-spin-button,
@@ -69,9 +83,9 @@ input::-webkit-inner-spin-button {
     margin-bottom: 0vh;
 }
 
-#sortby {
+/* #sortby {
     width: 90%;
-}
+} */
 
 .total-found-block {
     display: flex;
@@ -83,21 +97,21 @@ input::-webkit-inner-spin-button {
     margin-bottom: 2vh;
     width: auto;
     height: 4vh;
-    background-color: #FD7E14;
-    border-radius: 4px;
+    background-color: #000743;
+    border-radius: 16px;
     color: white;
     border: 1px solid black;
 }
 
 .total-found-button:hover {
-    background-color: #ff8f33;
+    background-color: #020c68;
     cursor: pointer;
 }
 
 .select-filters {
-    color: black;
+    color:#000743;
 }
 
 .dropdown-select option.select-filters {
-    color: black;
+    color:#000743;
 }

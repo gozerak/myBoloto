@@ -8,7 +8,7 @@ function Sortby () {
         <div>
         <p className="sort-name">Сортировать</p>
         <select className="dropdown-select" id="sortby" defaultValue={null}>
-            <option selected hidden value=""></option>
+            <option hidden value=""></option>
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -35,9 +35,9 @@ function Cost () {
         <div autoComplete="off">
         <p className="filters-names">Уровень дохода</p>
         <div className="cost-block">
-        <input type="number"  className="input-cost"/>
-        <div>-</div>
-        <input type="number"  className="input-cost"/>
+        <input type="number"  className="input-cost" placeholder="Цена от"/>
+        <div className="dash">-</div>
+        <input type="number"  className="input-cost" placeholder="до"/>
         <p className="ruble">₽</p>
         </div>
         </div>

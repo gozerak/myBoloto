@@ -1,7 +1,7 @@
 .search-form {
-    top: 5vh;
+    top: 56px;
     position: relative;
-    left: 20vw;
+    left: 13vw;
 }
 
 .search-form:after {
@@ -10,25 +10,33 @@
     display: table;
 }
 
-.search-bar {
-    width: 55vw;
-    height: 3.5vh;
-    font-size: 16px;
-    padding-left: 15px;
+.search-system {
+    width: 53vw;
+    height: 35px;
     border-radius: 6px;
     border: 2px solid black;
     outline: none;
-    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.search-bar {
+    width: 47vw;
+    height: 32px;
+    font-size: 16px;
+    padding-left: 1px;
+    border:none;
+    outline: none;
 }
 
 .submit {
-    width: 7vh;
-    height: 3vh;
+    margin-right: 6px;
+    width: 5vw;
+    height: 30px;
     background: none;
-    position: relative;
-    top: 0.07vh;
-    right: 3.7vw;
-    background-color: #007BFF;
+    background-color:#000743;
     border-radius: 4px;
     color: white;
     font-size: 16px;
@@ -36,7 +44,7 @@
 }
 
 .submit:hover {
-    background-color: #0084ff;
+    background-color: #020c68;
     cursor: pointer;
 }
 
@@ -44,4 +52,10 @@
     margin-top: 10px;
     font-size: 16px;
     color: #464545;
+}
+
+.search-and-add-card {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
 }

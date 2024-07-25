@@ -74,8 +74,9 @@ export default function HeaderLogin () {
         <Modal isOpen={isModalOpen} onClose={()=> setModalOpen(false)} >
             <form onSubmit={handleSubmit} className='add-login-form'>
                 <div>
+                    <p className='autorization'>Авторизация</p>
                     <label>
-                        Логин
+                        <p className='login-headers'>Логин</p>
                         <div>
                             <input
                                 type="text"
@@ -90,7 +91,7 @@ export default function HeaderLogin () {
                 </div>
                 <div>
                     <label>
-                        Пароль
+                    <p className='login-headers'>Пароль</p>
                         <div>
                             <input
                                 type="password"

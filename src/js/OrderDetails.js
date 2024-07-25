@@ -16,13 +16,23 @@ export default function OrderDetails ({order}) {
         <p className="card-header">{order.title}</p>
         <p className="card-cost">{order.price} ₽</p>
         <p className="card-main-info">{order.description}</p>
-        <p className="card-main-info">Период: {new Date(order.started_at).toLocaleDateString()} {order.finished_at? `- ${new Date(order.finished_at).toLocaleDateString()}`: null}</p>
-        <p className="card-main-info">Вид деятельности: {order.actionTypeName}</p>
-        <p className="card-main-info">Город: {order.place}</p>
-        <p className="card-main-info">Адрес: {order.job_address}</p>
-        <hr className="hr-line"/>
+        <div className="info-card">
+        <p className="card-main-info">Период</p>
+        <p className="card-order-value">{new Date(order.started_at).toLocaleDateString()} {order.finished_at? `- ${new Date(order.finished_at).toLocaleDateString()}`: null}</p>
+        </div>
+        <div className="info-card">
+        <p className="card-main-info">Род деятельности</p> 
+        <p className="card-order-value">{order.actionTypeName}</p>
+        </div>
+        <div className="info-card">
+        <p className="card-main-info">Город </p> 
+        <p className="card-order-value">{order.city}</p>
+        </div>
+        {/* <p className="card-main-info"><strong>Адрес </strong> {order.job_location}</p> */}
+        
         <div className="card-employer-container">
-                <p className="card-employer">{order.organization}</p>
+                <p className="card-employer">Предприятие</p>
+                <p className="card-order-value">{order.organization}</p>
                 {isCustomerPage? (
                     <div className="edit-delete-buttons">
                     <EditCard order= {order}/>

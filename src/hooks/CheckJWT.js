@@ -18,7 +18,7 @@ export const useCheckJWT = () => {
             }
 
             if (authToken === null) {
-                console.error("Необходимо перелогиниться");
+                // console.error("Необходимо перелогиниться");
                 setIsVerified(false);
                 return;
             }

@@ -1,25 +1,35 @@
 .order-card{
     position: relative;
-    width: 50vw;
+    width: 51.5vw;
     height: auto;
     display: flex;
     flex-direction: column;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* border: 1px solid rgba(0, 0, 0, 0.3); */
+    box-shadow: 1px 1px 4px 3px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     padding: 10px;
-    background-color: #FEF6E1;
+    background-color: #ffffff;
     margin-bottom: 10px;
 }
 
-.order-card:hover {
-    background-color: #f5e1b0;
+/* .order-card:hover {
+    background-color: #f0f0f0;
+} */
+
+.info-card {
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
 }
+
 
 .card-cost {
     position: absolute;
     top: 1vh;
     right: 2vw;
+    font-size: 20px;
 }
 
 .card-employer-container {
@@ -27,11 +37,13 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 2vh;
+    margin-top: 0;
 }
 
 .card-employer {
     margin: 0;
-    margin-bottom: 2vh;
+    margin-left: 0.5vw;
+    font-weight: bold;
 }
 
 .respond-btn {
@@ -41,7 +53,7 @@
     width: auto;
     height: 4vh;
     background: none;
-    background-color: #28A745;
+    background-color: #000743;
     border-radius: 16px;
     color: white;
     font-size: 16px;
@@ -49,7 +61,7 @@
 }
 
 .respond-btn:hover {
-    background-color:#22b946 ;
+    background-color:#020c68 ;
     cursor: pointer;
 }
 
@@ -70,9 +82,24 @@
     font-weight: 550;
 }
 
-.card-cost,
 .card-main-info,
 .card-employer{
     font-size: 20px;
+    min-width: 180px;
 }
 
+.card-main-info{
+    flex: 0 0 20px; /* Фиксированная ширина для меток, можно настроить по необходимости */
+    font-weight: bold;
+    white-space: nowrap;
+    padding-bottom: 15px;
+    margin-bottom: 0;
+}
+
+.card-order-value {
+    flex: 1;
+    margin-left: 10px;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-top: 5px;
+}
