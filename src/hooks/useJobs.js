@@ -18,8 +18,8 @@ export const useJobs = () => {
                     return acc;
                 }, {});
 
-                const placesMap = placesData.reduce((acc, place) => {
-                    acc[place.id] = place.title;
+                const placesMap = placesData.reduce((acc, city) => {
+                    acc[city.id] = city.title;
                     // console.log(acc)
                     return acc;
                 }, {});
@@ -32,7 +32,7 @@ export const useJobs = () => {
                 const enrichedJobs = jobsData.map (job => ({
                     ...job,
                     actionTypeName: actionTypesMap[job.action_type] || job.action_type,
-                    place: placesMap[job.location] || job.location,
+                    city: placesMap[job.city] || job.city,
                     organization: organizationsMap[job.organization_id] || job.organization,
                 }));
                 setJobs(enrichedJobs);

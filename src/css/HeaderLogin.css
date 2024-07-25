@@ -15,6 +15,15 @@
     text-decoration: underline;
 }
 
+.autorization{ 
+    text-align: center;
+}
+
+.login-headers {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .add-login-form {
     display: flex;
     flex-direction: column;
@@ -27,6 +36,7 @@
 .login-buttons {
     display: flex;
     justify-content: space-between;
+    flex-direction: column-reverse;
     margin-top: 20px;
 }
 
@@ -52,23 +62,24 @@ select{
 }
 
 .login-btn-back {
-    background-color: #d63107;
+    margin-top: 10px;
+    background-color: #9b2e2a;
     color:white;
     border:none;
     border-radius: 4px;
 }
 
 .login-btn-back:hover {
-    background-color: #ff3300;
+    background-color: #b33a1b;
 }
 
 .login-btn-submit {
-    background-color: #0bca1b;
+    background-color: #000743;
     color:white;
     border:none;
     border-radius: 4px;
 }
 
 .login-btn-submit:hover{
-    background-color: #1eff00;
+    background-color: #020c68;
 }

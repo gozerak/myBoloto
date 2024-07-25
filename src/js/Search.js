@@ -2,6 +2,7 @@ import "../css/Search.css"
 import { useLocation } from "react-router-dom"
 import { useJobs } from "../hooks/useJobs";
 import { useEffect, useState } from "react";
+import AddJobButton from "./AddJobButton"
 
 export default function Search () {
     const {jobsLength} = useJobs(); 
@@ -19,10 +20,13 @@ export default function Search () {
 
     return (
         <div className="search-form">
+            <div className="search-and-add-card">
         <form className="search-system">
         <input type="text" autoComplete="off" placeholder="Type here..." className="search-bar"></input>
         <button type="submit" className="submit">Найти</button>
         </form>
+        {isCustomerPage? <AddJobButton /> :null}
+        </div>
         <p className="total-found">
             {isCustomerPage? "Ваши заявки:": loading ? "Загрузка..." : `Найдено заказов: ${jobsLength}`}
             </p>

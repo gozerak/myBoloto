@@ -6,7 +6,7 @@
     min-width: 120px;
     height: 4vh;
     background: none;
-    background-color: #c90f08;
+    background-color: #9b2e2a;
     border-radius: 16px;
     color: white;
     font-size: 16px;
@@ -14,7 +14,7 @@
 }
 
 .delete-card-btn:hover {
-    background-color:#ff3300 ;
+    background-color:#b33a1b ;
     cursor: pointer;
 }
 
@@ -31,23 +31,23 @@
 }
 
 .delete-btn-back{
-    background-color: #d63107;
+    background-color: #9b2e2a;
     color:white;
     border:none;
     border-radius: 4px;
 }
 
 .delete-btn-back:hover{
-    background-color: #ff3300;
+    background-color: #b33a1b;
 }
 
 .delete-btn-submit{
-    background-color: #0bca1b;
+    background-color: #44af4d;
     color:white;
     border:none;
     border-radius: 4px;
 }
 
 .delete-btn-submit:hover{
-    background-color: #1eff00;
+    background-color: #3bb92a;
 }

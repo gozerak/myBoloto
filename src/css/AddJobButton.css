@@ -1,17 +1,16 @@
 .add-job-btn {
-    top: 5vh;
     width: auto;
-    height: 4vh;
-    background-color: #0bca1b;
+    height: 40px;
+    background-color: #44af4d;
     border-radius: 6px;
     color: white;
     border:none;
     border-radius: 4px;
-    position: relative
+    position: relative;
 }
 
 .add-job-btn:hover {
-    background-color: #1eff00;
+    background-color: #3bb92a;
     cursor: pointer;
 }
 
