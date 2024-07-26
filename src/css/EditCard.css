@@ -32,25 +32,25 @@
 }
 
 .edit-btn-back{
-    background-color: #d63107;
+    background-color: #9b2e2a;
     color:white;
     border:none;
     border-radius: 4px;
 }
 
 .edit-btn-back:hover{
-    background-color: #ff3300;
+    background-color: #b33a1b;
 }
 
 .edit-btn-submit{
-    background-color: #0bca1b;
+    background-color: #44af4d;
     color:white;
     border:none;
     border-radius: 4px;
 }
 
 .edit-btn-submit:hover{
-    background-color: #1eff00;
+    background-color: #3bb92a;
 }
 
 div {

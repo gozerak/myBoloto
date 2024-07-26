@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
+import { API_BASE_URL } from '../services/apiService';
 
 export const UserContext = createContext();
 
@@ -8,7 +9,7 @@ export const UserProvider = ({ children }) => {
     useEffect(() => {
         const userId = localStorage.getItem('userId');
         if (userId) {
-            fetch(`http://10.14.113.150:8010/user_manager/get_user_by_id?user_id=${userId}`, {
+            fetch(`${API_BASE_URL}/user_manager/get_user_by_id?user_id=${userId}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

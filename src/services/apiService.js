@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://10.14.113.150:8010";
+export const API_BASE_URL = "http://10.14.113.150:8010";
 
 export const fetchJobs = async () => {
     try {

@@ -55,7 +55,7 @@ input {
     height: 20px;
 }
 label{
-    margin-left:5px
+    margin-left:5px;
 }
 select{
     height: 30px;
@@ -82,4 +82,15 @@ select{
 
 .login-btn-submit:hover{
     background-color: #020c68;
+}
+
+.login-inputs {
+    
+    width: 80%;
+    height: 30px;
+    font-size: 18px;
+    font-family: 'Mulish';
+    border-radius: 4px;
+    border: 1px solid #19191a;
+    outline: none;
 }
