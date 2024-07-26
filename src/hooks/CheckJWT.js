@@ -1,6 +1,7 @@
 
 import { useState, useContext, useEffect } from 'react';
 import { UserContext } from '../js/UserContext';
+import { API_BASE_URL } from '../services/apiService';
 
 export const useCheckJWT = () => {
     const { setUserData } = useContext(UserContext);
@@ -23,7 +24,7 @@ export const useCheckJWT = () => {
                 return;
             }
 
-            fetch(`http://10.14.113.150:8010/auth/check_jwt?jwt=${authToken}`, {
+            fetch(`${API_BASE_URL}/auth/check_jwt?jwt=${authToken}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
