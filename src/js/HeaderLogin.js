@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import '../css/HeaderLogin.css';
 import Modal from './Modal';
 import { UserContext } from './UserContext';
+import { API_BASE_URL } from '../services/apiService';
 
 export default function HeaderLogin () {
     const [isModalOpen, setModalOpen] = useState(false);
@@ -23,7 +24,7 @@ export default function HeaderLogin () {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch("http://10.14.113.150:8010/auth/login", {
+            const response = await fetch(`${API_BASE_URL}/auth/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -41,7 +42,7 @@ export default function HeaderLogin () {
                 console.log("Доступ получен");
 
                 try{
-                    const response = await fetch(`http://10.14.113.150:8010/user_manager/get_user_by_id?user_id=${userId}`, {
+                    const response = await fetch(`${API_BASE_URL}/user_manager/get_user_by_id?user_id=${userId}`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -79,6 +80,7 @@ export default function HeaderLogin () {
                         <p className='login-headers'>Логин</p>
                         <div>
                             <input
+                            className='login-inputs'
                                 type="text"
                                 name="username"
                                 autoComplete='off'
@@ -94,6 +96,7 @@ export default function HeaderLogin () {
                     <p className='login-headers'>Пароль</p>
                         <div>
                             <input
+                                className='login-inputs'
                                 type="password"
                                 name="password"
                                 autoComplete='off'

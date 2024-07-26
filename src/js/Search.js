@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom"
 import { useJobs } from "../hooks/useJobs";
 import { useEffect, useState } from "react";
 import AddJobButton from "./AddJobButton"
+import "../css/AddJobButton.css"
 
 export default function Search () {
     const {jobsLength} = useJobs(); 

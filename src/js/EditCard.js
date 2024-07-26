@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "../css/EditCard.css"
 import { useJobs } from "../hooks/useJobs";
 import Modal from "./Modal";
+import { API_BASE_URL } from "../services/apiService";
 
 export default function EditCard({order}) {
     const [isModalOpen, setModalOpen] = useState(false);
@@ -59,7 +60,7 @@ export default function EditCard({order}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch("http://10.14.113.150:8010/jobs/create", {
+            const response = await fetch(`${API_BASE_URL}/jobs/create`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -95,10 +96,12 @@ export default function EditCard({order}) {
         <button className="edit-card-btn" onClick={() => setModalOpen(true)}>Редактировать</button>
         <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
                 <form onSubmit={handleSubmit} className="add-job-form">
-                    <div>
-                        <label>
-                            Заголовок: 
+                    <div className='modal-forms'>
+                        <p className='modal-headers'>
+                            Заголовок 
+                            </p>
                             <input
+                            className='modal-inputs'
                                 autoComplete="off"
                                 type="text"
                                 name="title"
@@ -106,12 +109,13 @@ export default function EditCard({order}) {
                                 onChange={handleChange}
                                 required
                             ></input>
-                        </label>
                     </div>
-                    <div>
-                        <label>
-                            Описание: 
+                    <div className='modal-forms'>
+                        <p className='modal-headers'>
+                            Описание 
+                            </p>
                             <textarea
+                            // className='modal-inputs'
                                 autoComplete="off"  
                                 type="text"
                                 name="description"
@@ -119,51 +123,56 @@ export default function EditCard({order}) {
                                 onChange={handleChange}
                                 required
                             />
-                        </label>
                     </div>
                     <div>
-                        <div>
-                        <label>
-                            Дата начала:
+                        <div className='modal-forms'>
+                        <p className='modal-headers'>
+                            Дата начала
+                            </p>
                             <input
+                            className='modal-data'
                                 type="date"
                                 name="started_at"
                                 value={cardData.started_at}
                                 onChange={handleChange}
                                 required
                             />
-                        </label>
                         </div>
                         <div>
                         {!isChecked && (
-                            <label>
-                                Дата окончания:
+                            <>
+                            <p className='modal-headers'>
+                                Дата окончания
+                                </p>
                                 <input
+                                className='modal-data'
                                     type="date"
                                     name="finished_at"
                                     value={cardData.finished_at}
                                     onChange={handleChange}
                                     required
                                     />
-                            </label>
+                                    </>
                         )}
                         </div>
                         <div>
-                        <label>
+                        <p className='modal-headers'>
+                            Один день
+                        </p>
                             <input
                                 type="checkbox"
                                 name="isOneDay"
                                 checked={isChecked}
                                 onChange={handleIsChecked}
                             />
-                            Один день
-                        </label>
                         </div>
                     </div>
-                                    <div>
-                                        <label>
-                                            Вид деятельности:
+                                    <div className='modal-forms'>
+                                        <p className='modal-headers'>
+                                            Вид деятельности
+                                            </p>
                                             <select
+                                            className='dropdown-select'
                                                 name="action_type"
                                                 value={cardData.action_type}
                                                 onChange={handleChange}
@@ -174,12 +183,13 @@ export default function EditCard({order}) {
                                                     <option key={id} value={id}>{name}</option>
                                                 ))}
                                             </select>
-                                        </label>
                                     </div>
-                                    <div>
-                        <label>
-                            Стоимость заказа: 
+                                    <div className='modal-forms'>
+                        <p className='modal-headers'>
+                            Стоимость заказа 
+                            </p>
                             <input
+                            className='modal-inputs'
                                 autoComplete="off"
                                 type="number"
                                 name="price"
@@ -187,12 +197,13 @@ export default function EditCard({order}) {
                                 onChange={handleChange}
                                 required
                             />
-                        </label>
                     </div>
-                    <div>
-                                        <label>
-                                            Город:
+                    <div className='modal-forms'>
+                                        <p className='modal-headers'>
+                                            Город
+                                            </p>
                                             <select
+                                            className='dropdown-select'
                                                 name="location"
                                                 value={cardData.location}
                                                 onChange={handleChange}
@@ -203,12 +214,13 @@ export default function EditCard({order}) {
                                                     <option key={id} value={id}>{name}</option>
                                                 ))}
                                             </select>
-                                        </label>
                                     </div>
-                                    <div>
-                        <label>
-                            Адрес: 
+                                    <div className='modal-forms'>
+                        <p className='modal-headers'>
+                            Адрес
+                            </p>
                             <input
+                            className='modal-inputs'
                                 autoComplete="off"
                                 type="text"
                                 name="job_address"
@@ -216,12 +228,13 @@ export default function EditCard({order}) {
                                 onChange={handleChange}
                                 required
                             />
-                        </label>
                     </div>
-                    <div>
-                                        <label>
-                                            Организация:
+                    <div className='modal-forms'>
+                                        <p className='modal-headers'>
+                                            Организация
+                                            </p>
                                             <select
+                                            className='dropdown-select'
                                                 name="organization_id"
                                                 value={cardData.organization_id}
                                                 onChange={handleChange}
@@ -232,7 +245,6 @@ export default function EditCard({order}) {
                                                     <option key={id} value={id}>{name}</option>
                                                 ))}
                                             </select>
-                                        </label>
                                     </div>
                                     <div></div>
                     <div className="edit-buttons">
