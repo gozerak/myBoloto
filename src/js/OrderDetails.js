@@ -1,12 +1,36 @@
 import { useLocation } from "react-router-dom"
 import EditCard from "./EditCard";
 import DeleteCard from "./DeleteCard";
+import { API_BASE_URL } from "../services/apiService";
 
 function Respond () {
     return (
         <button className="respond-btn">Откликнуться</button>
     )
 }
+
+const handleRespond = async(order_id) => {
+    if (!localStorage.getItem('userId')){
+        console.log ("Необходимо авторизоваться");
+        return;
+    }
+    try {
+        const response = await fetch (`${API_BASE_URL}/user_manager/response_for_job?user_id=${localStorage.getItem('userId')}&job_id=${order_id}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",  
+            },
+        });
+        if (response.ok) {
+            console.log('Вы откликнулись на заявку!');
+            //какую нибудь модалочку бы...
+        } else {
+            console.error ("При отклике на заявку произошла ошибка");
+        }
+    } catch (error){
+        console.error ("Error:", error)
+    }
+};
 
 export default function OrderDetails ({order}) {
     const location = useLocation();
@@ -39,7 +63,7 @@ export default function OrderDetails ({order}) {
                     <DeleteCard cardJob_id= {order.id} />
                     </div>
                     )
-                : <Respond />
+                : <Respond onclick={handleRespond(order.id)}/>
                 }
             </div>
         </>

@@ -3,7 +3,7 @@ import '../css/AddJobButton.css'
 import React, { useState } from "react";
 import Modal from "./Modal";
 import "../css/AddJobButton.css";
-import { useJobs } from "../hooks/useJobs";
+import { useJobs } from "./JobContext";
 import { API_BASE_URL } from '../services/apiService';
 
 export default function AddJobButton() {
@@ -14,12 +14,14 @@ export default function AddJobButton() {
         description: "",
         started_at: "",
         finished_at: "",
-        action_type: "",
-        location: "",
+        action_type_id: "",
+        city_id: "",
         is_active: true,
-        job_address: "",
+        job_location: "",
         organization_id: "",
         owner_id: "7a88bbab-d86d-4ffa-912d-a07f2830bd0c",
+        status_id: "6de85817-4102-4953-8001-207728c9e3ba",
+        type_id: "4d8b352f-8759-401d-a205-727372191be6",
     });
     const[isChecked,setIsChecked] = useState(false)
 
@@ -155,8 +157,8 @@ export default function AddJobButton() {
                                             </p>
                                             <select
                                             className='dropdown-select'
-                                                name="action_type"
-                                                value={formData.action_type}
+                                                name="action_type_id"
+                                                value={formData.action_type_id}
                                                 onChange={handleChange}
                                                 required
                                             >
@@ -186,8 +188,8 @@ export default function AddJobButton() {
                                             </p>
                                             <select
                                             className='dropdown-select'
-                                                name="location"
-                                                value={formData.location}
+                                                name="city_id"
+                                                value={formData.city_id}
                                                 onChange={handleChange}
                                                 required
                                             >
@@ -205,8 +207,8 @@ export default function AddJobButton() {
                             className='modal-inputs'
                                 autoComplete="off"
                                 type="text"
-                                name="job_address"
-                                value={formData.job_address}
+                                name="job_location"
+                                value={formData.job_location}
                                 onChange={handleChange}
                                 required
                             />

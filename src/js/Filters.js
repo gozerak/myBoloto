@@ -1,6 +1,6 @@
 import { useState } from "react"
 import "../css/Filters.css"
-import { useJobs } from "../hooks/useJobs"
+import { useJobs } from "./JobContext"
 
 
 function Sortby () {

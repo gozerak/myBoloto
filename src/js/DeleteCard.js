@@ -36,7 +36,7 @@ export default function DeleteCard ({cardJob_id}) {
     useEffect(() => {
         if (!isVerified) {
             // Логика для управления состоянием, когда JWT не прошла проверку
-            console.warn("Необходимо перелогиниться");
+            console.warn("В DeleteCard jwt не прошел проверку");
         }
     }, [isVerified]);
     return (

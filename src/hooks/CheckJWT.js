@@ -19,7 +19,7 @@ export const useCheckJWT = () => {
             }
 
             if (authToken === null) {
-                // console.error("Необходимо перелогиниться");
+                console.error("Необходимо перелогиниться");
                 setIsVerified(false);
                 return;
             }
@@ -34,8 +34,10 @@ export const useCheckJWT = () => {
             .then(authData => {
                 if (authData.sub && authData.exp) {
                     // логика успешной проверки JWT
+                    console.log('JWT прошел проверку!')
                     setIsVerified(true);
                 } else {
+                    console.error("С проверкой JWT что-то не так")
                     const userLocalId = localStorage.getItem('userId');
                     if (userLocalId) {
                         localStorage.removeItem('userId');

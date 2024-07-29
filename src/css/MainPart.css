@@ -1,21 +1,3 @@
-.main {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    gap: 22vw;
-    overflow: hidden;
-}
-
-.filters {
-    height: 71vh;
-    min-width: 300px;
-    position: relative;
-    top: 7vh;
-    width: 22vw;
-    border: 1px solid black;
-    background-color: #FEF6E1;
-}
-
 .order-cards {
     display: flex;
     position: relative;

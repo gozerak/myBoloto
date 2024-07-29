@@ -1,6 +1,6 @@
 import "../css/Search.css"
 import { useLocation } from "react-router-dom"
-import { useJobs } from "../hooks/useJobs";
+import { useJobs } from "./JobContext";
 import { useEffect, useState } from "react";
 import AddJobButton from "./AddJobButton"
 import "../css/AddJobButton.css"
