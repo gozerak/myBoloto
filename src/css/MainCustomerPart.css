@@ -3,7 +3,7 @@
     height: 100vh;
     display: flex;
     gap: 0vw;
-    overflow: hidden;
+    overflow-y: hidden;
     justify-content: space-between;
 }
 

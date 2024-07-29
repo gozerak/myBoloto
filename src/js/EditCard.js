@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "../css/EditCard.css"
-import { useJobs } from "../hooks/useJobs";
+import { useJobs } from "./JobContext";
 import Modal from "./Modal";
 import { API_BASE_URL } from "../services/apiService";
 
