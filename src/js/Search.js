@@ -6,18 +6,18 @@ import AddJobButton from "./AddJobButton"
 import "../css/AddJobButton.css"
 
 export default function Search () {
-    const {jobsLength} = useJobs(); 
+    // const {jobsLength} = useJobs(); 
     const location = useLocation();
     const isCustomerPage = location.pathname === "/customer";
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setLoading (false);
-        }, 100);
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         setLoading (false);
+    //     }, 100);
     
-        return () => clearTimeout(timer);
-    }, [jobsLength]);
+    //     return () => clearTimeout(timer);
+    // }, [jobsLength]);
 
     return (
         <div className="search-form">
@@ -29,7 +29,7 @@ export default function Search () {
         {isCustomerPage? <AddJobButton /> :null}
         </div>
         <p className="total-found">
-            {isCustomerPage? "Ваши заявки:": loading ? "Загрузка..." : `Найдено заказов: ${jobsLength}`}
+            {/* {isCustomerPage? "Ваши заявки:": loading ? "Загрузка..." : `Найдено заказов: ${jobsLength}`} */}
             </p>
         </div>
     )

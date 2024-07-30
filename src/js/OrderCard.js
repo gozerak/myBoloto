@@ -1,6 +1,6 @@
 import "../css/OrderCard.css"
-import OrderDetails from "./OrderDetails"
-import { useJobs } from "./JobContext";
+import { useJobs } from "../hooks/useJobs";
+import OrderDetails from "./OrderDetails";
 
 
 export default function OrderCard () {
