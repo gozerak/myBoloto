@@ -1,15 +1,15 @@
 import { useLocation } from "react-router-dom"
-import EditCard from "./EditCard";
+// import EditCard from "./EditCard";
 import DeleteCard from "./DeleteCard";
 import { API_BASE_URL } from "../services/apiService";
 
-function Respond () {
+function Respond ({ onClick }) {
     return (
-        <button className="respond-btn">Откликнуться</button>
+        <button className="respond-btn" onClick={onClick}>Откликнуться</button>
     )
 }
 
-const handleRespond = async(order_id) => {
+async function handleRespond (order_id) {
     if (!localStorage.getItem('userId')){
         console.log ("Необходимо авторизоваться");
         return;
@@ -25,7 +25,8 @@ const handleRespond = async(order_id) => {
             console.log('Вы откликнулись на заявку!');
             //какую нибудь модалочку бы...
         } else {
-            console.error ("При отклике на заявку произошла ошибка");
+            const errorData = await response.json();
+            console.error ("При отклике на заявку произошла ошибка:", errorData.detail );
         }
     } catch (error){
         console.error ("Error:", error)
@@ -46,26 +47,29 @@ export default function OrderDetails ({order}) {
         </div>
         <div className="info-card">
         <p className="card-main-info">Род деятельности</p> 
-        <p className="card-order-value">{order.actionTypeName}</p>
+        <p className="card-order-value">{order.action_type.title}</p>
         </div>
         <div className="info-card">
         <p className="card-main-info">Город </p> 
-        <p className="card-order-value">{order.city}</p>
+        <p className="card-order-value">{order.city.title}</p>
         </div>
-        {/* <p className="card-main-info"><strong>Адрес </strong> {order.job_location}</p> */}
+        <div className="info-card">
+        <p className="card-main-info">Адрес</p>
+        <p className="card-order-value">{order.job_location}</p>
+        </div>
         
         <div className="card-employer-container">
                 <p className="card-employer">Предприятие</p>
-                <p className="card-order-value">{order.organization}</p>
+                <p className="card-order-value">{order.organization.title}</p>
                 {isCustomerPage? (
                     <div className="edit-delete-buttons">
-                    <EditCard order= {order}/>
+                    {/* <EditCard order= {order}/> */}
                     <DeleteCard cardJob_id= {order.id} />
                     </div>
-                    )
-                : <Respond onclick={handleRespond(order.id)}/>
-                }
+                    ) : (
+                <Respond onClick={() => handleRespond(order.id)}/>
+                )}
             </div>
         </>
-    )
+    );
 }

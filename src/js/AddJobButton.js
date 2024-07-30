@@ -3,8 +3,9 @@ import '../css/AddJobButton.css'
 import React, { useState } from "react";
 import Modal from "./Modal";
 import "../css/AddJobButton.css";
-import { useJobs } from "./JobContext";
+import { useFetchOnFocus } from '../hooks/useFetchOnFocus';
 import { API_BASE_URL } from '../services/apiService';
+import { fetchActionTypes, fetchPlaces, fetchOrganizations } from '../services/apiService';
 
 export default function AddJobButton() {
     const [isModalOpen, setModalOpen] = useState(false);
@@ -25,9 +26,9 @@ export default function AddJobButton() {
     });
     const[isChecked,setIsChecked] = useState(false)
 
-    const { actionTypes } = useJobs();
-    const { places } = useJobs();
-    const { organizations } = useJobs();
+    const [actionTypes, handleActionTypeFocus] = useFetchOnFocus(fetchActionTypes);
+    const [places, handlePlaceFocus] = useFetchOnFocus(fetchPlaces);
+    const [organizations, handleOrganizationFocus] = useFetchOnFocus(fetchOrganizations);
 
     const handleChange = (e) => {
         const { name, value} = e.target;
@@ -160,11 +161,12 @@ export default function AddJobButton() {
                                                 name="action_type_id"
                                                 value={formData.action_type_id}
                                                 onChange={handleChange}
+                                                onFocus={handleActionTypeFocus}
                                                 required
                                             >
                                                 <option value="" hidden></option>
-                                                {Object.entries(actionTypes).map(([id, name]) => (
-                                                    <option key={id} value={id}>{name}</option>
+                                                {actionTypes.map((actionType) => (
+                                                    <option key={actionType.id} value={actionType.id}>{actionType.title}</option>
                                                 ))}
                                             </select>
                                     </div>
@@ -191,11 +193,12 @@ export default function AddJobButton() {
                                                 name="city_id"
                                                 value={formData.city_id}
                                                 onChange={handleChange}
+                                                onFocus={handlePlaceFocus}
                                                 required
                                             >
                                                 <option value="" hidden></option>
-                                                {Object.entries(places).map(([id, name]) => (
-                                                    <option key={id} value={id}>{name}</option>
+                                                {places.map((place) => (
+                                                    <option key={place.id} value={place.id}>{place.title}</option>
                                                 ))}
                                             </select>
                                     </div>
@@ -222,11 +225,12 @@ export default function AddJobButton() {
                                                 name="organization_id"
                                                 value={formData.organization_id}
                                                 onChange={handleChange}
+                                                onFocus={handleOrganizationFocus}
                                                 required
                                             >
                                                 <option value="" hidden></option>
-                                                {Object.entries(organizations).map(([id, name]) => (
-                                                    <option key={id} value={id}>{name}</option>
+                                                {organizations.map((organization) => (
+                                                    <option key={organization.id} value={organization.id}>{organization.title}</option>
                                                 ))}
                                             </select>
                                     </div>

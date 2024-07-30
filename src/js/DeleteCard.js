@@ -9,7 +9,7 @@ export default function DeleteCard ({cardJob_id}) {
     const isVerified = useCheckJWT();
     const [isLoading, setIsLoading] = useState(false);
     
-    const handleDeleteCard = async () => {
+    async function handleDeleteCard() {
         if (!isVerified) {
             console.error("JWT не прошла проверку");
             return;

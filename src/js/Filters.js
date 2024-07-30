@@ -1,6 +1,6 @@
 import { useState } from "react"
 import "../css/Filters.css"
-import { useJobs } from "./JobContext"
+// import { useJobs } from "./JobContext"
 
 
 function Sortby () {
@@ -60,9 +60,9 @@ function OtherFilters ({title, options =[]}) {
                 value={selectedValue}
             >
         <option className="selected-disabled" hidden value=""></option>
-            {options.map(option => (
+            {/* {options.map(option => (
                     <option className="select-filters" key={option.id} value={option.id}>{option.name}</option>
-                ))}
+                ))} */}
         </select>
         </div>
     )
@@ -71,43 +71,43 @@ function OtherFilters ({title, options =[]}) {
 function TotalFoundButton ({totalOrders}) {
  return (
     <div className="total-found-block">
-    <button className="total-found-button">Показать {totalOrders} заказов</button>
+    {/* <button className="total-found-button">Показать {totalOrders} заказов</button> */}
     </div>
  )
 }
 
 
 export default function Filters () {
-    const {actionTypes} = useJobs();
-    const {places} = useJobs();
-    const {organizations} = useJobs();
-    const {jobsLength} = useJobs();
+    // const {actionTypes} = useJobs();
+    // const {places} = useJobs();
+    // const {organizations} = useJobs();
+    // const {jobsLength} = useJobs();
 
-    const actionTypesOptions = Object.entries(actionTypes).map(([id, name]) => ({
-        id,
-        name
-    }));
+    // const actionTypesOptions = Object.entries(actionTypes).map(([id, name]) => ({
+    //     id,
+    //     name
+    // }));
 
-    const placesOptions = Object.entries(places).map(([id, name]) => ({
-        id,
-        name
-    }));
+    // const placesOptions = Object.entries(places).map(([id, name]) => ({
+    //     id,
+    //     name
+    // }));
 
-    const organizationsOptions = Object.entries(organizations).map(([id, name]) => ({
-        id,
-        name
-    }));
+    // const organizationsOptions = Object.entries(organizations).map(([id, name]) => ({
+    //     id,
+    //     name
+    // }));
 
     return (
         <div className="filters">
         <Sortby />
         <Date />
         <Cost />
-        <OtherFilters title="Вид деятельности" options = {actionTypesOptions}/>
+        {/* <OtherFilters title="Вид деятельности" options = {actionTypesOptions}/>
         <OtherFilters title="Регион"/>
         <OtherFilters title="Город"  options = {placesOptions}/>
         <OtherFilters title="Организация" options={organizationsOptions}/>
-        <TotalFoundButton totalOrders={jobsLength}/>
+        <TotalFoundButton totalOrders={jobsLength}/> */}
         </div>
     )
 
