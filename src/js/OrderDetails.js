@@ -40,7 +40,7 @@ export default function OrderDetails ({order}) {
         <>
         <p className="card-header">{order.title}</p>
         <p className="card-cost">{order.price} ₽</p>
-        <p className="card-main-info">{order.description}</p>
+        <p className="card-order-description">{order.description}</p>
         <div className="info-card">
         <p className="card-main-info">Период</p>
         <p className="card-order-value">{new Date(order.started_at).toLocaleDateString()} {order.finished_at? `- ${new Date(order.finished_at).toLocaleDateString()}`: null}</p>

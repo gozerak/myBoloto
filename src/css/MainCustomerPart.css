@@ -8,10 +8,10 @@
 }
 
 .filters {
-    height: 680px;
+    height: 580px;
     min-width: 300px;
     position: relative;
-    top: 6.5vh;
+    top: 60px;
     width: 22vw;
     border: 1px solid #F5F5F5;
     background-color: #ffffff;
@@ -25,7 +25,6 @@
     display: flex;
     position: relative;
     flex-direction: column;
-    top: 6.5vh;
     left: 13%;
     width: auto;
 }

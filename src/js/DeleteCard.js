@@ -17,7 +17,8 @@ export default function DeleteCard ({cardJob_id}) {
 
         setIsLoading(true);
         try {
-            const response = await fetch(`${API_BASE_URL}/jobs/remove_job?job_id=${cardJob_id}`, { method: "DELETE" });
+            const response = await fetch(`${API_BASE_URL}/jobs/remove_job?job_id=${cardJob_id}`, { method: "DELETE"
+             });
             console.log(cardJob_id)
             if (response.ok) {
                 console.log("Запись успешно удалена");

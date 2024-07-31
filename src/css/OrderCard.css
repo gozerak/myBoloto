@@ -24,10 +24,13 @@
     align-items: center;
 }
 
+.card-order-description{
+    font-size: 20px;
+}
 
 .card-cost {
     position: absolute;
-    top: 1vh;
+    top: 8px;
     right: 2vw;
     font-size: 20px;
 }
@@ -36,8 +39,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 2vh;
     margin-top: 0;
+    margin-bottom: 10px;
 }
 
 .card-employer {
@@ -51,6 +54,7 @@
     margin-bottom: 1vh;
     margin-right: 20px;
     width: auto;
+    min-width: 120px;
     height: 35px;
     background: none;
     background-color: #000743;
@@ -79,7 +83,7 @@
 
 .card-header{
     font-size: 24px;
-    font-weight: 550;
+    font-weight: bold;
 }
 
 .card-main-info,

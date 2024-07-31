@@ -2,7 +2,7 @@
     display: flex;
     position: relative;
     flex-direction: column;
-    top: 3.5vh;
+    top: 60px;
     left: 13%;
     width: 50vw;
 }
