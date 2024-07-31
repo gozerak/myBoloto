@@ -21,8 +21,8 @@ export default function AddJobButton() {
         job_location: "",
         organization_id: "",
         owner_id: "7a88bbab-d86d-4ffa-912d-a07f2830bd0c",
-        status_id: "6de85817-4102-4953-8001-207728c9e3ba",
-        type_id: "4d8b352f-8759-401d-a205-727372191be6",
+        status_value: "Черновик",
+        type_value: "Почасовая оплата",
     });
     const[isChecked,setIsChecked] = useState(false)
 

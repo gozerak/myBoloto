@@ -1,10 +1,11 @@
 import "../css/OrderCard.css"
-import { useJobs } from "../hooks/useJobs";
 import OrderDetails from "./OrderDetails";
 
 
-export default function OrderCard () {
-    const { jobs } = useJobs()
+export default function OrderCard ({ jobs }) {
+    if (!Array.isArray(jobs)) {
+        return null;
+    }
 
     return(
     <>
