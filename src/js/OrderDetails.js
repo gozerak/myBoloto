@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom"
 // import EditCard from "./EditCard";
 import DeleteCard from "./DeleteCard";
 import { API_BASE_URL } from "../services/apiService";
+import { useState } from "react";
 
 function Respond ({ onClick }) {
     return (
@@ -32,6 +33,38 @@ async function handleRespond (order_id) {
         console.error ("Error:", error)
     }
 };
+
+async function checkUserRespondedJobs() {
+    const [userRespondedJobs, setUserRespondedJobs] = useState({})
+
+    let authToken = null;
+
+    if (localStorage.getItem('userId')) {
+        const cookieString = document.cookie;
+        const cookies = cookieString.split('; ').find(row => row.startsWith('accessToken'));
+
+        if (cookies) {
+            authToken = cookies.split('=')[1];
+        }
+
+        if (authToken === null) {
+            console.error("Необходимо перелогиниться");
+            return;
+        }
+    }
+
+    fetch(`${API_BASE_URL}/user_manager/get_jobs`, {
+        method:"GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${authToken}`
+        }
+    })
+    .then (response => response.json())
+    .then(authData => setUserRespondedJobs(authData))
+    .catch(error => console.error("Error fetching user responds: ", error))
+}
+
 
 export default function OrderDetails ({order}) {
     const location = useLocation();
