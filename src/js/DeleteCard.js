@@ -31,6 +31,7 @@ export default function DeleteCard ({cardJob_id}) {
             console.error("Error:", error);
         } finally {
             setIsLoading(false);
+            window.location.reload()
         }
     };
 

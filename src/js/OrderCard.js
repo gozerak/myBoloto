@@ -2,7 +2,7 @@ import "../css/OrderCard.css"
 import OrderDetails from "./OrderDetails";
 
 
-export default function OrderCard ({ jobs }) {
+export default function OrderCard ({ jobs, respondedJobs }) {
     if (!Array.isArray(jobs)) {
         return null;
     }
@@ -11,7 +11,7 @@ export default function OrderCard ({ jobs }) {
     <>
         {jobs.map(order => (
             <div key={order.id} className="order-card">
-                <OrderDetails order = {order} />
+                <OrderDetails order = {order} respondedJobs = {respondedJobs} />
                 </div>
                       ))}
     </>
