@@ -1,10 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { UserContext } from "./UserContext";
 import "../css/ProfileIcon.css";
 
 export default function ProfileIcon() {
     const { userData, setUserData } = useContext(UserContext);
     const [isDropdownOpen, setDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
 
     const toggleDropdown = () => {
         setDropdownOpen(!isDropdownOpen);
@@ -18,8 +19,25 @@ export default function ProfileIcon() {
         window.location.reload();
     };
 
+    const handleClickOutside = (event) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            setDropdownOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        if (isDropdownOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isDropdownOpen]);
+
     return (
-        <div className="user-icon-container">
+        <div className="user-icon-container" ref={dropdownRef}>
             <div className="user-icon" onClick={toggleDropdown}>
                 {userData ? userData.login : "Loading..."}
             </div>

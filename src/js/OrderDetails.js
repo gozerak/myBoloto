@@ -2,15 +2,21 @@ import { useLocation } from "react-router-dom"
 // import EditCard from "./EditCard";
 import DeleteCard from "./DeleteCard";
 import { API_BASE_URL } from "../services/apiService";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function Respond ({ onClick }) {
+function Respond ({ onClick, isResponded }) {
     return (
-        <button className="respond-btn" onClick={onClick}>Откликнуться</button>
+        <button
+        className={isResponded? "responded-btn" : "respond-btn"} 
+        onClick={onClick}
+         disabled={isResponded}
+         >
+            {isResponded? 'Вы уже откликнулись' :'Откликнуться'}
+            </button>
     )
 }
 
-async function handleRespond (order_id) {
+async function handleRespond (order_id, setIsResopnded) {
     if (!localStorage.getItem('userId')){
         console.log ("Необходимо авторизоваться");
         return;
@@ -24,6 +30,7 @@ async function handleRespond (order_id) {
         });
         if (response.ok) {
             console.log('Вы откликнулись на заявку!');
+            setIsResopnded(true);
             //какую нибудь модалочку бы...
         } else {
             const errorData = await response.json();
@@ -34,41 +41,21 @@ async function handleRespond (order_id) {
     }
 };
 
-async function checkUserRespondedJobs() {
-    const [userRespondedJobs, setUserRespondedJobs] = useState({})
 
-    let authToken = null;
-
-    if (localStorage.getItem('userId')) {
-        const cookieString = document.cookie;
-        const cookies = cookieString.split('; ').find(row => row.startsWith('accessToken'));
-
-        if (cookies) {
-            authToken = cookies.split('=')[1];
-        }
-
-        if (authToken === null) {
-            console.error("Необходимо перелогиниться");
-            return;
-        }
-    }
-
-    fetch(`${API_BASE_URL}/user_manager/get_jobs`, {
-        method:"GET",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${authToken}`
-        }
-    })
-    .then (response => response.json())
-    .then(authData => setUserRespondedJobs(authData))
-    .catch(error => console.error("Error fetching user responds: ", error))
-}
-
-
-export default function OrderDetails ({order}) {
+export default function OrderDetails ({order, respondedJobs}) {
     const location = useLocation();
     const isCustomerPage = location.pathname === "/customer";
+    const [isResponded, setIsResponded] = useState(false);
+
+    useEffect(() => {
+        if (Array.isArray(respondedJobs)) {
+            const respondedJobIds = respondedJobs.map(job => job.id);
+            if (respondedJobIds.includes(order.id)) {
+                setIsResponded(true);
+            }
+        }
+    }, [respondedJobs, order.id]);
+    
     return (
         <>
         <p className="card-header">{order.title}</p>
@@ -100,7 +87,9 @@ export default function OrderDetails ({order}) {
                     <DeleteCard cardJob_id= {order.id} />
                     </div>
                     ) : (
-                <Respond onClick={() => handleRespond(order.id)}/>
+                        isResponded? (
+                            <Respond disabled isResponded= {isResponded} />):
+                (<Respond onClick={() => handleRespond(order.id, setIsResponded)} isResponded= {isResponded}/>)
                 )}
             </div>
         </>
