@@ -32,6 +32,5 @@ export const useRespondedJobs = () => {
     .then(authData => setUserRespondedJobs(authData))
     .catch(error => console.error("Error fetching user responds: ", error))
 }, [authToken]);
-console.log(`Bearer ${authToken}`)
     return {userRespondedJobs};
 }

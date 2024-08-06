@@ -122,3 +122,8 @@
     font-size: 16px;
     border: none;
 }
+
+.edit-delete-buttons{
+    display: flex;
+    flex-direction: row;
+}
