@@ -58,6 +58,7 @@ export default function AddJobButton() {
         } catch (error) {
             console.error("Error:", error);
         }
+        window.location.reload()
     };
 
     const handleIsChecked = async (e) => {
@@ -236,8 +237,8 @@ export default function AddJobButton() {
                                     </div>
                                     <div></div>
                     <div className="modal-buttons">
-                        <button type="button" className='modal-btn-back' onClick={() => setModalOpen(false)}>Back</button>
-                        <button type="submit" className='modal-btn-submit'>Submit</button>
+                        <button type="button" className='modal-btn-back' onClick={() => setModalOpen(false)}>Назад</button>
+                        <button type="submit" className='modal-btn-submit'>Добавить</button>
                     </div>
                 </form>
             </Modal>

@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom"
 import DeleteCard from "./DeleteCard";
 import { API_BASE_URL } from "../services/apiService";
 import { useEffect, useState } from "react";
+import RespondedList from "./RespondedList";
 
 function Respond ({ onClick, isResponded }) {
     return (
@@ -46,6 +47,7 @@ export default function OrderDetails ({order, respondedJobs}) {
     const location = useLocation();
     const isCustomerPage = location.pathname === "/customer";
     const [isResponded, setIsResponded] = useState(false);
+    const [respondedUsers, setRespondedUsers] = useState ({});
 
     useEffect(() => {
         if (Array.isArray(respondedJobs)) {
@@ -54,7 +56,27 @@ export default function OrderDetails ({order, respondedJobs}) {
                 setIsResponded(true);
             }
         }
+        else return;
     }, [respondedJobs, order.id]);
+
+    useEffect(() => {
+        const fetchRespondedUsers = async () => {
+          try {
+            const response = await fetch(`${API_BASE_URL}/jobs/get_job_relationship?job_id=${order.id}`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              }
+            });
+            const data = await response.json();
+            setRespondedUsers(data);
+          } catch (error) {
+            console.error("Error fetching responded users:", error);
+          }
+        };
+    
+        fetchRespondedUsers();
+      }, [order.id]);
     
     return (
         <>
@@ -84,12 +106,13 @@ export default function OrderDetails ({order, respondedJobs}) {
                 {isCustomerPage? (
                     <div className="edit-delete-buttons">
                     {/* <EditCard order= {order}/> */}
+                    <RespondedList respondedUsers={respondedUsers} isCustomerPage={isCustomerPage} order={order} />
                     <DeleteCard cardJob_id= {order.id} />
                     </div>
                     ) : (
                         isResponded? (
                             <Respond disabled isResponded= {isResponded} />):
-                (<Respond onClick={() => handleRespond(order.id, setIsResponded)} isResponded= {isResponded}/>)
+                (<Respond onClick={() => handleRespond(order.id, setIsResponded)} isResponded= {isResponded} order={order}/>)
                 )}
             </div>
         </>
