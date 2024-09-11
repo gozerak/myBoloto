@@ -33,7 +33,7 @@
     width: 106px;
     height: 26px;
     margin-top: 13px;
-    margin-left: 30vw;
+    margin-left: 1vw;
     margin-bottom: 0;
     font-size: 18px;
     border: none;
@@ -46,4 +46,11 @@
 .user-icon:hover {
     cursor: pointer;
     text-decoration: underline;
+}
+
+.user-balance {
+    margin-left: 20vw;
+    font-size: 18px;
+    color:#000743;
+    margin-top: 13px;
 }

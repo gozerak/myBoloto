@@ -29,7 +29,8 @@ export const useRespondedJobs = () => {
         }
     })
     .then (response => response.json())
-    .then(authData => setUserRespondedJobs(authData))
+    .then (responseData => responseData.map(responseDataObj => responseDataObj.job))
+    .then(userJobsData => setUserRespondedJobs(userJobsData))
     .catch(error => console.error("Error fetching user responds: ", error))
 }, [authToken]);
     return {userRespondedJobs};

@@ -20,6 +20,7 @@ function Respond ({ onClick, isResponded }) {
 async function handleRespond (order_id, setIsResopnded) {
     if (!localStorage.getItem('userId')){
         console.log ("Необходимо авторизоваться");
+        alert("Необходимо авторизоваться")
         return;
     }
     try {
