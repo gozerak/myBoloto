@@ -40,3 +40,28 @@ export const fetchOrganizations = async () => {
         throw error;
     }
 }
+
+export const fetchUserBalance = async () => {
+    let authToken
+        if (localStorage.getItem('userId')) {
+            const cookieString = document.cookie;
+            const cookies = cookieString.split('; ').find(row => row.startsWith('accessToken'));
+
+            if (cookies) {
+                authToken= (cookies.split('=')[1]);
+            } else {
+                console.error("Необходимо перелогиниться");
+            }
+    const response = await fetch(`${API_BASE_URL}/user_manager/get_balance`, {
+        method:"GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${authToken}`
+        }
+    });
+    if (!response.ok) {
+        throw new Error("Failed to fetch user balance");
+    }
+    const data = await response.json();
+    return data;
+}}

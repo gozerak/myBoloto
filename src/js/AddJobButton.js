@@ -20,12 +20,11 @@ export default function AddJobButton() {
         is_active: true,
         job_location: "",
         organization_id: "",
-        owner_id: "7a88bbab-d86d-4ffa-912d-a07f2830bd0c",
+        // owner_id: "",
         status_value: "Черновик",
         type_value: "Почасовая оплата",
     });
     const[isChecked,setIsChecked] = useState(false)
-
     const [actionTypes, handleActionTypeFocus] = useFetchOnFocus(fetchActionTypes);
     const [places, handlePlaceFocus] = useFetchOnFocus(fetchPlaces);
     const [organizations, handleOrganizationFocus] = useFetchOnFocus(fetchOrganizations);
@@ -39,7 +38,17 @@ export default function AddJobButton() {
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(JSON.stringify(formData))
+
+        if(!localStorage.getItem('userId')){
+            alert("Необходимо залогиниться!")
+        }
+        else {
+                const userID = localStorage.getItem('userId');
+                const updatedFormData = {
+                    ...formData,
+                    owner_id: userID // добавляем поле owner_id
+                };
+        console.log(JSON.stringify(updatedFormData))
         try {
             const response = await fetch(`${API_BASE_URL}/jobs/create`, {
                 method: "POST",
@@ -47,19 +56,19 @@ export default function AddJobButton() {
                     "Content-Type": "application/json",
                     "Access-Control-Allow-Origin": "*",
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(updatedFormData),
             });
             if (response.ok) {
                 console.log("Job added successfully");
                 setModalOpen(false);
+                window.location.reload()
             } else {
                 console.error("Failed to add job");
             }
         } catch (error) {
             console.error("Error:", error);
         }
-        window.location.reload()
-    };
+    }};
 
     const handleIsChecked = async (e) => {
         setIsChecked(e.target.checked)
