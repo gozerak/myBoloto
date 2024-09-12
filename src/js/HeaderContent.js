@@ -5,6 +5,7 @@ import HeaderLogin from "./HeaderLogin";
 import ProfileIcon from "./ProfileIcon";
 import { useEffect, useState } from "react";
 import { fetchUserBalance } from "../services/apiService";
+import { useCheckJWT } from "../hooks/CheckJWT";
 
 function HeaderName() {
     return (
@@ -38,6 +39,17 @@ function HeaderLogo() {
 }
 
 export function HeaderChapters() {
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const isVerified = useCheckJWT();
+
+    useEffect(() => {
+        if (isVerified) {
+            setIsAuthenticated(true);
+        } else {
+            setIsAuthenticated(false);
+        }
+    }, [isVerified]);
+
     return (
         <>
             <NavLink to="/" className={({ isActive }) => isActive ? "chapter-executor active-link" : "chapter-executor"}>
@@ -46,6 +58,10 @@ export function HeaderChapters() {
             <NavLink to="/customer" className={({ isActive }) => isActive ? "chapter-customer active-link" : "chapter-customer"}>
                 <div id="for-customer">Мои заказы</div>
             </NavLink>
+            {isAuthenticated?
+            <NavLink to="/myresponses" className={({ isActive }) => isActive? "chapter-myresponses active-link": "chapter-myresponses"}>
+                <div id="myresponses">Мои отклики</div>
+            </NavLink> : null}  
         </>
     );
 }

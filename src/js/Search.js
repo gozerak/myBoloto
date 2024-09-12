@@ -19,7 +19,8 @@ export default function Search ({ jobsLength }) {
         {isCustomerPage? <AddJobButton /> :null}
         </div>
         <p className="total-found">
-            {isCustomerPage? "Ваши заявки:": `Найдено заказов: ${jobsLength}`}
+            {isCustomerPage? "Ваши заявки:":
+             (jobsLength? (`Найдено заказов: ${jobsLength}`): "")}
             </p>
         </div>
     )

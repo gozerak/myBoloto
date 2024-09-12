@@ -26,7 +26,9 @@ window.onclick = function(event) {
     const [isCardModalOpen, setIsCardModalOpen] = useState(false);
     const [selectedUser, setSelectedUser] = useState({});
 
-    const handleApprove = (userId, orderId) => {
+    const handleApprove = async (e, userId, orderId) => {
+        e.preventDefault();
+
         let authToken
         if (localStorage.getItem('userId')) {
             const cookieString = document.cookie;
@@ -37,15 +39,22 @@ window.onclick = function(event) {
             } else {
                 console.error("Необходимо перелогиниться");
             }
-            fetch(`${API_BASE_URL}/jobs/accept_responded_user?user_id=${userId}&job_id=${orderId}`, {
-                method:"PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${authToken}`
-                }
-            })
-            .then(response => console.log(response.status))
-            .catch(alert("При подтверждении произошла ошибка"))
+            try {
+                const response = await fetch(`${API_BASE_URL}/jobs/accept_responded_user?user_id=${userId}&job_id=${orderId}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${authToken}`
+                    }
+                });
+            if (response.ok) {
+                console.log("Запрос выполнен успешно, статус:", response.status);
+            } else {
+                console.error("Ошибка выполнения запроса:", response.status);
+            }
+        } catch (error) {
+            console.error("При подтверждении произошла ошибка", error);
+        }
             closeModal();
     }   
     };
@@ -91,7 +100,7 @@ window.onclick = function(event) {
                 </p>
             <div className="delete-buttons">
             <button type='button' className='respond-btn-back' onClick={() => setIsCardModalOpen(false)}>Отмена</button>
-            <button type='submit' className='respond-btn-submit' onClick={() => handleApprove(selectedUser.id, order.id)}>
+            <button type='button' className='respond-btn-submit' onClick={(e) => handleApprove(e, selectedUser.id, order.id)}>
             Подтвердить
             </button>
             </div>

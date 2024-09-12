@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_BASE_URL = "http://10.14.113.150:8010";
+export const API_BASE_URL = "http://localhost:8100/api";
 
 export const fetchJobs = async () => {
     const response = await fetch(`${API_BASE_URL}/jobs/get_jobs?skip=0&limit=10`);
