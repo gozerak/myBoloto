@@ -17,6 +17,21 @@ function Respond ({ onClick, isResponded }) {
     )
 }
 
+function CustomerPageOrderDetail ({respondedUsers, isCustomerPage, order}) {
+    return(
+            <div className="edit-delete-buttons">
+                <RespondedList respondedUsers={respondedUsers} isCustomerPage={isCustomerPage} order={order} />
+                <DeleteCard cardJob_id= {order.id} />
+            </div>
+    )
+}
+
+// function AcceptWorkResult() {
+//     <div className="">
+//         <p>Ответственный: {}</p>
+//     </div>
+// }
+
 async function handleRespond (order_id, setIsResopnded) {
     if (!localStorage.getItem('userId')){
         console.log ("Необходимо авторизоваться");
@@ -46,13 +61,17 @@ async function handleRespond (order_id, setIsResopnded) {
 
 export default function OrderDetails ({order, respondedJobs}) {
     const location = useLocation();
+    
     const isCustomerPage = location.pathname === "/customer";
     const [isResponded, setIsResponded] = useState(false);
     const [respondedUsers, setRespondedUsers] = useState ({});
+    const [orderStatus, setOrderStatus] = useState('');
 
     useEffect(() => {
         if (Array.isArray(respondedJobs)) {
-            const respondedJobIds = respondedJobs.map(job => job.id);
+            const matchedJob = respondedJobs.find(jobData => jobData.job.id === order.id);
+            setOrderStatus(matchedJob? matchedJob.status : '')
+            const respondedJobIds = respondedJobs.map(job => job.job.id);
             if (respondedJobIds.includes(order.id)) {
                 setIsResponded(true);
             }
@@ -83,7 +102,10 @@ export default function OrderDetails ({order, respondedJobs}) {
         <>
         <p className="card-header">{order.title}</p>
         <p className="card-cost">{order.price} ₽</p>
+        <div className="description-and-status">
         <p className="card-order-description">{order.description}</p>
+        <p className="card-order-status">{orderStatus ? orderStatus : null}</p>
+        </div>
         <div className="info-card">
         <p className="card-main-info">Период</p>
         <p className="card-order-value">{new Date(order.started_at).toLocaleDateString()} {order.finished_at? `- ${new Date(order.finished_at).toLocaleDateString()}`: null}</p>
@@ -105,12 +127,7 @@ export default function OrderDetails ({order, respondedJobs}) {
                 <p className="card-employer">Предприятие</p>
                 <p className="card-order-value">{order.organization.title}</p>
                 {isCustomerPage? (
-                    <div className="edit-delete-buttons">
-                    {/* <EditCard order= {order}/> */}
-                    <RespondedList respondedUsers={respondedUsers} isCustomerPage={isCustomerPage} order={order} />
-                    <DeleteCard cardJob_id= {order.id} />
-                    </div>
-                    ) : (
+                 <CustomerPageOrderDetail respondedUsers={respondedUsers} isCustomerPage={isCustomerPage} order={order}/>) : (
                         isResponded? (
                             <Respond disabled isResponded= {isResponded} />):
                 (<Respond onClick={() => handleRespond(order.id, setIsResponded)} isResponded= {isResponded} order={order}/>)

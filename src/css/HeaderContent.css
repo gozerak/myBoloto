@@ -22,7 +22,8 @@ img {
 }
 
 .chapter-executor,
-.chapter-customer {
+.chapter-customer,
+.chapter-myresponses {
     background-color: white;
     padding-top: 15px;
     border: none;
@@ -65,6 +66,16 @@ img {
     text-decoration: none;
 }
 
+.chapter-myresponses:hover {
+    cursor:pointer;
+    text-decoration: none;
+}
+
+.chapter-myresponses:active {
+    border-bottom: 3px solid #000743;
+    text-decoration: none;
+}
+
 #for-executor {
     height: 10vh;
     display: flex;
@@ -88,10 +99,23 @@ img {
     color: black;
 }
 
+#myresponses {
+    height: 10vh;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+    margin-right: 0;
+    margin-left: 0;
+    user-select: none;
+    text-decoration: none;
+    color: black;
+}
+
 .report-problem {
-    font-size: 15px;
+    font-size: 16px;
     color: #8A8686;
-    margin-left: 5px;
+    margin-left: 0px;
     padding-right: 10px;
     padding-top: 4px;
+    /* padding-left:1vw; */
 }
