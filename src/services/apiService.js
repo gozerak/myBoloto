@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_BASE_URL = "http://localhost:8100/api";
+export const API_BASE_URL = "http://localhost:8000";
 
 export const fetchJobs = async () => {
     const response = await fetch(`${API_BASE_URL}/jobs/get_jobs?skip=0&limit=10`);
@@ -65,3 +65,29 @@ export const fetchUserBalance = async () => {
     const data = await response.json();
     return data;
 }}
+
+export const fetchMyCreatedJobs = async () => {
+    let authToken
+        if (localStorage.getItem('userId')) {
+            const cookieString = document.cookie;
+            const cookies = cookieString.split('; ').find(row => row.startsWith('accessToken'));
+
+            if (cookies) {
+                authToken= (cookies.split('=')[1]);
+            } else {
+                console.error("Необходимо перелогиниться");
+            }
+    const response = await fetch(`${API_BASE_URL}/user_manager/get_created_jobs`, {
+        method:"GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${authToken}`
+        }
+    });
+    if (!response.ok) {
+        throw new Error("Failed to fetch jobs");
+    }
+    const data = await response.json();
+    return data;
+}
+}

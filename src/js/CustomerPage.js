@@ -2,11 +2,11 @@ import Header from "./Header";
 import MainCustomerPart from "./MainCustomerPart";
 import Search from "./Search";
 import '../css/CustomerPage.css'
-import { useJobs } from "../hooks/useJobs";
+import { useMyCreatedJobs } from "../hooks/useMyCreatedJobs";
 import { useRespondedJobs } from "../hooks/useRespondedJobs";
 
 export default function CustomerPage() {
-    const { jobs, loading } = useJobs();
+    const { jobs, loading } = useMyCreatedJobs();
     const {userRespondedJobs} = useRespondedJobs();
 
     if (loading) {
