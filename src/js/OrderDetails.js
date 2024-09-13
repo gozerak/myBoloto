@@ -67,11 +67,12 @@ export default function OrderDetails ({order, respondedJobs}) {
     const [respondedUsers, setRespondedUsers] = useState ({});
     const [orderStatus, setOrderStatus] = useState('');
 
+
     useEffect(() => {
         if (Array.isArray(respondedJobs)) {
-            const matchedJob = respondedJobs.find(jobData => jobData.job.id === order.id);
+            const matchedJob = respondedJobs.find(jobData => jobData.id === order.id);
             setOrderStatus(matchedJob? matchedJob.status : '')
-            const respondedJobIds = respondedJobs.map(job => job.job.id);
+            const respondedJobIds = respondedJobs.map(job => job.id);
             if (respondedJobIds.includes(order.id)) {
                 setIsResponded(true);
             }

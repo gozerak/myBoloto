@@ -21,7 +21,8 @@ export const useRespondedJobs = () => {
     }, []);
 
     useEffect(() => {
-     fetch(`${API_BASE_URL}/user_manager/get_jobs`, {
+        if (authToken) {
+     fetch(`${API_BASE_URL}/user_manager/get_user_assigned_jobs`, {
         method:"GET",
         headers: {
             "Content-Type": "application/json",
@@ -32,6 +33,7 @@ export const useRespondedJobs = () => {
     // .then (responseData => responseData.map(responseDataObj => responseDataObj.job))
     .then(userJobsData => setUserRespondedJobs(userJobsData))
     .catch(error => console.error("Error fetching user responds: ", error))
-}, [authToken]);
+}}, [authToken]);
+console.log(userRespondedJobs)
     return {userRespondedJobs};
 }
