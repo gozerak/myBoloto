@@ -15,7 +15,7 @@
 }
 
 .dropdown-card-content {
-    display: none;
+    display: block;
     position: absolute;
     background-color: #f1f1f1;
     min-width: 160px;
@@ -35,7 +35,9 @@
     background-color: #e2e2e2;
 }
 
-.show {display: block;}
+.show {
+    display: block;
+}
 
 .respond-btn-back {
     background-color: #9b2e2a;
@@ -62,3 +64,9 @@
     background-color: #3bb92a;
 
 }
+
+.dropdown-container {
+    position: relative;
+    display: inline-block;
+}
+

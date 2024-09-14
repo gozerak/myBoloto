@@ -72,7 +72,7 @@ export default function OrderDetails ({order, respondedJobs}) {
         if (Array.isArray(respondedJobs)) {
             const matchedJob = respondedJobs.find(jobData => jobData.id === order.id);
             setOrderStatus(matchedJob? matchedJob.status : '')
-            const respondedJobIds = respondedJobs.map(job => job.id);
+            const respondedJobIds = respondedJobs.map(job => job.job.id);
             if (respondedJobIds.includes(order.id)) {
                 setIsResponded(true);
             }
