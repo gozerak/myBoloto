@@ -1,9 +1,6 @@
-.order-cards {
-    display: flex;
+.footer {
+    height: 50px;
+    width: 100%;
     position: relative;
-    flex-direction: column;
-    top: 60px;
-    left: 13%;
-    width: 50vw;
-    overflow-y: auto;
+    bottom: 0;
 }

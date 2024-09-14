@@ -96,11 +96,11 @@ window.onclick = function(event) {
                 <Modal isOpen={isCardModalOpen} onClose={() =>setIsCardModalOpen(false)}>
                     <div className="modal-approve">
             <p className="delete-question">
-                {`Назначить заказ ${order.title} на ${selectedUser.full_name}?`}
+                {`Назначить заказ ${order.job.title} на ${selectedUser.full_name}?`}
                 </p>
             <div className="delete-buttons">
             <button type='button' className='respond-btn-back' onClick={() => setIsCardModalOpen(false)}>Отмена</button>
-            <button type='button' className='respond-btn-submit' onClick={(e) => handleApprove(e, selectedUser.id, order.id)}>
+            <button type='button' className='respond-btn-submit' onClick={(e) => handleApprove(e, selectedUser.id, order.job.id)}>
             Подтвердить
             </button>
             </div>

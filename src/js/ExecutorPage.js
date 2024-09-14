@@ -4,6 +4,7 @@ import MainPart from "./MainPart";
 import Search from "./Search";
 import { useJobs } from "../hooks/useJobs";
 import { useRespondedJobs } from "../hooks/useRespondedJobs";
+import Footer from "./Footer";
 
 export default function ExecutorPage () {
   const { jobs, jobsLength, loading } = useJobs();
@@ -24,6 +25,7 @@ export default function ExecutorPage () {
           <Header />
           <Search jobsLength={jobsLength} />
           <MainPart jobs={jobs} respondedJobs = {userRespondedJobs} />
+          <Footer />
         </div>
       );
 }

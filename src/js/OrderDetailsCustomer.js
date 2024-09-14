@@ -5,78 +5,41 @@ import { useEffect, useState } from "react";
 import RespondedList from "./RespondedList";
 import AcceptWorkBtn from "./AcceptWorkBtn";
 
-// function Respond ({ onClick, isResponded }) {
-//     return (
-//         <button
-//         className={isResponded? "responded-btn" : "respond-btn"} 
-//         onClick={onClick}
-//          disabled={isResponded}
-//          >
-//             {isResponded? 'Вы уже откликнулись' :'Откликнуться'}
-//             </button>
-//     )
-// }
 
 function CustomerPageOrderDetail ({respondedUsers, isCustomerPage, order}) {
     return(
             <div className="edit-delete-buttons">
                 <RespondedList respondedUsers={respondedUsers} isCustomerPage={isCustomerPage} order={order} />
-                <DeleteCard cardJob_id= {order.id} />
+                <DeleteCard cardJob_id= {order.job.id} />
             </div>
     )
 }
 
-function AcceptWorkResult(order) {
-    <div className="">
-        <p>Ответственный: {order.responded_user.full_name}</p>
-        {/* <AcceptWorkBtn /> */}
+function AcceptWorkResult({ order }) {
+  return(
+    <div className="accept-work-elem">
+        <p className="responsible-customer-card">Ответственный: {order.responded_user.full_name}</p>
+        <div className="edit-delete-buttons">
+        <AcceptWorkBtn user = { order.responded_user.full_name } work = { order.job.title } userId = { order.responded_user.id } jobId = { order.job.id } />
+        <DeleteCard cardJob_id= {order.job.id} />
+        </div>
     </div>
+  )
 }
 
-// async function handleRespond (order_id, setIsResopnded) {
-//     if (!localStorage.getItem('userId')){
-//         console.log ("Необходимо авторизоваться");
-//         alert("Необходимо авторизоваться")
-//         return;
-//     }
-//     try {
-//         const response = await fetch (`${API_BASE_URL}/user_manager/response_for_job?user_id=${localStorage.getItem('userId')}&job_id=${order_id}`, {
-//             method: "POST",
-//             headers: {
-//               "Content-Type": "application/json",  
-//             },
-//         });
-//         if (response.ok) {
-//             console.log('Вы откликнулись на заявку!');
-//             setIsResopnded(true);
-//             //какую нибудь модалочку бы...
-//         } else {
-//             const errorData = await response.json();
-//             console.error ("При отклике на заявку произошла ошибка:", errorData.detail );
-//         }
-//     } catch (error){
-//         console.error ("Error:", error)
-//     }
-// };
+function Completed () {
+  return (
+    <div className="completed">
+      <img src="../img/completed.svg" alt="Выполено" />
+      <p>Выполнено</p>
+    </div>
+  )
+}
 
 
 export default function OrderDetails ({order}) {
-    // const location = useLocation();
     const isCustomerPage = true;
-    // const [isResponded, setIsResponded] = useState(false);
     const [respondedUsers, setRespondedUsers] = useState ({});
-    // const [orderStatus, setOrderStatus] = useState('');
-    // useEffect(() => {
-    //     if (Array.isArray(respondedJobs)) {
-    //         const matchedJob = respondedJobs.find(jobData => jobData.job.id === order.id);
-    //         setOrderStatus(matchedJob? matchedJob.status : '')
-    //         const respondedJobIds = respondedJobs.map(job => job.job.id);
-    //         if (respondedJobIds.includes(order.id)) {
-    //             setIsResponded(true);
-    //         }
-    //     }
-    //     else return;
-    // }, [respondedJobs, order.id]);
 
     useEffect(() => {
         const fetchRespondedUsers = async () => {
@@ -96,7 +59,6 @@ export default function OrderDetails ({order}) {
     
         fetchRespondedUsers();
       }, [order.job.id]);
-      console.log(order)
     
     return (
         <>
@@ -104,7 +66,7 @@ export default function OrderDetails ({order}) {
         <p className="card-cost">{order.job.price} ₽</p>
         <div className="description-and-status">
         <p className="card-order-description">{order.job.description}</p>
-        {/* <p className="card-order-status">{orderStatus ? orderStatus : null}</p> */}
+        <p className="card-order-status">{order.job.status ? order.job.status : null}</p>
         </div>
         <div className="info-card">
         <p className="card-main-info">Период</p>
@@ -126,7 +88,10 @@ export default function OrderDetails ({order}) {
         <div className="card-employer-container">
                 <p className="card-employer">Предприятие</p>
                 <p className="card-order-value">{order.job.organization.title}</p>
-                 {order.responded_user.id!==null? <AcceptWorkResult order={order}/>: (<CustomerPageOrderDetail respondedUsers={respondedUsers} isCustomerPage={isCustomerPage} order={order}/>)}
+                 {order.responded_user.id!== null?
+                  (<AcceptWorkResult order={order}/>):
+                  (order.status ==="Закрыт"? <Completed/>:
+                   <CustomerPageOrderDetail respondedUsers={respondedUsers} isCustomerPage={isCustomerPage} order={order}/>)}
             </div>
         </>
     );

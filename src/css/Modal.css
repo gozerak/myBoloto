@@ -18,7 +18,9 @@
     border-radius: 8px;
     position: relative;
     min-width: 300px;
+    max-width: 60vw;
     overflow-y: auto;
+    text-wrap: wrap;
 }
 
 .close-button {

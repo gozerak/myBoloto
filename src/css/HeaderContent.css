@@ -46,36 +46,30 @@ img {
     text-decoration: none;
 }
 
-.chapter-executor:hover {
-    /* background-color: #ebebee; */
-    cursor:pointer;
-    text-decoration: none;
-}
 
-
-
-.chapter-customer:active {
-    border-bottom: 3px solid #000743;
-    /* background-color: #ebebee; */
-    text-decoration: none;
-}
-
-.chapter-customer:hover {
-    /* background-color: #ebebee; */
-    cursor:pointer;
-    text-decoration: none;
-}
-
+.chapter-executor:hover,
+.chapter-customer:hover,
 .chapter-myresponses:hover {
+    /* background-color: #ebebee; */
     cursor:pointer;
     text-decoration: none;
+    border-bottom: 3px solid #000743;
+    padding-top: 17px;
 }
 
-.chapter-myresponses:active {
+
+
+/* .chapter-customer:active {
+    border-bottom: 3px solid #000743;
+    background-color: #ebebee;
+    text-decoration: none;
+} */
+
+
+/* .chapter-myresponses:active {
     border-bottom: 3px solid #000743;
     text-decoration: none;
-}
-
+} */ 
 #for-executor {
     height: 10vh;
     display: flex;
@@ -117,5 +111,6 @@ img {
     margin-left: 0px;
     padding-right: 10px;
     padding-top: 4px;
+    text-wrap: nowrap;
     /* padding-left:1vw; */
 }

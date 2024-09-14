@@ -1,13 +1,18 @@
 import Header from "./Header";
 import Search from "./Search";
-import MainCustomerPart from "./MainCustomerPart";
+// import MainCustomerPart from "./MainCustomerPart";
+import MainMyResponsesPart from "./MainMyResponsesPart";
+import { useRespondedJobs } from "../hooks/useRespondedJobs";
+import Footer from "./Footer";
 
 export default function MyResponsesPage () {
+    const {userRespondedJobs} = useRespondedJobs();
     return (
-        <>
+        <div className="App">
         <Header/>
         <Search />
-        <MainCustomerPart />
-        </>
+        <MainMyResponsesPart jobs = {userRespondedJobs} />
+        <Footer />
+        </div>
     )
 }

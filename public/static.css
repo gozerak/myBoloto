@@ -1,4 +1,10 @@
 body {
-    overflow-y:auto;
+    overflow-y:hidden;
     user-select: none;
 }
+
+html, body, #root, .CustomerApp {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }

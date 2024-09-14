@@ -28,7 +28,7 @@ function UserBalance() {
     getData(); 
    }, []);
 
-   return (<div className="user-balance">{userBalance}₽</div>)
+   return (<div className="user-balance">{userBalance} ₽</div>)
 
 }
 
@@ -89,7 +89,7 @@ export default function HeaderContent() {
             <HeaderLogo />
             <HeaderName />
             <HeaderChapters />
-            <UserBalance/>
+            {accessToken? <UserBalance/> : null}
             {accessToken ? <ProfileIcon /> : <HeaderLogin />}
             <ReportProblem />
         </>

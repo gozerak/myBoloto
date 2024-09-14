@@ -10,9 +10,8 @@ function Sortby () {
         <p className="sort-name">Сортировать</p>
         <select className="dropdown-select" id="sortby" defaultValue={null}>
             <option hidden value=""></option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
+            <option>По дате</option>
+            <option>По стоимости</option>
         </select>
         </div>
     )

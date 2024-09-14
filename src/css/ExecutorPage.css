@@ -1,6 +1,6 @@
 .App {
     overflow-x: hidden;
-    overflow-y: hidden;
-    min-height: 100vh;
+    overflow-y: auto;
+    height: 100%;
     width: 100%;
 }

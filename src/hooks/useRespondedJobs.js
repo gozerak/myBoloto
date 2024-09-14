@@ -34,6 +34,5 @@ export const useRespondedJobs = () => {
     .then(userJobsData => setUserRespondedJobs(userJobsData))
     .catch(error => console.error("Error fetching user responds: ", error))
 }}, [authToken]);
-console.log(userRespondedJobs)
     return {userRespondedJobs};
 }

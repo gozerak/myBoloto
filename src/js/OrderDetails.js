@@ -5,7 +5,7 @@ import { API_BASE_URL } from "../services/apiService";
 import { useEffect, useState } from "react";
 import RespondedList from "./RespondedList";
 
-function Respond ({ onClick, isResponded }) {
+export function Respond ({ onClick, isResponded }) {
     return (
         <button
         className={isResponded? "responded-btn" : "respond-btn"} 

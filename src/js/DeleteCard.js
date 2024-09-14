@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import "../css/DeleteCard.css"
 import Modal from "./Modal";
 import { useCheckJWT } from "../hooks/CheckJWT";
@@ -35,12 +35,6 @@ export default function DeleteCard ({cardJob_id}) {
         }
     };
 
-    useEffect(() => {
-        if (!isVerified) {
-            // Логика для управления состоянием, когда JWT не прошла проверку
-            console.warn("В DeleteCard useEffect jwt не прошел проверку");
-        }
-    }, [isVerified]);
     return (
         <>
         <button className="delete-card-btn" onClick={() => setModalOpen(true)}>Удалить</button>

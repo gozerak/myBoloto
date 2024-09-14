@@ -140,3 +140,42 @@
     color:#000743;
     font-weight: bold;
 }
+
+.accept-work-elem {
+    display: flex;
+    flex-direction: column;
+    /* padding-bottom: 40px; */
+}
+
+.accept-card-btn {
+    margin-left: 20px;
+    margin-bottom: 1vh;
+    margin-right: 20px;
+    width: auto;
+    min-width: 120px;
+    height: 35px;
+    background: none;
+    background-color: #44af4d;
+    border-radius: 16px;
+    color: white;
+    font-size: 16px;
+    border: none;
+    text-wrap: nowrap;
+}
+
+.accept-card-btn:hover {
+    background-color: #3bb92a;
+    cursor: pointer;
+}
+
+.completed {
+    display: flex;
+    flex-direction: row;
+}
+
+.responsible-customer-card {
+    margin-bottom: 30px;
+    right: 1vw;
+    position: relative;
+    text-align: right;
+}

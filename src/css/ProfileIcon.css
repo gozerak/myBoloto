@@ -54,4 +54,5 @@
     font-size: 18px;
     color:#000743;
     margin-top: 13px;
+    text-wrap: nowrap;
 }

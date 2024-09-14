@@ -108,8 +108,8 @@ export default function HeaderLogin () {
                     </label>
                 </div>
                 <div className='login-buttons'>
-                    <button type='button' className='login-btn-back' onClick={() => setModalOpen(false)}>Back</button>
-                    <button type='submit' className='login-btn-submit'>Login</button>
+                    <button type='button' className='login-btn-back' onClick={() => setModalOpen(false)}>Назад</button>
+                    <button type='submit' className='login-btn-submit'>Войти</button>
                 </div>
             </form>
             </Modal>

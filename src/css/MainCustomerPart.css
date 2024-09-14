@@ -1,17 +1,18 @@
 .main {
     width: 100vw;
-    height: 100vh;
+    /* height: 100%; */
     display: flex;
     gap: 0vw;
-    overflow-y: hidden;
+    /* overflow-y: auto; */
     justify-content: space-between;
+    flex-grow: 1;
+    margin-bottom: 20px;
 }
 
 .filters {
     height: 580px;
     min-width: 300px;
     position: relative;
-    top: 60px;
     width: 22vw;
     border: 1px solid #F5F5F5;
     background-color: #ffffff;
@@ -23,7 +24,7 @@
 
 .order-cards {
     display: flex;
-    position: relative;
+    position:relative;
     flex-direction: column;
     left: 13%;
     width: auto;

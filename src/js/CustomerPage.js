@@ -4,6 +4,7 @@ import Search from "./Search";
 import '../css/CustomerPage.css'
 import { useMyCreatedJobs } from "../hooks/useMyCreatedJobs";
 import { useRespondedJobs } from "../hooks/useRespondedJobs";
+import Footer from "./Footer";
 
 export default function CustomerPage() {
     const { jobs, loading } = useMyCreatedJobs();
@@ -24,6 +25,7 @@ export default function CustomerPage() {
             <Header />
             <Search />
             <MainCustomerPart jobs={jobs} respondedJobs = {userRespondedJobs} />
+            {/* <Footer /> */}
             </div>
     )
 }
