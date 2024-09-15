@@ -128,7 +128,7 @@ export default function OrderDetails ({order, respondedJobs}) {
         <div className="card-employer-container">
                 <p className="card-employer">Предприятие</p>
                 <p className="card-order-value">{order.organization.title}</p>
-                {orderStatus ==="Закрыт"? <Completed /> : (isCustomerPage? (
+                {order.status_value ==="Закрыта"? <Completed /> : (isCustomerPage? (
                  <CustomerPageOrderDetail respondedUsers={respondedUsers} isCustomerPage={isCustomerPage} order={order}/>) : (
                         isResponded? (
                             <Respond disabled isResponded= {isResponded} />):

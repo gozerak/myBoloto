@@ -31,7 +31,7 @@ import  Completed  from "./OrderDetailsCustomer";
         <div className="card-employer-container">
                 <p className="card-employer">Предприятие</p>
                 <p className="card-order-value">{order.job.organization.title}</p>
-                            { order.status ==="Закрыт"? <Completed/> : <Respond disabled isResponded= {true} />}
+                            { order.job.status_value ==="Закрыта"? <Completed/> : <Respond disabled isResponded= {true} />}
             </div>
         </>
     )
