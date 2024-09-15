@@ -40,6 +40,7 @@ export function Completed () {
 export default function OrderDetails ({order}) {
     const isCustomerPage = true;
     const [respondedUsers, setRespondedUsers] = useState ({});
+    console.log(order)
 
     useEffect(() => {
         const fetchRespondedUsers = async () => {
