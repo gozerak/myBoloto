@@ -55,9 +55,10 @@ export function HeaderChapters() {
             <NavLink to="/" className={({ isActive }) => isActive ? "chapter-executor active-link" : "chapter-executor"}>
                 <div id="for-executor">Поиск работы</div>
             </NavLink>
+            {isAuthenticated?
             <NavLink to="/customer" className={({ isActive }) => isActive ? "chapter-customer active-link" : "chapter-customer"}>
                 <div id="for-customer">Мои заказы</div>
-            </NavLink>
+            </NavLink> : null}
             {isAuthenticated?
             <NavLink to="/myresponses" className={({ isActive }) => isActive? "chapter-myresponses active-link": "chapter-myresponses"}>
                 <div id="myresponses">Мои отклики</div>
