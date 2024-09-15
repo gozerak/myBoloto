@@ -27,11 +27,11 @@ function AcceptWorkResult({ order }) {
   )
 }
 
-function Completed () {
+export function Completed () {
   return (
     <div className="completed">
-      <img src="../img/completed.svg" alt="Выполено" />
       <p>Выполнено</p>
+      <img id ="completed-img" src="../img/completed.svg" alt="Выполено" height="50px" width="50px" />
     </div>
   )
 }
@@ -88,9 +88,9 @@ export default function OrderDetails ({order}) {
         <div className="card-employer-container">
                 <p className="card-employer">Предприятие</p>
                 <p className="card-order-value">{order.job.organization.title}</p>
-                 {order.responded_user.id!== null?
-                  (<AcceptWorkResult order={order}/>):
-                  (order.status ==="Закрыт"? <Completed/>:
+                 {order.status ==="Закрыт"?
+                  ( <Completed/>):
+                  (order.responded_user.id!== null? <AcceptWorkResult order={order}/>:
                    <CustomerPageOrderDetail respondedUsers={respondedUsers} isCustomerPage={isCustomerPage} order={order}/>)}
             </div>
         </>

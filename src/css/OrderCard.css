@@ -171,6 +171,8 @@
 .completed {
     display: flex;
     flex-direction: row;
+    margin-right: 40px;
+    justify-content: flex-end;
 }
 
 .responsible-customer-card {
@@ -178,4 +180,8 @@
     right: 1vw;
     position: relative;
     text-align: right;
+}
+
+#completed-img {
+    margin-left: 1vw;
 }

@@ -4,6 +4,7 @@ import DeleteCard from "./DeleteCard";
 import { API_BASE_URL } from "../services/apiService";
 import { useEffect, useState } from "react";
 import RespondedList from "./RespondedList";
+import  Completed  from "./OrderDetailsCustomer";
 
 export function Respond ({ onClick, isResponded }) {
     return (
@@ -67,10 +68,9 @@ export default function OrderDetails ({order, respondedJobs}) {
     const [respondedUsers, setRespondedUsers] = useState ({});
     const [orderStatus, setOrderStatus] = useState('');
 
-
     useEffect(() => {
         if (Array.isArray(respondedJobs)) {
-            const matchedJob = respondedJobs.find(jobData => jobData.id === order.id);
+            const matchedJob = respondedJobs.find(jobData => jobData.job.id === order.id);
             setOrderStatus(matchedJob? matchedJob.status : '')
             const respondedJobIds = respondedJobs.map(job => job.job.id);
             if (respondedJobIds.includes(order.id)) {
@@ -127,12 +127,12 @@ export default function OrderDetails ({order, respondedJobs}) {
         <div className="card-employer-container">
                 <p className="card-employer">Предприятие</p>
                 <p className="card-order-value">{order.organization.title}</p>
-                {isCustomerPage? (
+                {orderStatus ==="Закрыт"? <Completed /> : (isCustomerPage? (
                  <CustomerPageOrderDetail respondedUsers={respondedUsers} isCustomerPage={isCustomerPage} order={order}/>) : (
                         isResponded? (
                             <Respond disabled isResponded= {isResponded} />):
                 (<Respond onClick={() => handleRespond(order.id, setIsResponded)} isResponded= {isResponded} order={order}/>)
-                )}
+                ))}
             </div>
         </>
     );

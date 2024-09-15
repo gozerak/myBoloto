@@ -1,4 +1,5 @@
 import { Respond } from "./OrderDetails";
+import  Completed  from "./OrderDetailsCustomer";
 
  export default function OrderDetailsMyResponses ({ order }) {
 
@@ -30,7 +31,7 @@ import { Respond } from "./OrderDetails";
         <div className="card-employer-container">
                 <p className="card-employer">Предприятие</p>
                 <p className="card-order-value">{order.job.organization.title}</p>
-                            <Respond disabled isResponded= {true} />
+                            { order.status ==="Закрыт"? <Completed/> : <Respond disabled isResponded= {true} />}
             </div>
         </>
     )
