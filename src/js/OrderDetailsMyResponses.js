@@ -1,5 +1,5 @@
 import { Respond } from "./OrderDetails";
-import  Completed  from "./OrderDetailsCustomer";
+import { Completed } from "./OrderDetailsCustomer";
 
  export default function OrderDetailsMyResponses ({ order }) {
 

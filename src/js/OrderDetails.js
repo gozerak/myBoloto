@@ -1,10 +1,7 @@
-import { useLocation } from "react-router-dom"
-// import EditCard from "./EditCard";
-import DeleteCard from "./DeleteCard";
+
 import { API_BASE_URL } from "../services/apiService";
 import { useEffect, useState } from "react";
-import RespondedList from "./RespondedList";
-import  Completed  from "./OrderDetailsCustomer";
+import { Completed } from "./OrderDetailsCustomer";
 
 export function Respond ({ onClick, isResponded }) {
     return (
@@ -18,14 +15,14 @@ export function Respond ({ onClick, isResponded }) {
     )
 }
 
-function CustomerPageOrderDetail ({respondedUsers, isCustomerPage, order}) {
-    return(
-            <div className="edit-delete-buttons">
-                <RespondedList respondedUsers={respondedUsers} isCustomerPage={isCustomerPage} order={order} />
-                <DeleteCard cardJob_id= {order.id} />
-            </div>
-    )
-}
+// function CustomerPageOrderDetail ({respondedUsers, isCustomerPage, order}) {
+//     return(
+//             <div className="edit-delete-buttons">
+//                 <RespondedList respondedUsers={respondedUsers} isCustomerPage={isCustomerPage} order={order} />
+//                 <DeleteCard cardJob_id= {order.id} />
+//             </div>
+//     )
+// }
 
 // function AcceptWorkResult() {
 //     <div className="">
@@ -61,17 +58,17 @@ async function handleRespond (order_id, setIsResopnded) {
 
 
 export default function OrderDetails ({order, respondedJobs}) {
-    const location = useLocation();
     
-    const isCustomerPage = location.pathname === "/customer";
+    // const isCustomerPage = location.pathname === "/customer";
     const [isResponded, setIsResponded] = useState(false);
-    const [respondedUsers, setRespondedUsers] = useState ({});
-    const [orderStatus, setOrderStatus] = useState('');
+    // const [respondedUsers, setRespondedUsers] = useState ({});
+    // const [orderStatus, setOrderStatus] = useState('');
+    console.log(order.status_value)
 
     useEffect(() => {
         if (Array.isArray(respondedJobs)) {
-            const matchedJob = respondedJobs.find(jobData => jobData.job.id === order.id);
-            setOrderStatus(matchedJob? matchedJob.status : '')
+            // const matchedJob = respondedJobs.find(jobData => jobData.job.id === order.id);
+            // setOrderStatus(matchedJob? matchedJob.status : '')
             const respondedJobIds = respondedJobs.map(job => job.job.id);
             if (respondedJobIds.includes(order.id)) {
                 setIsResponded(true);
@@ -80,24 +77,24 @@ export default function OrderDetails ({order, respondedJobs}) {
         else return;
     }, [respondedJobs, order.id]);
 
-    useEffect(() => {
-        const fetchRespondedUsers = async () => {
-          try {
-            const response = await fetch(`${API_BASE_URL}/jobs/get_job_relationship?job_id=${order.id}`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              }
-            });
-            const data = await response.json();
-            setRespondedUsers(data);
-          } catch (error) {
-            console.error("Error fetching responded users:", error);
-          }
-        };
+    // useEffect(() => {
+    //     const fetchRespondedUsers = async () => {
+    //       try {
+    //         const response = await fetch(`${API_BASE_URL}/jobs/get_job_relationship?job_id=${order.id}`, {
+    //           method: "POST",
+    //           headers: {
+    //             "Content-Type": "application/json",
+    //           }
+    //         });
+    //         const data = await response.json();
+    //         setRespondedUsers(data);
+    //       } catch (error) {
+    //         console.error("Error fetching responded users:", error);
+    //       }
+    //     };
     
-        fetchRespondedUsers();
-      }, [order.id]);
+    //     fetchRespondedUsers();
+    //   }, [order.id]);
     
     return (
         <>
@@ -128,12 +125,11 @@ export default function OrderDetails ({order, respondedJobs}) {
         <div className="card-employer-container">
                 <p className="card-employer">Предприятие</p>
                 <p className="card-order-value">{order.organization.title}</p>
-                {order.status_value ==="Закрыта"? <Completed /> : (isCustomerPage? (
-                 <CustomerPageOrderDetail respondedUsers={respondedUsers} isCustomerPage={isCustomerPage} order={order}/>) : (
-                        isResponded? (
+                {order.status_value ==="Закрыта"? <Completed /> : 
+                        (isResponded? (
                             <Respond disabled isResponded= {isResponded} />):
                 (<Respond onClick={() => handleRespond(order.id, setIsResponded)} isResponded= {isResponded} order={order}/>)
-                ))}
+                )}
             </div>
         </>
     );
