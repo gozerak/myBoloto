@@ -88,7 +88,7 @@ export default function OrderDetails ({order}) {
         <div className="card-employer-container">
                 <p className="card-employer">Предприятие</p>
                 <p className="card-order-value">{order.job.organization.title}</p>
-                 {order.status ==="Закрыт"?
+                 {order.job.status_value ==="Закрыта"?
                   ( <Completed/>):
                   (order.responded_user.id!== null? <AcceptWorkResult order={order}/>:
                    <CustomerPageOrderDetail respondedUsers={respondedUsers} isCustomerPage={isCustomerPage} order={order}/>)}
