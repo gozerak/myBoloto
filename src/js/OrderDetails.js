@@ -105,7 +105,8 @@ export default function OrderDetails ({order, respondedJobs}) {
         <p className="card-cost">{order.price} ₽</p>
         <div className="description-and-status">
         <p className="card-order-description">{order.description}</p>
-        <p className="card-order-status">{orderStatus ? orderStatus : null}</p>
+        {/* <p className="card-order-status">{orderStatus ? orderStatus : null}</p> */}
+        <p className="card-order-status"></p>
         </div>
         <div className="info-card">
         <p className="card-main-info">Период</p>
