@@ -105,12 +105,21 @@ img {
     color: black;
 }
 
-.report-problem {
+.sign-up {
     font-size: 16px;
     color: #8A8686;
     margin-left: 0px;
-    padding-right: 10px;
-    padding-top: 4px;
-    text-wrap: nowrap;
+    padding-top: 14px;
+    text-decoration: none;
+    white-space: nowrap;
     /* padding-left:1vw; */
+    width: auto;
+    height: 26px;
+    border: none;
+    background-color: white;
+}
+
+.sign-up:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }

@@ -6,6 +6,7 @@ import ProfileIcon from "./ProfileIcon";
 import { useEffect, useState } from "react";
 import { fetchUserBalance } from "../services/apiService";
 import { useCheckJWT } from "../hooks/CheckJWT";
+import LoginBtn from "./SignUpBtn";
 
 function HeaderName() {
     return (
@@ -67,12 +68,6 @@ export function HeaderChapters() {
     );
 }
 
-function ReportProblem() {
-    return (
-        <p className="report-problem">Сообщить о проблеме</p>
-    );
-}
-
 export default function HeaderContent() {
     let accessToken = null;
 
@@ -92,7 +87,7 @@ export default function HeaderContent() {
             <HeaderChapters />
             {accessToken? <UserBalance/> : null}
             {accessToken ? <ProfileIcon /> : <HeaderLogin />}
-            <ReportProblem />
+            <LoginBtn />
         </>
     );
 }
