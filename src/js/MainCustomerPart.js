@@ -2,11 +2,11 @@ import Filters from "./Filters"
 import OrderCard from "./OrderCard"
 import '../css/MainCustomerPart.css'
 
-export default function MainCustomerPart({ jobs, respondedJobs }) {
+export default function MainCustomerPart({ jobs }) {
     return(
         <div className="main">
         <div className="order-cards">
-            <OrderCard jobs = {jobs} respondedJobs = {respondedJobs} />
+            <OrderCard jobs = {jobs}/>
         </div>
         <Filters />
         </div>

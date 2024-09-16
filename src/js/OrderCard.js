@@ -16,7 +16,7 @@ export default function OrderCard ({ jobs, respondedJobs = null }) {
     {isCustomerPage?
         (jobs.map(order => (
             <div key={order.job.id} className="order-card">
-                <OrderDetailsCustomer order = {order} respondedJobs = {respondedJobs} />
+                <OrderDetailsCustomer order = {order} />
                 </div>
                       ))):( isMyResponsesPage? (
                         jobs.map(order => (

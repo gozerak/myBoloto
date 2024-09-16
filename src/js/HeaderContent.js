@@ -87,7 +87,7 @@ export default function HeaderContent() {
             <HeaderChapters />
             {accessToken? <UserBalance/> : null}
             {accessToken ? <ProfileIcon /> : <HeaderLogin />}
-            <LoginBtn />
+            {accessToken? null: <LoginBtn />}
         </>
     );
 }

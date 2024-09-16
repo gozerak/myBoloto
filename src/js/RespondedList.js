@@ -86,7 +86,7 @@ export default function RespondedList({ respondedUsers, isCustomerPage, order })
                             <div id="card-dropdown" className="dropdown-card-content" ref={dropdownRef}>
                                 {respondedUsers.map((user) => (
                                     <div key={user.id} className="dropdown-card-item" onClick={() => handleSpanClick(user)}>
-                                        <span>{user.full_name}</span>
+                                        <span>{user.login}</span>
                                     </div>
                                 ))}
                             </div>
