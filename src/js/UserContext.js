@@ -10,7 +10,7 @@ export const UserProvider = ({ children }) => {
         const userId = localStorage.getItem('userId');
         if (userId) {
             fetch(`${API_BASE_URL}/user_manager/get_user_by_id?user_id=${userId}`, {
-                method: "POST",
+                method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                 }
@@ -20,7 +20,7 @@ export const UserProvider = ({ children }) => {
             .catch(error => console.error('Error:', error));
         }
     }, []);
-
+    console.log(userData)
     return (
         <UserContext.Provider value={{ userData, setUserData }}>
             {children}

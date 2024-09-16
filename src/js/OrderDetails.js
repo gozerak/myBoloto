@@ -63,7 +63,6 @@ export default function OrderDetails ({order, respondedJobs}) {
     const [isResponded, setIsResponded] = useState(false);
     // const [respondedUsers, setRespondedUsers] = useState ({});
     // const [orderStatus, setOrderStatus] = useState('');
-    console.log(order.status_value)
 
     useEffect(() => {
         if (Array.isArray(respondedJobs)) {

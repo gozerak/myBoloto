@@ -38,8 +38,8 @@ export function Completed () {
 
 
 export default function OrderDetails ({order}) {
-    const isCustomerPage = true;
-    const [respondedUsers, setRespondedUsers] = useState ({});
+  const [respondedUsers, setRespondedUsers] = useState ({});
+  const isCustomerPage = true;
     console.log(order)
 
     useEffect(() => {
