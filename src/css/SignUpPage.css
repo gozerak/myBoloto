@@ -1,0 +1,81 @@
+.registration-forms{
+    display: flex;
+    flex-direction: column;
+}
+
+.registration-elem {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.registration-label {
+    font-size: 18px;
+    font-weight: bold;
+    margin-left:40%;
+    color: #000743;
+    margin-bottom: 5px;
+}
+
+.registration-input {
+    margin-left: 40%;
+    width: 20%;
+    height: 30px;
+    font-size: 18px;
+    padding-left: 10px;
+}
+
+.sign-up-page {
+    height: 100%;
+    position: relative;
+    overflow-y: auto;
+    margin-bottom: 40px;
+}
+
+.registration-checkbox {
+    margin-left: 40%;
+    width: 2%;
+}
+
+.registration-cont-back-btn{
+    width: 10%;
+    height: 40px;
+    background-color: #07137e;
+    border-radius: 6px;
+    color:white;
+    text-align: center;
+    position: relative;
+    margin-top: 20px;
+    left: 40%;
+    margin-bottom: 40px;
+}
+
+.registration-headers{
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    margin-left:10%;
+}
+
+.registration-register-btn {
+    width: 10%;
+    height: 40px;
+    background-color: #44af4d;
+    border-radius: 6px;
+    color:white;
+    text-align: center;
+    position: relative;
+    margin-top: 20px;
+    left: 40%;
+}
+
+.registration-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.required {
+    color:red;
+    margin-left: 5px;
+}
