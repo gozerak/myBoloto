@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import { useContext } from 'react';
 import '../css/HeaderLogin.css';
 import Modal from './Modal';
@@ -7,6 +8,7 @@ import { API_BASE_URL } from '../services/apiService';
 
 export default function HeaderLogin () {
     const [isModalOpen, setModalOpen] = useState(false);
+    const navigate = useNavigate();
     const [loginData, setLoginData] = useState ( {
         username: '',
         password: '',
@@ -59,7 +61,7 @@ export default function HeaderLogin () {
 
 
                 setModalOpen(false);
-                window.location.reload()
+                navigate("/");
                 //Логика получения кукиса
             } else {
                 console.error ('Доступ не получен')

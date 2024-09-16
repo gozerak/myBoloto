@@ -91,3 +91,18 @@ export const fetchMyCreatedJobs = async () => {
     return data;
 }
 }
+
+export const fetchUserData = async ({ userId }) => {
+        const response = await fetch(`${API_BASE_URL}/user_manager/get_user_by_id?user_id=${userId}`, {
+            method:"GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        if (!response.ok) {
+            throw new Error("Failed to fetch jobs");
+        }
+        const data = await response.json();
+        return data;
+
+}

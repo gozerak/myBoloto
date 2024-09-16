@@ -1,0 +1,70 @@
+.profile-main-info-part {
+    display: grid;
+    grid-template-columns: repeat(4, 15%); /* 4 колонки равной ширины */
+    grid-template-rows: repeat(2, auto);   /* 2 ряда по высоте контента */
+    gap: 10px; /* Отступы между элементами */
+}
+
+.profile-main-info-part > .profile-element:nth-child(1),
+.profile-main-info-part > .profile-element:nth-child(2),
+.profile-main-info-part > .profile-element:nth-child(3),
+.profile-main-info-part > .profile-element:nth-child(4) {
+    grid-column: span 1; /* Каждому элементу из первых четырех задаем по 1 колонке */
+}
+
+.profile-main-info-part > .profile-element:nth-child(5),
+.profile-main-info-part > .profile-element:nth-child(6),
+.profile-main-info-part > .profile-element:nth-child(7) {
+    grid-column: span 1; /* Каждому элементу из последних трех задаем по 1 колонке */
+}
+
+.profile-additional-info-part {
+    display: grid;
+    grid-template-columns: repeat(4, 15%); /* 4 колонки равной ширины */
+    grid-template-rows: repeat(3, auto);   /* 2 ряда по высоте контента */
+    gap: 10px; /* Отступы между элементами */
+}
+
+.profile-main-info-part > .profile-element:nth-child(1),
+.profile-main-info-part > .profile-element:nth-child(2),
+.profile-main-info-part > .profile-element:nth-child(3),
+.profile-main-info-part > .profile-element:nth-child(4) {
+    grid-column: span 1; /* Каждому элементу из первых четырех задаем по 1 колонке */
+}
+
+.profile-main-info-part > .profile-element:nth-child(5),
+.profile-main-info-part > .profile-element:nth-child(6),
+.profile-main-info-part > .profile-element:nth-child(7),
+.profile-main-info-part > .profile-element:nth-child(8) {
+    grid-column: span 1; /* Каждому элементу из первых четырех задаем по 1 колонке */
+}
+
+.profile-main-info-part > .profile-element:nth-child(9),
+.profile-main-info-part > .profile-element:nth-child(10),
+.profile-main-info-part > .profile-element:nth-child(11),
+.profile-main-info-part > .profile-element:nth-child(12) {
+    grid-column: span 1; /* Каждому элементу из первых четырех задаем по 1 колонке */
+}
+
+.profile-element {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000743;
+    margin-bottom: 5px;
+}
+
+.profile-block-title {
+    font-size: 22px;
+    color: #000743;
+    font-weight: bold;
+}
+
+.profile-page {
+    position: relative;
+    overflow-y: auto;
+}

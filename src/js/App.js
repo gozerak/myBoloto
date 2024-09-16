@@ -3,6 +3,7 @@ import ExecutorPage from './ExecutorPage';
 import CustomerPage from './CustomerPage';
 import MyResponsesPage from './MyResponsesPage';
 import SignUpPage from './SignUpPage';
+import ProfilePage from './ProfilePage';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
                 <Route path="/customer" element={<CustomerPage />} />
                 <Route path="/myresponses" element={<MyResponsesPage />} />
                 <Route path="/registration" element={<SignUpPage />} />
+                <Route path="/profile/:userId" element={<ProfilePage />} />
             </Routes>
         </Router>
     );

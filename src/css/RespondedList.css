@@ -70,3 +70,28 @@
     display: inline-block;
 }
 
+.respond-options-btn {
+    border: 1px solid black;
+    height: 30px;
+    width: 50%;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.dropdown-actions{ 
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.respond-btn-profile{
+    background-color: #2c1a94;
+    color:white;
+    border:none;
+    border-radius: 4px;
+}
+
+.respond-btn-profile:hover {
+    background-color: #3019af;
+
+}

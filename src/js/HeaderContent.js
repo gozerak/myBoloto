@@ -43,6 +43,12 @@ export function HeaderChapters() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const isVerified = useCheckJWT();
 
+    let userId;
+
+    if (isAuthenticated) {
+        userId= localStorage.getItem("userId");
+    }
+
     useEffect(() => {
         if (isVerified) {
             setIsAuthenticated(true);
@@ -63,7 +69,11 @@ export function HeaderChapters() {
             {isAuthenticated?
             <NavLink to="/myresponses" className={({ isActive }) => isActive? "chapter-myresponses active-link": "chapter-myresponses"}>
                 <div id="myresponses">Мои отклики</div>
-            </NavLink> : null}  
+            </NavLink> : null} 
+            {isAuthenticated?
+            <NavLink to={`/profile/${userId}`} className={({ isActive }) => isActive? "chapter-profile active-link": "chapter-profile"}>
+            <div id="profile-link" >Профиль</div>
+            </NavLink> : null}
         </>
     );
 }

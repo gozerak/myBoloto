@@ -1,11 +1,14 @@
 import { useContext, useState, useEffect, useRef } from "react";
 import { UserContext } from "./UserContext";
 import "../css/ProfileIcon.css";
+import { NavLink } from "react-router-dom";
 
 export default function ProfileIcon() {
     const { userData, setUserData } = useContext(UserContext);
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
+
+    const userId = localStorage.getItem('userId');
 
     const toggleDropdown = () => {
         setDropdownOpen(!isDropdownOpen);
@@ -43,7 +46,7 @@ export default function ProfileIcon() {
             </div>
             {isDropdownOpen && (
                 <div className="dropdown-menu">
-                    <button className="dropdown-item">Профиль</button>
+                    <NavLink to={`/profile/${userId}`}><button className="dropdown-item" >Профиль</button></NavLink>
                     <button className="dropdown-item" onClick={handleLogout}>Выйти</button>
                 </div>
             )}

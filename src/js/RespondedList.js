@@ -2,10 +2,11 @@ import { useState, useEffect, useRef } from "react";
 import "../css/RespondedList.css";
 import Modal from "./Modal";
 import { API_BASE_URL } from "../services/apiService";
+import { NavLink } from "react-router-dom";
 
 export default function RespondedList({ respondedUsers, isCustomerPage, order }) {
     const [isCardModalOpen, setIsCardModalOpen] = useState(false);
-    const [selectedUser, setSelectedUser] = useState({});
+    const [selectedUser, setSelectedUser] = useState(null); // Убираем начальное значение пустого объекта
     const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Управляем открытием списка
     const dropdownRef = useRef(null); // Реф для выпадающего списка
 
@@ -41,18 +42,18 @@ export default function RespondedList({ respondedUsers, isCustomerPage, order })
                 console.error("При подтверждении произошла ошибка", error);
             }
             closeModal();
-            window.location.reload()
+            window.location.reload();
         }   
     };
 
     const handleSpanClick = (user) => {
-        setSelectedUser(user);
-        setIsCardModalOpen(true);
+        setSelectedUser(user); // Устанавливаем выбранного пользователя
+        setIsCardModalOpen(true); // Открываем модальное окно
     };
 
     const closeModal = () => {
-        setIsCardModalOpen(false);
-        setSelectedUser(null);
+        setIsCardModalOpen(false); // Закрываем модальное окно
+        setSelectedUser(null); // Сбрасываем выбранного пользователя
     };
 
     // Обработчик клика за пределами dropdown
@@ -99,16 +100,20 @@ export default function RespondedList({ respondedUsers, isCustomerPage, order })
                 <p>Никто не откликнулся</p>
             )}
 
-            {isCardModalOpen && (
-                <Modal isOpen={isCardModalOpen} onClose={() => setIsCardModalOpen(false)}>
-                    <div className="modal-approve">
-                        <p className="delete-question">
-                            {`Назначить заказ ${order.job.title} на ${selectedUser.full_name}?`}
-                        </p>
+            {isCardModalOpen && selectedUser && ( // Модальное окно рендерится отдельно
+                <Modal isOpen={isCardModalOpen} onClose={closeModal}>
+                    <div className="delete-modal">
+                        <p className="delete-question">{`Выберите действие для ${selectedUser.full_name || selectedUser.login}`}</p>
                         <div className="delete-buttons">
-                            <button type='button' className='respond-btn-back' onClick={() => setIsCardModalOpen(false)}>Отмена</button>
-                            <button type='button' className='respond-btn-submit' onClick={(e) => handleApprove(e, selectedUser.id, order.job.id)}>
-                                Подтвердить
+                            <NavLink to={`/profile/${selectedUser.id}`}>
+                                <button className="respond-btn-profile">Профиль</button>
+                            </NavLink>
+                            <button
+                                type="submit"
+                                className="respond-btn-submit"
+                                onClick={(e) => handleApprove(e, selectedUser.id, order.job.id)}
+                            >
+                                Подтвердить выбор
                             </button>
                         </div>
                     </div>
