@@ -14,6 +14,10 @@
     z-index: 1000;
 }
 
+.dropdown-menu a {
+    text-decoration: none;
+}
+
 .dropdown-item {
     display: block;
     width: 100%;
@@ -23,6 +27,7 @@
     text-align: left;
     cursor: pointer;
     color: #000743;
+    text-decoration: none;
 }
 
 .dropdown-item:hover {
@@ -33,7 +38,7 @@
     width: auto;
     height: 26px;
     margin-top: 13px;
-    margin-left: 0.5vw;
+    margin-left: 15%;
     margin-bottom: 0;
     padding-right: 3vw;
     font-size: 18px;
@@ -50,7 +55,7 @@
 }
 
 .user-balance {
-    margin-left: 20vw;
+    margin-left: 15%;
     font-size: 18px;
     color:#000743;
     margin-top: 13px;

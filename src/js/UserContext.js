@@ -20,7 +20,6 @@ export const UserProvider = ({ children }) => {
             .catch(error => console.error('Error:', error));
         }
     }, []);
-    console.log(userData)
     return (
         <UserContext.Provider value={{ userData, setUserData }}>
             {children}

@@ -23,7 +23,8 @@ img {
 
 .chapter-executor,
 .chapter-customer,
-.chapter-myresponses {
+.chapter-myresponses,
+.chapter-profile {
     background-color: white;
     padding-top: 15px;
     border: none;
@@ -49,7 +50,8 @@ img {
 
 .chapter-executor:hover,
 .chapter-customer:hover,
-.chapter-myresponses:hover {
+.chapter-myresponses:hover,
+.chapter-profile:hover {
     /* background-color: #ebebee; */
     cursor:pointer;
     text-decoration: none;
@@ -94,6 +96,18 @@ img {
 }
 
 #myresponses {
+    height: 10vh;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+    margin-right: 0;
+    margin-left: 0;
+    user-select: none;
+    text-decoration: none;
+    color: black;
+}
+
+#profile-link {
     height: 10vh;
     display: flex;
     justify-content: center; /* Center horizontally */
