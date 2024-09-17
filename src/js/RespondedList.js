@@ -75,7 +75,6 @@ export default function RespondedList({ respondedUsers, isCustomerPage, order })
         };
     }, [isDropdownOpen]);
 
-    console.log(respondedUsers)
     return (
         <div className="dropdown-container">
             {isCustomerPage ? (
