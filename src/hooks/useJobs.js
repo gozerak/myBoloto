@@ -13,7 +13,7 @@ export const useJobs = () => {
                 setJobs(jobsData);
                 setJobsLength(jobsData.length);
             } catch (error){
-                console.error ("Error fetching data:", error);
+                console.error ("Error fetching jobs data:", error);
             } finally {
                 setLoading (false);
             }
