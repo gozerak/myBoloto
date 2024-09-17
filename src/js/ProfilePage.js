@@ -36,6 +36,7 @@ export default function ProfilePage () {
     return (
         <div className="profile-page">
             <Header />
+            <p className="profile-block-title">Профиль пользователя {userData.full_name}</p>
             <p className="profile-block-title">Основная информация</p>
             <div className="profile-main-info-part">
                 <ProfileElem profileTitle={"Фамилия"} profileDescription={userData.user_data.surname} />

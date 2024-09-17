@@ -14,6 +14,7 @@ export default function SignUpPage () {
         login: "",
         email: "",
         hashed_password: "",
+        full_name: "",
         user_data: {
             surname: "",
             name: "",
@@ -62,14 +63,20 @@ export default function SignUpPage () {
             setFormError(true);
             return;
         }
+
+        const updatedFormData = {
+            ...formData,
+            full_name: `${formData.user_data.surname.trim()} ${formData.user_data.name.trim()} ${formData.user_data.patronymic.trim()}`
+        };
+
         const response = await fetch(`${API_BASE_URL}/user_manager/register_user`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(formData)
+            body: JSON.stringify(updatedFormData)
         });
-        console.log(JSON.stringify(formData))
+        console.log(JSON.stringify(updatedFormData))
         if (response.ok) {
             console.log("Успешная регистрация", response.status)
             alert("Вы успешно зарегистрировались!")
