@@ -32,10 +32,13 @@ export default function ProfilePage () {
             </div>
         )
     }
+    console.log(userData)
 
     return (
         <div className="profile-page">
             <Header />
+            {userData.user_data?
+            (<>
             <p className="profile-block-title">Профиль пользователя {userData.full_name}</p>
             <p className="profile-block-title">Основная информация</p>
             <div className="profile-main-info-part">
@@ -62,6 +65,11 @@ export default function ProfilePage () {
                 <ProfileElem profileTitle={"О себе"} profileDescription={userData.user_data.about} />
                 <ProfileElem profileTitle={"Водительское удостоверение"} profileDescription={userData.user_data.driver_license} />
             </div>
+            </>
+            ) : (
+                <p>При загрузке данных произошла ошибка! (Скорее всего битый пользователь)</p>
+            )
+        }
         </div>
     )
 }

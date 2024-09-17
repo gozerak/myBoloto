@@ -89,6 +89,7 @@ export default function AcceptWorkBtn({user, work, userId, jobId}) {
                     className="kpi-input" 
                     value={kpi}
                     onChange={handleKpiChange}
+                    onWheel={(e) => e.target.blur()}
                     min={0}
                     max={100}
                     />

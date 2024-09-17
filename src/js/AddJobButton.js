@@ -191,6 +191,7 @@ export default function AddJobButton() {
                                 name="price"
                                 value={formData.price}
                                 onChange={handleChange}
+                                onWheel={(e) => e.target.blur()}
                                 required
                             />
                     </div>

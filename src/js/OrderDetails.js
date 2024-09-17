@@ -61,6 +61,7 @@ export default function OrderDetails ({order, respondedJobs}) {
     
     // const isCustomerPage = location.pathname === "/customer";
     const [isResponded, setIsResponded] = useState(false);
+    const [userId, setUserId] = useState ("")
     // const [respondedUsers, setRespondedUsers] = useState ({});
     // const [orderStatus, setOrderStatus] = useState('');
 
@@ -76,24 +77,11 @@ export default function OrderDetails ({order, respondedJobs}) {
         else return;
     }, [respondedJobs, order.id]);
 
-    // useEffect(() => {
-    //     const fetchRespondedUsers = async () => {
-    //       try {
-    //         const response = await fetch(`${API_BASE_URL}/jobs/get_job_relationship?job_id=${order.id}`, {
-    //           method: "POST",
-    //           headers: {
-    //             "Content-Type": "application/json",
-    //           }
-    //         });
-    //         const data = await response.json();
-    //         setRespondedUsers(data);
-    //       } catch (error) {
-    //         console.error("Error fetching responded users:", error);
-    //       }
-    //     };
-    
-    //     fetchRespondedUsers();
-    //   }, [order.id]);
+    useEffect(() => {
+        if (localStorage.getItem("userId")) {
+            setUserId(localStorage.getItem("userId"))
+        }
+      }, []);
     
     return (
         <>
@@ -125,6 +113,7 @@ export default function OrderDetails ({order, respondedJobs}) {
                 <p className="card-employer">Предприятие</p>
                 <p className="card-order-value">{order.organization.title}</p>
                 {order.status_value ==="Закрыта"? <Completed /> : 
+                    userId === order.owner_id ? (<p className="your-order">Ваш заказ</p>):
                         (isResponded? (
                             <Respond disabled isResponded= {isResponded} />):
                 (<Respond onClick={() => handleRespond(order.id, setIsResponded)} isResponded= {isResponded} order={order}/>)

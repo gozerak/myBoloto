@@ -35,9 +35,9 @@ function Cost () {
         <div autoComplete="off">
         <p className="filters-names">Уровень дохода</p>
         <div className="cost-block">
-        <input type="number"  className="input-cost" placeholder="Цена от"/>
+        <input type="number" onWheel={(e) => e.target.blur()}  className="input-cost" placeholder="Цена от"/>
         <div className="dash">-</div>
-        <input type="number"  className="input-cost" placeholder="до"/>
+        <input type="number" onWheel={(e) => e.target.blur()}  className="input-cost" placeholder="до"/>
         <p className="ruble">₽</p>
         </div>
         </div>

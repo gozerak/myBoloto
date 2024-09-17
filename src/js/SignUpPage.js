@@ -44,7 +44,7 @@ export default function SignUpPage () {
     const handleChangeUserData = (e) => {
         setFormData({
             ...formData,
-            user_data: {...formData.user_data, [e.target.name]: e.target.value}})
+            user_data: {...formData.user_data, [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value}})
     }
 
     const handleSubmit = async (e) => {
@@ -170,6 +170,7 @@ export default function SignUpPage () {
                         name="phone_number"
                         value={formData.user_data.phone_number}
                         onChange={handleChangeUserData}
+                        onWheel={(e) => e.target.blur()}
                         required />
                     </div>
                     <div className="registration-elem">
@@ -267,7 +268,7 @@ export default function SignUpPage () {
                         className="registration-checkbox"
                         type="checkbox"
                         name="medical_book"
-                        value={formData.user_data.medical_book}
+                        checked={formData.user_data.medical_book}
                         onChange={handleChangeUserData} />
                     </div>
                     <div className="registration-elem">
@@ -278,7 +279,7 @@ export default function SignUpPage () {
                         className="registration-checkbox"
                         type="checkbox"
                         name="is_self_employed"
-                        value={formData.user_data.is_self_employed}
+                        checked={formData.user_data.is_self_employed}
                         onChange={handleChangeUserData}/>
                     </div>
                     <div className="registration-elem">
@@ -345,7 +346,8 @@ export default function SignUpPage () {
                         type="number"
                         name="driver_license"
                         value={formData.user_data.driver_license}
-                        onChange={handleChangeUserData}/>
+                        onChange={handleChangeUserData}
+                        onWheel={(e) => e.target.blur()}/>
                     </div>
                     <div className="registration-elem">
                     <label className="registration-label">
@@ -390,15 +392,13 @@ export default function SignUpPage () {
                         className="registration-input"
                         type="text"
                         name="email"
-                        value={formData.user_data.email}
+                        value={formData.email}
                         onChange={handleChange}
                         onBlur={(e) => {
                             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // простая регулярка для email
                             if (!emailPattern.test(e.target.value)) {
                                 setFormData({
-                                    ...formData,
-                                    user_data: { ...formData.user_data, email: "" }
-                                }); // сбрасываем, если формат неверный
+                                    ...formData, email: "" }) // сбрасываем, если формат неверный
                               alert("Введите корректный email");
                             }
                           }}
@@ -444,7 +444,7 @@ export default function SignUpPage () {
                 </div>
             )
             default:
-                return null;    
+                return "";    
         }
     };
 
