@@ -107,8 +107,8 @@ export default function RespondedList({ respondedUsers, isCustomerPage, order })
                         <div className="delete-buttons">
                             <NavLink 
                             to={`/profile/${selectedUser.id}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            // target="_blank"
+                            // rel="noopener noreferrer"
                             >
                                 <button className="respond-btn-profile">Профиль</button>
                             </NavLink>

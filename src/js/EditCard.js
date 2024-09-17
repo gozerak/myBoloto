@@ -195,6 +195,7 @@ export default function EditCard({order}) {
                                 name="price"
                                 value={cardData.price}
                                 onChange={handleChange}
+                                onWheel={(e) => e.target.blur()}
                                 required
                             />
                     </div>
