@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useContext } from 'react';
 import '../css/HeaderLogin.css';
 import Modal from './Modal';
@@ -8,6 +8,7 @@ import { API_BASE_URL } from '../services/apiService';
 
 export default function HeaderLogin () {
     const [isModalOpen, setModalOpen] = useState(false);
+    const location = useLocation();
     const navigate = useNavigate();
     const [loginData, setLoginData] = useState ( {
         username: '',
@@ -45,7 +46,7 @@ export default function HeaderLogin () {
 
                 try{
                     const response = await fetch(`${API_BASE_URL}/user_manager/get_user_by_id?user_id=${userId}`, {
-                        method: "POST",
+                        method: "GET",
                         headers: {
                             "Content-Type": "application/json",
                         }
@@ -61,7 +62,13 @@ export default function HeaderLogin () {
 
 
                 setModalOpen(false);
-                navigate("/");
+                console.log(location)
+                if (location.pathname!== "/"){
+                    navigate("/");
+                }
+                else {
+                    window.location.reload();
+                }
                 //Логика получения кукиса
             } else {
                 console.error ('Доступ не получен')

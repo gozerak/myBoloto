@@ -75,6 +75,7 @@ export default function RespondedList({ respondedUsers, isCustomerPage, order })
         };
     }, [isDropdownOpen]);
 
+    console.log(respondedUsers)
     return (
         <div className="dropdown-container">
             {isCustomerPage ? (
@@ -87,7 +88,7 @@ export default function RespondedList({ respondedUsers, isCustomerPage, order })
                             <div id="card-dropdown" className="dropdown-card-content" ref={dropdownRef}>
                                 {respondedUsers.map((user) => (
                                     <div key={user.id} className="dropdown-card-item" onClick={() => handleSpanClick(user)}>
-                                        <span>{user.login}</span>
+                                        <span>{user.full_name}</span>
                                     </div>
                                 ))}
                             </div>
@@ -105,7 +106,11 @@ export default function RespondedList({ respondedUsers, isCustomerPage, order })
                     <div className="delete-modal">
                         <p className="delete-question">{`Выберите действие для ${selectedUser.full_name || selectedUser.login}`}</p>
                         <div className="delete-buttons">
-                            <NavLink to={`/profile/${selectedUser.id}`}>
+                            <NavLink 
+                            to={`/profile/${selectedUser.id}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >
                                 <button className="respond-btn-profile">Профиль</button>
                             </NavLink>
                             <button

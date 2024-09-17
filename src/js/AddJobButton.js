@@ -79,7 +79,7 @@ export default function AddJobButton() {
         if (isChecked) {
             setFormData({
                 ...formData,
-                finished_at: ''
+                finished_at: formData.started_at
             })
         }
     }
