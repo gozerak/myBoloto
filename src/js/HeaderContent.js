@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { fetchUserBalance } from "../services/apiService";
 import { useCheckJWT } from "../hooks/CheckJWT";
 import LoginBtn from "./SignUpBtn";
+import Notifications from "./Notifications";
 
 function HeaderName() {
     return (
@@ -95,6 +96,7 @@ export default function HeaderContent() {
             <HeaderLogo />
             <HeaderName />
             <HeaderChapters />
+            {accessToken? <Notifications />: null}
             {accessToken? <UserBalance/> : null}
             {accessToken ? <ProfileIcon /> : <HeaderLogin />}
             {accessToken? null: <LoginBtn />}

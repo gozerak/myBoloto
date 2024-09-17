@@ -106,3 +106,29 @@ export const fetchUserData = async ({ userId }) => {
         return data;
 
 }
+
+export const fetchNotifications = async () => {
+    let authToken
+        if (localStorage.getItem('userId')) {
+            const cookieString = document.cookie;
+            const cookies = cookieString.split('; ').find(row => row.startsWith('accessToken'));
+
+            if (cookies) {
+                authToken= (cookies.split('=')[1]);
+            } else {
+                console.error("Необходимо перелогиниться");
+            }
+    const response = await fetch(`${API_BASE_URL}/notif/user_unread_notif`, {
+        method:"GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${authToken}`
+        }
+    });
+    if (!response.ok) {
+        throw new Error("Failed to fetch notifications");
+    }
+    const data = await response.json();
+    return data;
+}
+}
