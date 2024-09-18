@@ -104,6 +104,10 @@ export default function RespondedList({ respondedUsers, isCustomerPage, order })
                 <Modal isOpen={isCardModalOpen} onClose={closeModal}>
                     <div className="delete-modal">
                         <p className="delete-question">{`Выберите действие для ${selectedUser.full_name || selectedUser.login}`}</p>
+                        <div className="respond-modal-comment">
+                            <p>Комментарий для работника:</p>
+                            <input className="respond-modal-input" type="text" />
+                        </div>
                         <div className="delete-buttons">
                             <NavLink 
                             to={`/profile/${selectedUser.id}`}
