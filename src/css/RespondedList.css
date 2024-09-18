@@ -1,5 +1,5 @@
 .dropbtn {
-    background-color: #139755;
+    background-color: #44af4d;
     color: white;
     font-size: 16px;
     border: none;
@@ -11,7 +11,7 @@
 }
 
 .dropbtn:hover, .dropbtn:focus {
-    background-color: rgb(19, 150, 29);
+    background-color: #3bb92a;
 }
 
 .dropdown-card-content {
@@ -94,4 +94,15 @@
 .respond-btn-profile:hover {
     background-color: #3019af;
 
+}
+
+.respond-modal-comment {
+    display: flex;
+    flex-direction: column;
+}
+
+.respond-modal-input {
+    height: 30px;
+    font-size: 20px;
+    outline: none;
 }

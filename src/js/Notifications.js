@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import "../css/Notifications.css"
 import { API_BASE_URL, fetchNotifications } from "../services/apiService";
 
@@ -6,6 +6,8 @@ export default function Notifications () {
     const [notifications, setNotifications] = useState([]);
     const [listOpened, setListOpened] = useState(false);
     const [openedNotificationId, setOpenedNotificationId] = useState(null);
+
+    const notificationListRef = useRef(null);
 
     useEffect(() => {
         const getData = async () => {
@@ -18,6 +20,26 @@ export default function Notifications () {
         };
         getData();
     }, [])
+
+    useEffect(() => {
+      const handleClickOutside = (event) => {
+        if (
+          notificationListRef.current &&
+          !notificationListRef.current.contains(event.target)
+        ) {
+          setListOpened(false); // Close the notification list
+        }
+      };
+  
+      // Add event listener only when list is opened
+      if (listOpened) {
+        document.addEventListener("mousedown", handleClickOutside);
+      }
+  
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [listOpened]);
 
     const formatDate = (dateStr) => {
         const date = new Date(dateStr);
@@ -81,7 +103,7 @@ export default function Notifications () {
         <div className="notifications">
             <img className="notification-img" src="../img/notification.svg" height="26px" width="26px" alt="Уведомления" onClick={() => handleCloseList(!listOpened)} />
             {listOpened && (
-        <div className="notification-list">
+        <div className="notification-list" ref={notificationListRef}>
           {notifications.length > 0 ? (
             notifications.map((notification) => (
               <div
