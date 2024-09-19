@@ -5,6 +5,96 @@
     gap: 10px; /* Отступы между элементами */
 }
 
+.not-self-employed-text {
+    color: red;
+}
+
+.set-is-employed {
+    margin-left: 20px;
+    margin-right: 20px;
+    width: auto;
+    min-width: 100px;
+    height: 35px;
+    background: none;
+    background-color: #44af4d;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    border: none;
+    text-wrap: nowrap;
+}
+
+.set-is-employed:hover {
+    background-color: #3bb92a;
+    cursor: pointer;
+}
+
+
+.profile-element {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000743;
+    margin-bottom: 5px;
+}
+
+.profile-block-title {
+    font-size: 22px;
+    color: #000743;
+    font-weight: bold;
+}
+
+.profile-page {
+    position: relative;
+    overflow-y: auto;
+}
+
+.profile-block-title-rating {
+    display: flex;
+    flex-direction: row;
+    vertical-align: middle;
+}
+
+.profile-block-rating {
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-block-rating-title {
+    font-size: 22px;
+    color: #000743;
+    font-weight: 200;
+}
+
+.profile-block-rating-stars {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 30%;
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+}
+
+
+.star-wrapper {
+    position: relative;
+    width: 20px;
+    height: 20px;
+}
+
+.star-background,
+.star-fill {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 .profile-main-info-part > .profile-element:nth-child(1),
 .profile-main-info-part > .profile-element:nth-child(2),
 .profile-main-info-part > .profile-element:nth-child(3),
@@ -17,6 +107,7 @@
 .profile-main-info-part > .profile-element:nth-child(7) {
     grid-column: span 1; /* Каждому элементу из последних трех задаем по 1 колонке */
 }
+
 
 .profile-additional-info-part {
     display: grid;
@@ -46,25 +137,3 @@
     grid-column: span 1; /* Каждому элементу из первых четырех задаем по 1 колонке */
 }
 
-.profile-element {
-    display: flex;
-    flex-direction: column;
-}
-
-.profile-title {
-    font-size: 18px;
-    font-weight: bold;
-    color: #000743;
-    margin-bottom: 5px;
-}
-
-.profile-block-title {
-    font-size: 22px;
-    color: #000743;
-    font-weight: bold;
-}
-
-.profile-page {
-    position: relative;
-    overflow-y: auto;
-}

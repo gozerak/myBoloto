@@ -36,7 +36,7 @@ function UserBalance() {
 
 function HeaderLogo() {
     return (
-        <img src='/img/pic_logo.svg' alt='logo' />
+        <img src='/img/pic_logo.svg' alt='logo' className="logo" />
     );
 }
 

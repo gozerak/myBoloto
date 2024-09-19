@@ -12,6 +12,7 @@ export default function AcceptWorkBtn({user, work, userId, jobId}) {
     const isVerified = useCheckJWT();
     const [isLoading, setIsLoading] = useState(false);
     const [kpi, setKpi] = useState("");
+    const [comment, setComment] = useState("");
     const [rating, setRating] = useState(0);
 
     async function handleAcceptWork() {
@@ -44,10 +45,36 @@ export default function AcceptWorkBtn({user, work, userId, jobId}) {
             });
             if (response.ok) {
                 console.log("Вы подтвердили выполнение работы!");
+                sendRating(authToken)
+            } else {
+                console.error("Ошибка подтверждения выполнения работы");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    }};
+
+    async function sendRating(authToken) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/user_rating/add`, { method: "POST"
+             ,
+            headers: {
+               "Content-Type": "application/json",
+                "Authorization": `Bearer ${authToken}`,
+                "Access-Control-Allow-Origin": "*"
+            },
+            body: JSON.stringify({
+                user_id: userId,
+                rating_value: rating,
+                comment: comment
+            })
+            });
+            if (response.ok) {
+                console.log("Вы отправили рейтинг пользователя!");
                 setModalOpen(false);
                 // мб еще что-то, например рефреш страницы
             } else {
-                console.error("Ошибка подтверждения выполнения работы");
+                console.error("Ошибка отправки рейтинга");
             }
         } catch (error) {
             console.error("Error:", error);
@@ -55,7 +82,8 @@ export default function AcceptWorkBtn({user, work, userId, jobId}) {
             setIsLoading(false);
             window.location.reload()
         }
-    }};
+        
+    }
 
     const handleCloseModal = () => {
         setModalOpen(false);
@@ -108,6 +136,14 @@ export default function AcceptWorkBtn({user, work, userId, jobId}) {
                                 </span>
                             ))}
                 </div>
+            </div>
+            <div className="comment-accept-work">
+                <p className="comment-accept-work-title">Отзыв о выполнении работы:</p>
+                <input 
+                className="comment-accept-work-input"
+                type="text"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)} />
             </div>
             <div className="delete-buttons">
             <button type='button' className='delete-btn-back' onClick={() => handleCloseModal()}>Отмена</button>

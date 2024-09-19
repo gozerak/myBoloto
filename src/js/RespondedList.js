@@ -9,6 +9,7 @@ export default function RespondedList({ respondedUsers, isCustomerPage, order })
     const [selectedUser, setSelectedUser] = useState(null); // Убираем начальное значение пустого объекта
     const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Управляем открытием списка
     const dropdownRef = useRef(null); // Реф для выпадающего списка
+    const [comment, setComment] = useState('')
 
     const handleApprove = async (e, userId, orderId) => {
         e.preventDefault();
@@ -35,16 +36,48 @@ export default function RespondedList({ respondedUsers, isCustomerPage, order })
 
                 if (response.ok) {
                     console.log("Запрос выполнен успешно, статус:", response.status);
+                    if (comment) {
+                        sendComment (userId)
+                    }
+                    else {
+                        closeModal();
+                        window.location.reload(); 
+                    }
+
                 } else {
                     console.error("Ошибка выполнения запроса:", response.status);
                 }
             } catch (error) {
                 console.error("При подтверждении произошла ошибка", error);
             }
-            closeModal();
-            window.location.reload();
         }   
     };
+
+    const sendComment = async (userId) => {
+        try {
+            const response = await fetch(`${API_BASE_URL}/notif/create`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                   notification_data: comment,
+                   user_id: userId 
+                })
+            });
+
+            if (response.ok) {
+                console.log("Запрос выполнен успешно, статус:", response.status);
+
+            } else {
+                console.error("Ошибка выполнения запроса:", response.status);
+            }
+        } catch (error) {
+                console.error("При отправке комментария ошибка", error);
+            }
+        closeModal();
+        window.location.reload();   
+    }
 
     const handleSpanClick = (user) => {
         setSelectedUser(user); // Устанавливаем выбранного пользователя
@@ -106,7 +139,11 @@ export default function RespondedList({ respondedUsers, isCustomerPage, order })
                         <p className="delete-question">{`Выберите действие для ${selectedUser.full_name || selectedUser.login}`}</p>
                         <div className="respond-modal-comment">
                             <p>Комментарий для работника:</p>
-                            <input className="respond-modal-input" type="text" />
+                            <input 
+                            className="respond-modal-input" 
+                            type="text"
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)} />
                         </div>
                         <div className="delete-buttons">
                             <NavLink 
