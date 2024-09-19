@@ -16,7 +16,6 @@ function CustomerPageOrderDetail ({respondedUsers, isCustomerPage, order}) {
 }
 
 function AcceptWorkResult({ order }) {
-  console.log(order)
   return(
     <div className="accept-work-elem">
         <p className="responsible-customer-card">Ответственный: {order.responded_user.full_name}</p>
