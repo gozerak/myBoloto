@@ -1,12 +1,13 @@
 import { useContext, useState, useEffect, useRef } from "react";
 import { UserContext } from "./UserContext";
 import "../css/ProfileIcon.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function ProfileIcon() {
     const { userData, setUserData } = useContext(UserContext);
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
+    const navigate = useNavigate();
 
     const userId = localStorage.getItem('userId');
 
@@ -19,7 +20,7 @@ export default function ProfileIcon() {
         localStorage.removeItem('userId');
         document.cookie = 'accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         setUserData(null);
-        window.location.reload();
+        navigate("/");
     };
 
     const handleClickOutside = (event) => {

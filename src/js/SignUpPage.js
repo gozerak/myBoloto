@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import { API_BASE_URL } from "../services/apiService";
 import "../css/SignUpPage.css"
+import InputMask from 'react-input-mask';
 
 export default function SignUpPage () {
     const [step, setStep] = useState(1);
@@ -44,7 +45,17 @@ export default function SignUpPage () {
     const handleChangeUserData = (e) => {
         setFormData({
             ...formData,
-            user_data: {...formData.user_data, [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value}})
+            user_data: {
+                ...formData.user_data,
+                 [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value}})
+    }
+
+    const handleChangeUserSpecialData = (e) => {
+        setFormData({
+            ...formData,
+            user_data: {
+                ...formData.user_data,
+                 [e.target.name]: e.target.value.replace(/\D/g, ''),}})
     }
 
     const handleSubmit = async (e) => {
@@ -213,52 +224,62 @@ export default function SignUpPage () {
                         Серия и номер паспорта
                         <span className="required">*</span>
                         </label>
-                        <input
-                        className="registration-input"
-                        type="text"
-                        name="passport_data"
-                        value={formData.user_data.passport_data}
-                        onChange={(e) => {
-                            if (e.target.value.length <= 10) {
-                              handleChangeUserData(e); // разрешаем ввод до 10 символов
-                            }
-                          }}
-                          onBlur={(e) => {
-                            if (formData.user_data.passport_data.length !== 10) {
-                              setFormData({
-                                ...formData,
-                                user_data: { ...formData.user_data, passport_data: "" } // сбрасываем, если длина не 10
-                              });
-                            }
-                          }}
-                          required
-                        />
+                        <InputMask
+                            mask="9999 999999"
+                            maskChar="_"
+                            className="registration-input"
+                            type="text"
+                            name="passport_data"
+                            value={formData.user_data.passport_data}
+                            onChange={(e) => {
+                                // Удаляем пробелы для корректной проверки длины
+                                const valueWithoutSpaces = e.target.value.replace(/\s/g, '');
+                                if (valueWithoutSpaces.length <= 10) {
+                                    handleChangeUserSpecialData(e);
+                                }
+                            }}
+                            onBlur={(e) => {
+                                const valueWithoutSpaces = formData.user_data.passport_data.replace(/\s/g, '');
+                                if (valueWithoutSpaces.length !== 10) {
+                                setFormData({
+                                    ...formData,
+                                    user_data: { ...formData.user_data, passport_data: '' },
+                                });
+                                }
+                            }}
+                            required
+                            />
                     </div>
                     <div className="registration-elem">
                     <label className="registration-label">
                         СНИЛС
                         <span className="required">*</span>
                         </label>
-                        <input
-                        className="registration-input"
-                        type="text"
-                        name="snils"
-                        value={formData.user_data.snils}
-                        onChange={(e) => {
-                            if (e.target.value.length <= 11) {
-                              handleChangeUserData(e); // разрешаем ввод до 10 символов
-                            }
-                          }}
-                          onBlur={(e) => {
-                            if (formData.user_data.snils.length !== 11) {
-                              setFormData({
-                                ...formData,
-                                user_data: { ...formData.user_data, snils: "" } // сбрасываем, если длина не 10
-                              });
-                            }
-                          }}
-                          required
-                        />
+                        <InputMask
+                            mask="999-999-999 99"
+                            maskChar="_"
+                            className="registration-input"
+                            type="text"
+                            name="snils"
+                            value={formData.user_data.snils}
+                            onChange={(e) => {
+                                // Удаляем пробелы для корректной проверки длины
+                                const valueWithoutSpaces = e.target.value.replace(/\D/g, '');
+                                if (valueWithoutSpaces.length <= 11) {
+                                    handleChangeUserSpecialData(e);
+                                }
+                            }}
+                            onBlur={(e) => {
+                                const valueWithoutSpaces = formData.user_data.snils.replace(/\D/g, '');
+                                if (valueWithoutSpaces.length !== 11) {
+                                setFormData({
+                                    ...formData,
+                                    user_data: { ...formData.user_data, snils: '' },
+                                });
+                                }
+                            }}
+                            required
+                            />
                     </div>
                     <div className="registration-elem">
                     <label className="registration-label">
