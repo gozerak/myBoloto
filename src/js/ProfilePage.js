@@ -2,7 +2,7 @@ import { useUserData } from "../hooks/useUserData";
 import Header from "./Header";
 import "../css/ProfilePage.css";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { API_BASE_URL } from "../services/apiService";
 
 
@@ -48,28 +48,30 @@ function UserRating ({rating}) {
     )
 }
 
-function SelfEmployedWarning(isSelfEmployed, userId) {
-    const handleSelfEmployed = async (isSelfEmployed) => {
+function SelfEmployedWarning({isSelfEmployed, userId}) {
+    const handleSelfEmployed = async () => {
         if(isSelfEmployed) return;
         try {
-            const response = await fetch( `${API_BASE_URL}/user_manager/update_data?user_id=${userId}`, {
+            const response = await fetch( `${API_BASE_URL}/user_manager/update_data`, {
                 method:"PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({
-                    isSelfEmployed: true
+                body: JSON.stringify({ user_id: userId,
+                    update_data: {
+                    is_self_employed: true
+                }
                 })
-        });
+            });
             if (response.ok) {
                 console.log ("Ну теперь-то ты самозанятый, деньги начнешь лопатой грести")
             } else {
                 console.error ("Произошла ошибка при попытке сделать пользователя самозанятым")
-        }
-    } catch (error) {
-        console.error ("Error: ", error);
-    } finally {
-        // window.location.reload()
+            }
+        } catch (error) {
+             console.error ("Error: ", error);
+            } finally {
+            window.location.reload()
     }
 };
 
@@ -77,7 +79,7 @@ function SelfEmployedWarning(isSelfEmployed, userId) {
         <>
         <p className="not-self-employed-text">Внимание! У Вас не оформлен статус самозанятого, вы не можете откликаться на работу.<br /> 
             Чтобы зарегистрироваться как самозанятый, кликните по кнопке ниже</p>
-        <button className="set-is-employed" onClick={() => handleSelfEmployed()}>Тык</button>    
+        <button className="set-is-employed" onClick={() => handleSelfEmployed ()}>Тык</button>    
         </>
         )
 }
@@ -85,7 +87,13 @@ function SelfEmployedWarning(isSelfEmployed, userId) {
 export default function ProfilePage () {
     const { userId } = useParams();
     const { userData, loading} = useUserData({ userId });
-    const [isSelfEmployed, setIsSelfEmployed] = useState(userData.is_self_employed)
+    const [isSelfEmployed, setIsSelfEmployed] = useState(true)
+
+    useEffect(() => {
+        if (userData && userData.user_data) {
+          setIsSelfEmployed(userData.user_data.is_self_employed);
+        }
+      }, [userData]);
 
     if (loading) {
         return (
@@ -95,6 +103,28 @@ export default function ProfilePage () {
             </div>
         )
     }
+
+    function formatPassport (passportData) {
+        if (passportData) {
+        const series= passportData.slice(0,4);
+        const number = passportData.slice(4);
+        
+        return(`${series} ${number}`)
+        }
+        else return;
+    }
+
+    function formatSnils (snils) {
+        if (snils) {
+            return (`${snils.slice(0,3)}-${snils.slice (3,6)}-${snils.slice(6,9)} ${snils.slice(9)}`)
+        }
+        else return;
+    }
+
+    function formatDate(dateString) {
+        const [year, month, day] = dateString.split("-");
+        return `${day}.${month}.${year}`;
+      }
 
     return (
         <div className="profile-page">
@@ -107,7 +137,7 @@ export default function ProfilePage () {
             <UserRating rating={userData.user_rating} /> : null } 
             </div>
             <p className="profile-block-title">Основная информация</p>
-                {!isSelfEmployed? <SelfEmployedWarning isSelfEmployed={userData.is_self_employed} userId= {userId} /> : ""}
+                {!isSelfEmployed? <SelfEmployedWarning isSelfEmployed={userData.user_data.is_self_employed} userId= {userId} /> : ""}
             <div className="profile-main-info-part">
                 <ProfileElem profileTitle={"Фамилия"} profileDescription={userData.user_data.surname} />
                 <ProfileElem profileTitle={"Имя"} profileDescription={userData.user_data.name} />
@@ -115,15 +145,15 @@ export default function ProfilePage () {
                 <ProfileElem profileTitle={"e-mail"} profileDescription={userData.email} />
                 <ProfileElem profileTitle={"Номер телефона"} profileDescription={userData.user_data.phone_number} />
                 <ProfileElem profileTitle={"Город"} profileDescription={userData.user_data.city} />
-                <ProfileElem profileTitle={"Дата рождения"} profileDescription={userData.user_data.date_of_birth} />
+                <ProfileElem profileTitle={"Дата рождения"} profileDescription={formatDate(userData.user_data.date_of_birth)} />
             </div>
             <p className="profile-block-title">Дополнительная информация</p>
             <div className="profile-additional-info-part">
                 <ProfileElem profileTitle={"Гражданство"} profileDescription={userData.user_data.citizenship} />
-                <ProfileElem profileTitle={"Паспортные данные"} profileDescription={userData.user_data.passport_data} />
-                <ProfileElem profileTitle={"СНИЛС"} profileDescription={userData.user_data.snils} />
+                <ProfileElem profileTitle={"Паспортные данные"} profileDescription={formatPassport(userData.user_data.passport_data)} />
+                <ProfileElem profileTitle={"СНИЛС"} profileDescription={formatSnils(userData.user_data.snils)} />
                 <ProfileElem profileTitle={"Медицинская книжка"} profileDescription={userData.user_data.medical_book} />
-                <ProfileElem profileTitle={"Самозанятый"} profileDescription={userData.is_self_employed} onChange={() => setIsSelfEmployed(userData.is_self_employed)} />
+                <ProfileElem profileTitle={"Самозанятый"} profileDescription={userData.user_data.is_self_employed} onChange={() => setIsSelfEmployed(userData.user_data.is_self_employed)} />
                 <ProfileElem profileTitle={"Образование"} profileDescription={userData.user_data.education} />
                 <ProfileElem profileTitle={"Опыт работы"} profileDescription={userData.user_data.work_experience} />
                 <ProfileElem profileTitle={"Противопоказания"} profileDescription={userData.user_data.contraindications} />
