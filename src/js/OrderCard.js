@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import OrderDetailsCustomer from "./OrderDetailsCustomer";
 import OrderDetailsMyResponses from "./OrderDetailsMyResponses";
 
-export default function OrderCard ({ jobs, respondedJobs = null }) {
+export default function OrderCard ({ jobs, respondedJobs = null, refreshOrder }) {
     const location = useLocation();
     const isCustomerPage = location.pathname === "/customer";
     const isMyResponsesPage = location.pathname === "/myresponses"
@@ -16,7 +16,7 @@ export default function OrderCard ({ jobs, respondedJobs = null }) {
     {isCustomerPage?
         (jobs.map(order => (
             <div key={order.job.id} className="order-card">
-                <OrderDetailsCustomer order = {order} />
+                <OrderDetailsCustomer order = {order} refreshOrder={refreshOrder}/>
                 </div>
                       ))):( isMyResponsesPage? (
                         jobs.map(order => (

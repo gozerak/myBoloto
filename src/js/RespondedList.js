@@ -4,7 +4,7 @@ import Modal from "./Modal";
 import { API_BASE_URL } from "../services/apiService";
 import { NavLink } from "react-router-dom";
 
-export default function RespondedList({ respondedUsers, isCustomerPage, order }) {
+export default function RespondedList({ respondedUsers, isCustomerPage, order, refreshOrder }) {
     const [isCardModalOpen, setIsCardModalOpen] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null); // Убираем начальное значение пустого объекта
     const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Управляем открытием списка
@@ -41,7 +41,7 @@ export default function RespondedList({ respondedUsers, isCustomerPage, order })
                     }
                     else {
                         closeModal();
-                        window.location.reload(); 
+                        refreshOrder(); 
                     }
 
                 } else {
