@@ -6,16 +6,16 @@ import RespondedList from "./RespondedList";
 import AcceptWorkBtn from "./AcceptWorkBtn";
 
 
-function CustomerPageOrderDetail ({respondedUsers, isCustomerPage, order}) {
+function CustomerPageOrderDetail ({respondedUsers, isCustomerPage, order, refreshOrder}) {
     return(
             <div className="edit-delete-buttons">
-                <RespondedList respondedUsers={respondedUsers} isCustomerPage={isCustomerPage} order={order} />
+                <RespondedList respondedUsers={respondedUsers} isCustomerPage={isCustomerPage} order={order} refreshOrder={refreshOrder} />
                 <DeleteCard cardJob_id= {order.job.id} />
             </div>
     )
 }
 
-function AcceptWorkResult({ order }) {
+function AcceptWorkResult({ order, refreshOrder }) {
   return(
     <div className="accept-work-elem">
         <p className="responsible-customer-card">Ответственный: {order.responded_user.full_name}</p>
@@ -37,7 +37,7 @@ export function Completed () {
 }
 
 
-export default function OrderDetails ({order}) {
+export default function OrderDetailsCustomer ({order, refreshOrder}) {
   const [respondedUsers, setRespondedUsers] = useState ({});
   const isCustomerPage = true;
 
@@ -91,7 +91,7 @@ export default function OrderDetails ({order}) {
                  {order.job.status_value ==="Закрыта"?
                   ( <Completed/>):
                   (order.responded_user.id!== null? <AcceptWorkResult order={order}/>:
-                   <CustomerPageOrderDetail respondedUsers={respondedUsers} isCustomerPage={isCustomerPage} order={order}/>)}
+                   <CustomerPageOrderDetail respondedUsers={respondedUsers} isCustomerPage={isCustomerPage} order={order} refreshOrder={refreshOrder}/>)}
             </div>
         </>
     );

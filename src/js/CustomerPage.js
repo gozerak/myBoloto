@@ -21,7 +21,7 @@ export default function CustomerPage() {
         <div className="CustomerApp">
             <Header />
             <Search />
-            <MainCustomerPart jobs={jobs} />
+            <MainCustomerPart jobs={jobs} refreshOrder={useMyCreatedJobs} />
             {/* <Footer /> */}
             </div>
     )

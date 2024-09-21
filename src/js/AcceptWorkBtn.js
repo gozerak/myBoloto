@@ -6,7 +6,7 @@ import "../css/AcceptWorkBtn.css"
 import Modal from "./Modal";
 import { useCheckJWT } from "../hooks/CheckJWT";
 
-export default function AcceptWorkBtn({user, work, userId, jobId}) {
+export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder}) {
 
     const [isModalOpen, setModalOpen] = useState (false);
     const isVerified = useCheckJWT();
@@ -80,7 +80,7 @@ export default function AcceptWorkBtn({user, work, userId, jobId}) {
             console.error("Error:", error);
         } finally {
             setIsLoading(false);
-            window.location.reload()
+            refreshOrder();
         }
         
     }
