@@ -126,9 +126,19 @@ export default function ProfilePage () {
         return `${day}.${month}.${year}`;
       }
 
+    function formatPhoneNumber (phoneNumber) {
+        if (phoneNumber.length === 11) {
+            const formatted = phoneNumber.replace(/(\d)(\d{3})(\d{3})(\d{2})(\d{2})/,
+                 '+$1 ($2) $3 $4-$5');
+            return formatted;  
+        }
+        return phoneNumber
+    }
+
     return (
         <div className="profile-page">
             <Header />
+            <div className="profile-main">
             {userData.user_data?
             (<>
             <div className="profile-block-title-rating">
@@ -138,12 +148,13 @@ export default function ProfilePage () {
             </div>
             <p className="profile-block-title">Основная информация</p>
                 {!isSelfEmployed? <SelfEmployedWarning isSelfEmployed={userData.user_data.is_self_employed} userId= {userId} /> : ""}
+            <div className="profile-info">
             <div className="profile-main-info-part">
                 <ProfileElem profileTitle={"Фамилия"} profileDescription={userData.user_data.surname} />
                 <ProfileElem profileTitle={"Имя"} profileDescription={userData.user_data.name} />
                 <ProfileElem profileTitle={"Отчество"} profileDescription={userData.user_data.patronymic} />
                 <ProfileElem profileTitle={"e-mail"} profileDescription={userData.email} />
-                <ProfileElem profileTitle={"Номер телефона"} profileDescription={userData.user_data.phone_number} />
+                <ProfileElem profileTitle={"Номер телефона"} profileDescription={formatPhoneNumber(userData.user_data.phone_number)} />
                 <ProfileElem profileTitle={"Город"} profileDescription={userData.user_data.city} />
                 <ProfileElem profileTitle={"Дата рождения"} profileDescription={formatDate(userData.user_data.date_of_birth)} />
             </div>
@@ -162,11 +173,13 @@ export default function ProfilePage () {
                 <ProfileElem profileTitle={"О себе"} profileDescription={userData.user_data.about} />
                 <ProfileElem profileTitle={"Водительское удостоверение"} profileDescription={userData.user_data.driver_license} />
             </div>
+            </div>
             </>
             ) : (
                 <p>При загрузке данных произошла ошибка! (Скорее всего битый пользователь)</p>
             )
         }
+        </div>
         </div>
     )
 }

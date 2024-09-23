@@ -175,14 +175,41 @@ export default function SignUpPage () {
                         Номер телефона
                         <span className="required">*</span>
                         </label>
-                        <input
+                        {/* <input
                         className="registration-input"
                         type="number"
                         name="phone_number"
                         value={formData.user_data.phone_number}
                         onChange={handleChangeUserData}
                         onWheel={(e) => e.target.blur()}
-                        required />
+                        required /> */}
+                        <InputMask
+                            mask="+7 (999) 999-99-99"
+                            maskChar="_"
+                            className="registration-input"
+                            type="text"
+                            name="phone_number"
+                            value={formData.user_data.phone_number}
+                            onChange={(e) => {
+                                // Удаляем пробелы для корректной проверки длины
+                                const valueWithoutSpaces = e.target.value.replace(/\D/g, '');
+                                if (valueWithoutSpaces.length <= 11) {
+                                    handleChangeUserSpecialData(e);
+                                }
+                            }}
+                            onBlur={(e) => {
+                                const valueWithoutSpaces = formData.user_data.phone_number.replace(/\D/g, '');
+                                if (valueWithoutSpaces.length !== 11) {
+                                    
+                                    console.log(valueWithoutSpaces.length)
+                                setFormData({
+                                    ...formData,
+                                    user_data: { ...formData.user_data, phone_number: '' },
+                                });
+                                }
+                            }}
+                            required
+                            />
                     </div>
                     <div className="registration-elem">
                     <label className="registration-label">
