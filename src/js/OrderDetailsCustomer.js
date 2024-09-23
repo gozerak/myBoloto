@@ -20,8 +20,8 @@ function AcceptWorkResult({ order, refreshOrder }) {
     <div className="accept-work-elem">
         <p className="responsible-customer-card">Ответственный: {order.responded_user.full_name}</p>
         <div className="edit-delete-buttons">
-        <AcceptWorkBtn user = { order.responded_user.full_name } work = { order.job.title } userId = { order.responded_user.id } jobId = { order.job.id } />
-        <DeleteCard cardJob_id= {order.job.id} />
+        <AcceptWorkBtn user = { order.responded_user.full_name } work = { order.job.title } userId = { order.responded_user.id } jobId = { order.job.id } refreshOrder={refreshOrder} />
+        <DeleteCard cardJob_id= {order.job.id} refreshOrder={refreshOrder} />
         </div>
     </div>
   )
@@ -90,7 +90,7 @@ export default function OrderDetailsCustomer ({order, refreshOrder}) {
                 <p className="card-order-value">{order.job.organization.title}</p>
                  {order.job.status_value ==="Закрыта"?
                   ( <Completed/>):
-                  (order.responded_user.id!== null? <AcceptWorkResult order={order}/>:
+                  (order.responded_user.id!== null? <AcceptWorkResult order={order} refreshOrder={refreshOrder}/>:
                    <CustomerPageOrderDetail respondedUsers={respondedUsers} isCustomerPage={isCustomerPage} order={order} refreshOrder={refreshOrder}/>)}
             </div>
         </>

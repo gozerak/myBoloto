@@ -4,7 +4,7 @@ import Modal from "./Modal";
 import { useCheckJWT } from "../hooks/CheckJWT";
 import { API_BASE_URL } from "../services/apiService";
 
-export default function DeleteCard ({cardJob_id}) {
+export default function DeleteCard ({cardJob_id, refreshOrder}) {
     const [isModalOpen, setModalOpen] = useState (false);
     const isVerified = useCheckJWT();
     const [isLoading, setIsLoading] = useState(false);
@@ -31,7 +31,7 @@ export default function DeleteCard ({cardJob_id}) {
             console.error("Error:", error);
         } finally {
             setIsLoading(false);
-            window.location.reload()
+            refreshOrder();
         }
     };
 

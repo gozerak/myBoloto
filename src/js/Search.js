@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom"
 import AddJobButton from "./AddJobButton"
 import "../css/AddJobButton.css"
 
-export default function Search ({ jobsLength }) {
+export default function Search ({ jobsLength, refreshOrder }) {
     const location = useLocation();
     const isCustomerPage = location.pathname === "/customer";
 
@@ -16,7 +16,7 @@ export default function Search ({ jobsLength }) {
         <input type="text" autoComplete="off" placeholder="Type here..." className="search-bar"></input>
         <button type="submit" className="submit">Найти</button>
         </form>
-        {isCustomerPage? <AddJobButton /> :null}
+        {isCustomerPage? <AddJobButton refreshOrder={refreshOrder} /> :null}
         </div>
         <p className="total-found">
             {isCustomerPage? "Ваши заявки:":

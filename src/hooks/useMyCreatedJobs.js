@@ -6,20 +6,27 @@ export const useMyCreatedJobs = () => {
     // const [jobsLength, setJobsLength] = useState(0);
     const [loading, setLoading] = useState(true);
 
+    const getData = async () => {
+        try {
+            const jobsData = await fetchMyCreatedJobs();
+            setJobs(jobsData);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // Хук useEffect вызывается при монтировании компонента для начальной загрузки данных
     useEffect(() => {
-        const getData = async () => {
-            try {
-                const jobsData = await fetchMyCreatedJobs()
-                setJobs(jobsData);
-                // setJobsLength(jobsData.length);
-            } catch (error){
-                console.error ("Error fetching data:", error);
-            } finally {
-                setLoading (false);
-            }
-        };
         getData();
     }, []);
 
-    return {jobs, loading};
+    // Функция для обновления данных (перезагрузки списка)
+    const refreshOrder = () => {
+        setLoading(true); // Чтобы отобразить индикатор загрузки при обновлении
+        getData(); // Повторный вызов функции для получения данных
+    };
+
+    return {jobs, loading, refreshOrder};
 }
