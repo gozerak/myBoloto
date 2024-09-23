@@ -7,7 +7,7 @@ import { useFetchOnFocus } from '../hooks/useFetchOnFocus';
 import { API_BASE_URL } from '../services/apiService';
 import { fetchActionTypes, fetchPlaces, fetchOrganizations } from '../services/apiService';
 
-export default function AddJobButton() {
+export default function AddJobButton({ refreshOrder }) {
     const [isModalOpen, setModalOpen] = useState(false);
     const [formData, setFormData] = useState({
         title: "",
@@ -61,7 +61,7 @@ export default function AddJobButton() {
             if (response.ok) {
                 console.log("Job added successfully");
                 setModalOpen(false);
-                window.location.reload()
+                refreshOrder();
             } else {
                 console.error("Failed to add job");
             }

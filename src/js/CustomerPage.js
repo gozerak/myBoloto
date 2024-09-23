@@ -5,7 +5,7 @@ import '../css/CustomerPage.css'
 import { useMyCreatedJobs } from "../hooks/useMyCreatedJobs";
 
 export default function CustomerPage() {
-    const { jobs, loading } = useMyCreatedJobs();
+    const { jobs, loading, refreshOrder } = useMyCreatedJobs();
 
     if (loading) {
         return (
@@ -20,8 +20,8 @@ export default function CustomerPage() {
     return (
         <div className="CustomerApp">
             <Header />
-            <Search />
-            <MainCustomerPart jobs={jobs} refreshOrder={useMyCreatedJobs} />
+            <Search refreshOrder={refreshOrder} />
+            <MainCustomerPart jobs={jobs} refreshOrder={refreshOrder} />
             {/* <Footer /> */}
             </div>
     )
