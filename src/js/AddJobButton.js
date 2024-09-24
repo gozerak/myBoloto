@@ -6,6 +6,7 @@ import "../css/AddJobButton.css";
 import { useFetchOnFocus } from '../hooks/useFetchOnFocus';
 import { API_BASE_URL } from '../services/apiService';
 import { fetchActionTypes, fetchPlaces, fetchOrganizations } from '../services/apiService';
+import TemporaryNotifier from './TemporaryNotifier';
 
 export default function AddJobButton({ refreshOrder }) {
     const [isModalOpen, setModalOpen] = useState(false);
@@ -28,6 +29,9 @@ export default function AddJobButton({ refreshOrder }) {
     const [actionTypes, handleActionTypeFocus] = useFetchOnFocus(fetchActionTypes);
     const [places, handlePlaceFocus] = useFetchOnFocus(fetchPlaces);
     const [organizations, handleOrganizationFocus] = useFetchOnFocus(fetchOrganizations);
+    const [showNotifier, setShowNotifier] = useState(false);
+    const [notifierStatus, setNotifierStatus] = useState('');
+    const [notifierText, setNotifierText] = useState('')
 
     const handleChange = (e) => {
         const { name, value} = e.target;
@@ -62,11 +66,23 @@ export default function AddJobButton({ refreshOrder }) {
                 console.log("Job added successfully");
                 setModalOpen(false);
                 refreshOrder();
+                setNotifierStatus('success')
+                setNotifierText('Вы успешно создали работу!')
+                setShowNotifier(true)
+                setTimeout(() => {
+                    setShowNotifier(false);
+                }, 5000)
             } else {
                 console.error("Failed to add job");
             }
         } catch (error) {
             console.error("Error:", error);
+            setNotifierStatus('error')
+            setNotifierText('При создании работы возникла ошибка')
+            setShowNotifier(true)
+            setTimeout(() => {
+                setShowNotifier(false);
+              }, 5000)
         }
     }};
 
@@ -86,6 +102,7 @@ export default function AddJobButton({ refreshOrder }) {
 
     return (
         <>
+            {showNotifier? <TemporaryNotifier status={notifierStatus} text={notifierText} />: null}
             <button className="add-job-btn" onClick={() => setModalOpen(true)}>
                 Добавить заказ
             </button>

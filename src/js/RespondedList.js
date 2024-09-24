@@ -3,6 +3,7 @@ import "../css/RespondedList.css";
 import Modal from "./Modal";
 import { API_BASE_URL } from "../services/apiService";
 import { NavLink } from "react-router-dom";
+import TemporaryNotifier from "./TemporaryNotifier";
 
 export default function RespondedList({ respondedUsers, isCustomerPage, order, refreshOrder }) {
     const [isCardModalOpen, setIsCardModalOpen] = useState(false);
@@ -10,6 +11,9 @@ export default function RespondedList({ respondedUsers, isCustomerPage, order, r
     const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Управляем открытием списка
     const dropdownRef = useRef(null); // Реф для выпадающего списка
     const [comment, setComment] = useState('')
+    const [showNotifier, setShowNotifier] = useState(false);
+    const [notifierStatus, setNotifierStatus] = useState('');
+    const [notifierText, setNotifierText] = useState('')
 
     const handleApprove = async (e, userId, orderId) => {
         e.preventDefault();
@@ -36,6 +40,12 @@ export default function RespondedList({ respondedUsers, isCustomerPage, order, r
 
                 if (response.ok) {
                     console.log("Запрос выполнен успешно, статус:", response.status);
+                    setNotifierStatus('success')
+                    setNotifierText('Вы успешно назначили работу!')
+                    setShowNotifier(true)
+                    setTimeout(() => {
+                        setShowNotifier(false);
+                    }, 5000)
                     if (comment) {
                         sendComment (userId)
                     }
@@ -49,6 +59,12 @@ export default function RespondedList({ respondedUsers, isCustomerPage, order, r
                 }
             } catch (error) {
                 console.error("При подтверждении произошла ошибка", error);
+                setNotifierStatus('error')
+                setNotifierText('При подтверждении произошла ошибка')
+                setShowNotifier(true)
+                setTimeout(() => {
+                    setShowNotifier(false);
+                }, 5000)
             }
         }   
     };
@@ -75,8 +91,7 @@ export default function RespondedList({ respondedUsers, isCustomerPage, order, r
         } catch (error) {
                 console.error("При отправке комментария ошибка", error);
             }
-        closeModal();
-        window.location.reload();   
+        closeModal();  
     }
 
     const handleSpanClick = (user) => {
@@ -110,6 +125,7 @@ export default function RespondedList({ respondedUsers, isCustomerPage, order, r
 
     return (
         <div className="dropdown-container">
+            {showNotifier? <TemporaryNotifier status={notifierStatus} text={notifierText} />: null}
             {isCustomerPage ? (
                 respondedUsers !== null && Array.isArray(respondedUsers) && respondedUsers.length !== 0 ? (
                     <>

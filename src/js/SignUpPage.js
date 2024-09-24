@@ -4,6 +4,7 @@ import Header from "./Header";
 import { API_BASE_URL } from "../services/apiService";
 import "../css/SignUpPage.css"
 import InputMask from 'react-input-mask';
+import TemporaryNotifier from "./TemporaryNotifier";
 
 export default function SignUpPage () {
     const [step, setStep] = useState(1);
@@ -11,6 +12,9 @@ export default function SignUpPage () {
     const [passwordError, setPasswordError] = useState(false);
     const [confirmPassword, setConfirmPassword] = useState("");
     const [formError, setFormError] = useState(false);
+    const [showNotifier, setShowNotifier] = useState(false);
+    const [notifierStatus, setNotifierStatus] = useState('');
+    const [notifierText, setNotifierText] = useState('')
     const [formData, setFormData] = useState ({
         login: "",
         email: "",
@@ -90,7 +94,12 @@ export default function SignUpPage () {
         console.log(JSON.stringify(updatedFormData))
         if (response.ok) {
             console.log("Успешная регистрация", response.status)
-            alert("Вы успешно зарегистрировались!")
+            setNotifierStatus('success')
+            setNotifierText('Вы успешно зарегистрировались!')
+            setShowNotifier(true)
+            setTimeout(() => {
+                setShowNotifier(false);
+              }, 5000)
             navigate("/");
         }
     }
@@ -499,6 +508,7 @@ export default function SignUpPage () {
     return (
         <div className="sign-up-page">
             <Header />
+            {showNotifier? <TemporaryNotifier status={notifierStatus} text={notifierText} />: null}
             <form>{renderStep()}</form>
         </div>
     )

@@ -10,7 +10,7 @@ function CustomerPageOrderDetail ({respondedUsers, isCustomerPage, order, refres
     return(
             <div className="edit-delete-buttons">
                 <RespondedList respondedUsers={respondedUsers} isCustomerPage={isCustomerPage} order={order} refreshOrder={refreshOrder} />
-                <DeleteCard cardJob_id= {order.job.id} />
+                <DeleteCard cardJob_id= {order.job.id} refreshOrder={refreshOrder} />
             </div>
     )
 }
