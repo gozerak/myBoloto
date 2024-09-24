@@ -3,11 +3,15 @@ import "../css/DeleteCard.css"
 import Modal from "./Modal";
 import { useCheckJWT } from "../hooks/CheckJWT";
 import { API_BASE_URL } from "../services/apiService";
+import TemporaryNotifier from "./TemporaryNotifier";
 
 export default function DeleteCard ({cardJob_id, refreshOrder}) {
     const [isModalOpen, setModalOpen] = useState (false);
     const isVerified = useCheckJWT();
     const [isLoading, setIsLoading] = useState(false);
+    const [showNotifier, setShowNotifier] = useState(false);
+    const [notifierStatus, setNotifierStatus] = useState('');
+    const [notifierText, setNotifierText] = useState('')
     
     async function handleDeleteCard() {
         if (!isVerified) {
@@ -23,12 +27,24 @@ export default function DeleteCard ({cardJob_id, refreshOrder}) {
             if (response.ok) {
                 console.log("Запись успешно удалена");
                 setModalOpen(false);
+                setNotifierStatus('success')
+            setNotifierText('Запись успешно удалена')
+            setShowNotifier(true)
+            setTimeout(() => {
+                setShowNotifier(false);
+              }, 5000)
                 // мб еще что-то, например рефреш страницы
             } else {
                 console.error("Ошибка удаления записи");
             }
         } catch (error) {
             console.error("Error:", error);
+            setNotifierStatus('error')
+            setNotifierText('При отклике на заявку произошла ошибка')
+            setShowNotifier(true)
+            setTimeout(() => {
+                setShowNotifier(false);
+              }, 5000)
         } finally {
             setIsLoading(false);
             refreshOrder();
@@ -37,6 +53,7 @@ export default function DeleteCard ({cardJob_id, refreshOrder}) {
 
     return (
         <>
+        {showNotifier? <TemporaryNotifier status={notifierStatus} text={notifierText} />: null}
         <button className="delete-card-btn" onClick={() => setModalOpen(true)}>Удалить</button>
         <Modal isOpen={isModalOpen} onClose={() =>setModalOpen(false)}>
             <div className="delete-modal">

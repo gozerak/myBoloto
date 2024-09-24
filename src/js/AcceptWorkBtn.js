@@ -5,6 +5,7 @@ import "../css/OrderCard.css"
 import "../css/AcceptWorkBtn.css"
 import Modal from "./Modal";
 import { useCheckJWT } from "../hooks/CheckJWT";
+import TemporaryNotifier from "./TemporaryNotifier"
 
 export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder}) {
 
@@ -14,6 +15,9 @@ export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder})
     const [kpi, setKpi] = useState("");
     const [comment, setComment] = useState("");
     const [rating, setRating] = useState(0);
+    const [showNotifier, setShowNotifier] = useState(false);
+    const [notifierStatus, setNotifierStatus] = useState('');
+    const [notifierText, setNotifierText] = useState('')
 
     async function handleAcceptWork() {
         if (!isVerified) {
@@ -46,8 +50,20 @@ export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder})
             if (response.ok) {
                 console.log("Вы подтвердили выполнение работы!");
                 sendRating(authToken)
+                setNotifierStatus('success')
+            setNotifierText('Вы подтвердили выполнение работы!')
+            setShowNotifier(true)
+            setTimeout(() => {
+                setShowNotifier(false);
+              }, 5000)
             } else {
                 console.error("Ошибка подтверждения выполнения работы");
+                setNotifierStatus('error')
+            setNotifierText('Ошибка подтверждения выполнения работы')
+            setShowNotifier(true)
+            setTimeout(() => {
+                setShowNotifier(false);
+              }, 5000)
             }
         } catch (error) {
             console.error("Error:", error);
@@ -72,6 +88,7 @@ export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder})
             if (response.ok) {
                 console.log("Вы отправили рейтинг пользователя!");
                 setModalOpen(false);
+                
                 // мб еще что-то, например рефреш страницы
             } else {
                 console.error("Ошибка отправки рейтинга");
@@ -105,6 +122,7 @@ export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder})
 
     return (
         <>
+        {showNotifier? <TemporaryNotifier status={notifierStatus} text={notifierText} />: null}
         <button className="accept-card-btn" onClick={() => setModalOpen(true)}>Подтвердить выполнение</button>
         <Modal isOpen={isModalOpen} onClose={() => handleCloseModal()}>
             <div className="delete-modal">

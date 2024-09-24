@@ -48,7 +48,7 @@ function UserRating ({rating}) {
     )
 }
 
-function SelfEmployedWarning({isSelfEmployed, userId}) {
+function SelfEmployedWarning({isSelfEmployed, userId, setIsSelfEmployed}) {
     const handleSelfEmployed = async () => {
         if(isSelfEmployed) return;
         try {
@@ -71,7 +71,7 @@ function SelfEmployedWarning({isSelfEmployed, userId}) {
         } catch (error) {
              console.error ("Error: ", error);
             } finally {
-            window.location.reload()
+            setIsSelfEmployed(true)
     }
 };
 
@@ -147,7 +147,7 @@ export default function ProfilePage () {
             <UserRating rating={userData.user_rating} /> : null } 
             </div>
             <p className="profile-block-title">Основная информация</p>
-                {!isSelfEmployed? <SelfEmployedWarning isSelfEmployed={userData.user_data.is_self_employed} userId= {userId} /> : ""}
+                {!isSelfEmployed? <SelfEmployedWarning isSelfEmployed={userData.user_data.is_self_employed} userId= {userId} setIsSelfEmployed={setIsSelfEmployed} /> : ""}
             <div className="profile-info">
             <div className="profile-main-info-part">
                 <ProfileElem profileTitle={"Фамилия"} profileDescription={userData.user_data.surname} />

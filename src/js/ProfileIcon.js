@@ -21,6 +21,7 @@ export default function ProfileIcon() {
         document.cookie = 'accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         setUserData(null);
         navigate("/");
+        window.location.reload();
     };
 
     const handleClickOutside = (event) => {

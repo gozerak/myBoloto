@@ -2,6 +2,7 @@
 import { API_BASE_URL } from "../services/apiService";
 import { useEffect, useState } from "react";
 import { Completed } from "./OrderDetailsCustomer";
+import TemporaryNotifier from "./TemporaryNotifier";
 
 export function Respond ({ onClick, isResponded }) {
     return (
@@ -30,7 +31,11 @@ export function Respond ({ onClick, isResponded }) {
 //     </div>
 // }
 
-async function handleRespond (order_id, setIsResopnded) {
+async function handleRespond (order_id, 
+    setIsResopnded,
+    setShowNotifier, 
+    setNotifierStatus, 
+    setNotifierText) {
     if (!localStorage.getItem('userId')){
         console.log ("Необходимо авторизоваться");
         alert("Необходимо авторизоваться")
@@ -46,10 +51,21 @@ async function handleRespond (order_id, setIsResopnded) {
         if (response.ok) {
             console.log('Вы откликнулись на заявку!');
             setIsResopnded(true);
-            //какую нибудь модалочку бы...
+            setNotifierStatus('success')
+            setNotifierText('Вы успешно откликнулись!')
+            setShowNotifier(true)
+            setTimeout(() => {
+                setShowNotifier(false);
+              }, 5000)
         } else {
             const errorData = await response.json();
             console.error ("При отклике на заявку произошла ошибка:", errorData.detail );
+            setNotifierStatus('error')
+            setNotifierText('При отклике на заявку произошла ошибка')
+            setShowNotifier(true)
+            setTimeout(() => {
+                setShowNotifier(false);
+              }, 5000)
         }
     } catch (error){
         console.error ("Error:", error)
@@ -62,6 +78,9 @@ export default function OrderDetails ({order, respondedJobs}) {
     // const isCustomerPage = location.pathname === "/customer";
     const [isResponded, setIsResponded] = useState(false);
     const [userId, setUserId] = useState ("")
+    const [showNotifier, setShowNotifier] = useState(false);
+    const [notifierStatus, setNotifierStatus] = useState('');
+    const [notifierText, setNotifierText] = useState('')
     // const [respondedUsers, setRespondedUsers] = useState ({});
     // const [orderStatus, setOrderStatus] = useState('');
 
@@ -85,6 +104,7 @@ export default function OrderDetails ({order, respondedJobs}) {
     
     return (
         <>
+        {showNotifier? <TemporaryNotifier status={notifierStatus} text={notifierText} />: null}
         <p className="card-header">{order.title}</p>
         <p className="card-cost">{order.price} ₽</p>
         <div className="description-and-status">
@@ -116,7 +136,11 @@ export default function OrderDetails ({order, respondedJobs}) {
                     userId === order.owner_id ? (<p className="your-order">Ваш заказ</p>):
                         (isResponded? (
                             <Respond disabled isResponded= {isResponded} />):
-                (<Respond onClick={() => handleRespond(order.id, setIsResponded)} isResponded= {isResponded} order={order}/>)
+                (<Respond onClick={() => handleRespond(order.id, 
+                    setIsResponded, 
+                    setShowNotifier, 
+                    setNotifierStatus, 
+                    setNotifierText)} isResponded= {isResponded} order={order}/>)
                 )}
             </div>
         </>

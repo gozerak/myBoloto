@@ -1,0 +1,29 @@
+.temporary-notifier {
+    position: fixed;
+    right: 40px;
+    top:10px;
+    min-width: 150px;
+    max-width: 250px;
+    min-height: 25px;
+    z-index: 5;
+}
+
+.temporary-success {
+    background-color: #1fbd26 ;
+    opacity: 75%;
+    min-height: 25px;
+}
+
+.temporary-error {
+    background-color: #bd3514 ;
+    opacity: 35%;
+    min-height: 25px;
+}
+
+.temporary-text {
+    font-size: 18px;
+    font-weight: 300;
+    color: white;
+    margin: 10px 0px 0px 10px;
+    word-break: break-all;
+}
