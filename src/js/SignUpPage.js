@@ -6,6 +6,24 @@ import "../css/SignUpPage.css"
 import InputMask from 'react-input-mask';
 import TemporaryNotifier from "./TemporaryNotifier";
 
+function LabeledInput({title, required = false, type = 'text', name, value, onChange, onBlur }) {
+    return(
+       <div className="registration-elem">
+        <label className="registration-label">{title}
+            {required && <span className="required">*</span>}
+        </label>
+        <input
+        className={type!=="checkbox"?"registration-input": "registration-checkbox"}
+        type={type}
+        name={name}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        required={required} />
+       </div> 
+    )
+}
+
 export default function SignUpPage () {
     const [step, setStep] = useState(1);
     const navigate = useNavigate();
@@ -127,71 +145,43 @@ export default function SignUpPage () {
                     <>
                     <p className="registration-headers">Основная информация</p>
                  <div className="registration-forms">
-                    <div className="registration-elem">
-                    <label className="registration-label">
-                        Фамилия
-                        <span className="required">*</span>
-                        </label>
-                        <input
-                        className="registration-input"
-                        type="text"
-                        name="surname"
-                        value={formData.user_data.surname}
-                        onChange={handleChangeUserData}
-                        required />
-                    </div>
-                    <div className="registration-elem">
-                    <label className="registration-label">
-                        Имя
-                        <span className="required">*</span>
-                        </label>
-                        <input
-                        className="registration-input"
-                        type="text"
-                        name="name"
-                        value={formData.user_data.name}
-                        onChange={handleChangeUserData}
-                        required />
-                    </div>
-                    <div className="registration-elem">
-                    <label className="registration-label">
-                        Отчество
-                        <span className="required">*</span>
-                        </label>
-                        <input
-                        className="registration-input"
-                        type="text"
-                        name="patronymic"
-                        value={formData.user_data.patronymic}
-                        onChange={handleChangeUserData}
-                        required />
-                    </div>
-                    <div className="registration-elem">
-                    <label className="registration-label">
-                        Дата рождения
-                        <span className="required">*</span>
-                        </label>
-                        <input
-                        className="registration-input"
-                        type="date"
-                        name="date_of_birth"
-                        value={formData.user_data.date_of_birth}
-                        onChange={handleChangeUserData}
-                        required />
-                    </div>
+                    <LabeledInput
+                    title="Фамилия"
+                    name="surname"
+                    type="text"
+                    value={formData.user_data.surname}
+                    onChange={handleChangeUserData}
+                    required />
+
+                    <LabeledInput
+                    title="Имя"
+                    name="name"
+                    type="text"
+                    value={formData.user_data.name}
+                    onChange={handleChangeUserData}
+                    required />
+                    
+                    <LabeledInput
+                    title="Отчество"
+                    name="patronymic"
+                    type="text"
+                    value={formData.user_data.patronymic}
+                    onChange={handleChangeUserData}
+                    required />
+                    
+                    <LabeledInput
+                    title="Дата рождения"
+                    name="date_of_birth"
+                    type="date"
+                    value={formData.user_data.date_of_birth}
+                    onChange={handleChangeUserData}
+                    required />
+
                     <div className="registration-elem">
                     <label className="registration-label">
                         Номер телефона
                         <span className="required">*</span>
                         </label>
-                        {/* <input
-                        className="registration-input"
-                        type="number"
-                        name="phone_number"
-                        value={formData.user_data.phone_number}
-                        onChange={handleChangeUserData}
-                        onWheel={(e) => e.target.blur()}
-                        required /> */}
                         <InputMask
                             mask="+7 (999) 999-99-99"
                             maskChar="_"
@@ -220,32 +210,23 @@ export default function SignUpPage () {
                             required
                             />
                     </div>
-                    <div className="registration-elem">
-                    <label className="registration-label">
-                        Гражданство
-                        <span className="required">*</span>
-                        </label>
-                        <input
-                        className="registration-input"
-                        type="text"
-                        name="citizenship"
-                        value={formData.user_data.citizenship}
-                        onChange={handleChangeUserData}
-                        required />
-                    </div>
-                    <div className="registration-elem">
-                    <label className="registration-label">
-                        Город
-                        <span className="required">*</span>
-                        </label>
-                        <input
-                        className="registration-input"
-                        type="text"
-                        name="city"
-                        value={formData.user_data.city}
-                        onChange={handleChangeUserData}
-                        required />
-                    </div>
+
+                    <LabeledInput
+                    title="Гражданство"
+                    name="citizenship"
+                    type="text"
+                    value={formData.user_data.citizenship}
+                    onChange={handleChangeUserData}
+                    required />
+                    
+                    <LabeledInput
+                    title="Город"
+                    name="city"
+                    type="text"
+                    value={formData.user_data.city}
+                    onChange={handleChangeUserData}
+                    required />
+                    
                     <button className="registration-cont-back-btn" onClick={() => setStep(2)}>Далее</button>
                     </div> 
                     </>
@@ -317,106 +298,80 @@ export default function SignUpPage () {
                             required
                             />
                     </div>
-                    <div className="registration-elem">
-                    <label className="registration-label">
-                        Медицинская книжка
-                        </label>
-                        <input
-                        className="registration-checkbox"
-                        type="checkbox"
-                        name="medical_book"
-                        checked={formData.user_data.medical_book}
-                        onChange={handleChangeUserData} />
-                    </div>
-                    <div className="registration-elem">
-                    <label className="registration-label">
-                        Самозанятый
-                        </label>
-                        <input
-                        className="registration-checkbox"
-                        type="checkbox"
-                        name="is_self_employed"
-                        checked={formData.user_data.is_self_employed}
-                        onChange={handleChangeUserData}/>
-                    </div>
-                    <div className="registration-elem">
-                    <label className="registration-label">
-                        Опыт работы
-                        </label>
-                        <input
-                        className="registration-input"
-                        type="text"
-                        name="work_experience"
-                        value={formData.user_data.work_experience}
-                        onChange={handleChangeUserData} />
-                    </div>
-                    <div className="registration-elem">
-                    <label className="registration-label">
-                        Навыки
-                        </label>
-                        <input
-                        className="registration-input"
-                        type="text"
-                        name="activity_type"
-                        value={formData.user_data.activity_type}
-                        onChange={handleChangeUserData} />
-                    </div>
-                    <div className="registration-elem">
-                    <label className="registration-label">
-                        Противопоказания
-                        </label>
-                        <input
-                        className="registration-input"
-                        type="text"
-                        name="contraindications"
-                        value={formData.user_data.contraindications}
-                        onChange={handleChangeUserData}/>
-                    </div>
-                    <div className="registration-elem">
-                    <label className="registration-label">
-                        Обо мне
-                        </label>
-                        <input
-                        className="registration-input"
-                        type="text"
-                        name="about"
-                        value={formData.user_data.about}
-                        onChange={handleChangeUserData}/>
-                    </div>
-                    <div className="registration-elem">
-                    <label className="registration-label">
-                        Образование
-                        </label>
-                        <input
-                        className="registration-input"
-                        type="text"
-                        name="education"
-                        value={formData.user_data.education}
-                        onChange={handleChangeUserData}/>
-                    </div>   
-                    <div className="registration-elem">
-                    <label className="registration-label">
-                        Водительское удостоверение
-                        </label>
-                        <input
-                        className="registration-input"
-                        type="number"
-                        name="driver_license"
-                        value={formData.user_data.driver_license}
-                        onChange={handleChangeUserData}
-                        onWheel={(e) => e.target.blur()}/>
-                    </div>
-                    <div className="registration-elem">
-                    <label className="registration-label">
-                        Знание языков
-                        </label>
-                        <input
-                        className="registration-input"
-                        type="text"
-                        name="languages"
-                        value={formData.user_data.languages}
-                        onChange={handleChangeUserData}/>
-                    </div>
+
+                    <LabeledInput
+                    title="Медицинская книжка"
+                    name="medical_book"
+                    type="checkbox"
+                    value={formData.user_data.medical_book}
+                    onChange={handleChangeUserData}
+                    />
+
+                    <LabeledInput
+                    title="Самозанятый"
+                    name="is_self_employed"
+                    type="checkbox"
+                    value={formData.user_data.is_self_employed}
+                    onChange={handleChangeUserData}
+                    />
+
+                    <LabeledInput
+                    title="Опыт работы"
+                    name="work_experience"
+                    type="text"
+                    value={formData.user_data.work_experience}
+                    onChange={handleChangeUserData}
+                    />
+                    
+                    <LabeledInput
+                    title="Навыки"
+                    name="activity_type"
+                    type="text"
+                    value={formData.user_data.activity_type}
+                    onChange={handleChangeUserData}
+                    />
+                    
+                    <LabeledInput
+                    title="Противопоказания"
+                    name="contraindications"
+                    type="text"
+                    value={formData.user_data.contraindications}
+                    onChange={handleChangeUserData}
+                    />
+
+                    <LabeledInput
+                    title="Обо мне"
+                    name="about"
+                    type="text"
+                    value={formData.user_data.about}
+                    onChange={handleChangeUserData}
+                    />
+
+                    <LabeledInput
+                    title="Образование"
+                    name="education"
+                    type="text"
+                    value={formData.user_data.education}
+                    onChange={handleChangeUserData}
+                    />
+
+                    <LabeledInput
+                    title="Водительское удостоверение"
+                    name="driver_license"
+                    type="number"
+                    value={formData.user_data.driver_license}
+                    onChange={handleChangeUserData}
+                    onWheel={(e) => e.target.blur()}
+                    />
+
+                    <LabeledInput
+                    title="Знание языков"
+                    name="languages"
+                    type="text"
+                    value={formData.user_data.languages}
+                    onChange={handleChangeUserData}
+                    />
+
                     <div className="registration-buttons">
                     <button className="registration-cont-back-btn" onClick={() => setStep(1)}>Назад</button>
                     <button className="registration-cont-back-btn" onClick={() => setStep(3)}>Далее</button>
@@ -427,54 +382,41 @@ export default function SignUpPage () {
             case 3: 
             return(
                 <div className="registration-forms">
-                    <div className="registration-elem">
-                   <label className="registration-label">
-                        Имя пользователя
-                        <span className="required">*</span>
-                        </label>
-                        <input
-                        className="registration-input"
-                        type="text"
-                        name="login"
-                        value={formData.user_data.login}
-                        onChange={handleChange}
-                        required/>
-                    </div>
-                    <div className="registration-elem">
-                    <label className="registration-label">
-                        e-mail
-                        <span className="required">*</span>
-                        </label>
-                        <input
-                        className="registration-input"
-                        type="text"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        onBlur={(e) => {
-                            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // простая регулярка для email
-                            if (!emailPattern.test(e.target.value)) {
-                                setFormData({
-                                    ...formData, email: "" }) // сбрасываем, если формат неверный
-                              alert("Введите корректный email");
-                            }
-                          }}
-                          required
-                        />
-                    </div>
-                    <div className="registration-elem">
-                    <label className="registration-label">
-                        Пароль
-                        <span className="required">*</span>
-                        </label>
-                        <input
-                        className="registration-input"
-                        type="password"
-                        name="hashed_password"
-                        value={formData.user_data.hashed_password}
-                        onChange={handleChange}
-                        required/>
-                    </div>
+                    <LabeledInput
+                    title="Имя пользователя"
+                    name="login"
+                    type="text"
+                    value={formData.login}
+                    onChange={handleChange}
+                    required
+                    />
+                    
+                    <LabeledInput
+                    title="e-mail"
+                    name="email"
+                    type="text"
+                    value={formData.email}
+                    onChange={handleChange}
+                    onBlur={(e) => {
+                        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // простая регулярка для email
+                        if (!emailPattern.test(e.target.value)) {
+                            setFormData({
+                                ...formData, email: "" }) // сбрасываем, если формат неверный
+                          alert("Введите корректный email");
+                        }
+                      }}
+                    required
+                    />
+
+                    <LabeledInput
+                    title="Пароль"
+                    name="hashed_password"
+                    type="password"
+                    value={formData.hashed_password}
+                    onChange={handleChange}
+                    required
+                    />
+                    
                     <div className="registration-elem">
                     <label className="registration-label">
                         Повторите пароль
