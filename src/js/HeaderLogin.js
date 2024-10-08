@@ -41,7 +41,7 @@ export default function HeaderLogin () {
                 //запись userId в storage
                 localStorage.setItem('userId', userId);
                 //запись токена в куки
-                document.cookie = `accessToken=${accessToken}`;
+                document.cookie = `accessToken=${accessToken}; samesite=strict`;
                 console.log("Доступ получен");
 
                 try{

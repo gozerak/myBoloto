@@ -36,8 +36,8 @@ export default function SignUpPage() {
         <div className="sign-up-page">
             <Header />
             <div className="user-or-manager-sign-up">
-                <div className="user-sign-up" onClick={() => handleClick(true)}>Регистрация пользователя</div>
-                <div className="manager-sign-up" onClick={() => handleClick(false)}>Регистрация менеджера</div>
+                <div className={`user-sign-up ${isUserSignUpPage? "active": ""}`} onClick={() => handleClick(true)}>Регистрация пользователя</div>
+                <div className={`manager-sign-up ${!isUserSignUpPage? "active": ""}`} onClick={() => handleClick(false)}>Регистрация менеджера</div>
             </div>
         {isUserSignUpPage? <SignUpUser />: <SignUpManager />}
         </div>
