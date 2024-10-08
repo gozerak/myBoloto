@@ -54,7 +54,7 @@
     font-size: 20px;
     font-weight: bold;
     padding-bottom: 10px;
-    margin-left:10%;
+    margin-left:40%;
 }
 
 .registration-register-btn {
@@ -82,4 +82,44 @@
 
 .profile-main {
     margin-left: 10%
+}
+
+.user-or-manager-sign-up {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.user-sign-up{
+    font-size: 18px;
+    border-radius: 3px;
+    padding-right: 5px;
+    margin-left: 5%;
+}
+
+.manager-sign-up{
+    font-size: 18px;
+    padding-left: 5px;
+    
+}
+
+.manager-sign-up:hover,
+.user-sign-up:hover {
+    cursor: pointer;
+    color: #3f3838;
+}
+
+.user-sign-up.active,
+.manager-sign-up.active{
+    font-size: 18px;
+    color:#303136;
+    border-top: 1px solid black;
+}
+
+.user-sign-up.active{
+    border-right: 1px solid black;
+}
+
+.manager-sign-up.active{
+    border-left: 1px solid black;
 }
