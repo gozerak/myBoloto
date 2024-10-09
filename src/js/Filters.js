@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import "../css/Filters.css";
 import { useFetchOnFocus } from '../hooks/useFetchOnFocus';
 import { fetchActionTypes, fetchPlaces, fetchOrganizations } from '../services/apiService';
@@ -44,26 +44,25 @@ function Cost () {
     )
 }
 
-    function OtherFilters ({title, handleFocus, items}) {
-        const [selectedValue, setSelectedValue] = useState('');
+    export function OtherFilters ({title, handleFocus, items, onChange, value, name }) {
         
-        function handleChange (event) {
-            setSelectedValue(event.target.value);
-        }
+        // function handleChange (event) {
+        //     setSelectedValue(event.target.value);
+        // }
 
 
     return (
         <div className="other-filters">
         <p className="filters-names">{title}</p>
         <select 
-                className={`dropdown-select ${selectedValue ? 'active' : ''}`} 
-                onChange={handleChange}
-                value={selectedValue}
+                className={`dropdown-select ${value ? 'active' : ''}`} 
+                onChange={onChange}
+                value={value}
                 onFocus={handleFocus}
             >
         <option className="selected-disabled" hidden value=""></option>
             {items.map(item => (
-                    <option className="select-filters" key={item.id} value={item.id}>{item.title}</option>
+                    <option className="select-filters" name={name} key={item.id} value={item.id}>{item.title}</option>
                 ))}
         </select>
         </div>

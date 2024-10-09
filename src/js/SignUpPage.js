@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
-import { API_BASE_URL } from "../services/apiService";
+import { API_BASE_URL, fetchOrganizations } from "../services/apiService";
 import "../css/SignUpPage.css"
 import InputMask from 'react-input-mask';
 import TemporaryNotifier from "./TemporaryNotifier";
+import { OtherFilters } from "./Filters";
+import { useFetchOnFocus } from "../hooks/useFetchOnFocus";
 
 function LabeledInput({title, required = false, type = 'text', name, value, onChange, onBlur }) {
     return(
@@ -52,7 +54,8 @@ function SignUpManager () {
     const [formError, setFormError] = useState(false);
     const [showNotifier, setShowNotifier] = useState(false);
     const [notifierStatus, setNotifierStatus] = useState('');
-    const [notifierText, setNotifierText] = useState('')
+    const [notifierText, setNotifierText] = useState('');
+    const [organizations, handleOrganizationFocus] = useFetchOnFocus(fetchOrganizations);
     const [formData, setFormData] = useState ({
         login: "",
         email: "",
@@ -217,6 +220,21 @@ function SignUpManager () {
                             required
                             />
                     </div>
+                    <div className="registration-elem">
+                    <label className="registration-label">
+                        Организация
+                        <span className="required">*</span>
+                        </label>
+                        <OtherFilters 
+                        handleFocus ={handleOrganizationFocus} 
+                        items={organizations} 
+                        value = {formData.manager_data.organization}
+                        name={'organization'}
+                        onChange={(e) => {
+                            handleChangeManagerData(e);
+                        }}
+                        />
+                        </div>
                     <button className="registration-cont-back-btn" onClick={() => setStep(2)}>Далее</button>
                     </div> 
                     </>

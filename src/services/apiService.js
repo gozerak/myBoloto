@@ -2,9 +2,9 @@ import axios from "axios";
 
 export const API_BASE_URL = "http://localhost:8000";
 
-export const fetchJobs = async () => {
+export const fetchJobs = async (isAuthorized) => {
     const response = await fetch(`${API_BASE_URL}/jobs/get_jobs?skip=0&limit=10`, {
-        credentials: 'include'
+        credentials: isAuthorized? 'include': 'omit'
     });
     if (!response.ok) {
         throw new Error("Failed to fetch jobs");
