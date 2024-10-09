@@ -6,10 +6,12 @@ export const useJobs = () => {
     const [jobsLength, setJobsLength] = useState(0);
     const [loading, setLoading] = useState(true);
 
+    const isAuthorized = !!localStorage.getItem('userId')
+
     useEffect(() => {
         const getData = async () => {
             try {
-                const jobsData = await fetchJobs()
+                const jobsData = await fetchJobs(isAuthorized)
                 setJobs(jobsData);
                 setJobsLength(jobsData.length);
             } catch (error){
@@ -19,7 +21,7 @@ export const useJobs = () => {
             }
         };
         getData();
-    }, []);
+    }, [isAuthorized]);
 
     return {jobs, jobsLength, loading};
 }

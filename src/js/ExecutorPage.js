@@ -6,7 +6,7 @@ import { useJobs } from "../hooks/useJobs";
 import { useRespondedJobs } from "../hooks/useRespondedJobs";
 
 export default function ExecutorPage () {
-  const { jobs, jobsLength, loading } = useJobs();
+  const { jobs, jobsLength, loading } = useJobs(localStorage.getItem('userId'));
   const {userRespondedJobs} = useRespondedJobs();
 
     if (loading) {
