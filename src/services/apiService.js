@@ -94,7 +94,7 @@ export const fetchMyCreatedJobs = async () => {
 }
 }
 
-export const fetchUserData = async ({ userId }) => {
+export const fetchUserData = async (userId) => {
         const response = await fetch(`${API_BASE_URL}/user_manager/get_user_by_id?user_id=${userId}`, {
             method:"GET",
             headers: {

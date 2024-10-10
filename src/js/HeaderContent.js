@@ -8,10 +8,11 @@ import { fetchUserBalance } from "../services/apiService";
 import { useCheckJWT } from "../hooks/CheckJWT";
 import LoginBtn from "./SignUpBtn";
 import Notifications from "./Notifications";
+import { useUserData } from "../hooks/useUserData";
 
 function HeaderName() {
     return (
-        <p className="header-name">KOMOS JOBHUB</p>
+        <p className="header-name">TALENT MARKETPLACE</p>
     );
 }
 
@@ -40,7 +41,7 @@ function HeaderLogo() {
     );
 }
 
-export function HeaderChapters() {
+export function HeaderChapters(userData) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const isVerified = useCheckJWT();
 
@@ -57,17 +58,17 @@ export function HeaderChapters() {
             setIsAuthenticated(false);
         }
     }, [isVerified]);
-
+    console.log(userData)
     return (
         <>
-            <NavLink to="/" className={({ isActive }) => isActive ? "chapter-executor active-link" : "chapter-executor"}>
+            {userData.userData.user_data? (<NavLink to="/" className={({ isActive }) => isActive ? "chapter-executor active-link" : "chapter-executor"}>
                 <div id="for-executor">Поиск работы</div>
-            </NavLink>
-            {isAuthenticated?
+            </NavLink>) : ""}
+            {userData.userData.manager_data?
             <NavLink to="/customer" className={({ isActive }) => isActive ? "chapter-customer active-link" : "chapter-customer"}>
                 <div id="for-customer">Мои заказы</div>
             </NavLink> : null}
-            {isAuthenticated?
+            {userData.userData.user_data?
             <NavLink to="/myresponses" className={({ isActive }) => isActive? "chapter-myresponses active-link": "chapter-myresponses"}>
                 <div id="myresponses">Мои отклики</div>
             </NavLink> : null} 
@@ -80,26 +81,29 @@ export function HeaderChapters() {
 }
 
 export default function HeaderContent() {
-    let accessToken = null;
+    const [userId, setUserId] = useState(null);
+    const { userData } = useUserData(userId);
 
-    if (localStorage.getItem('userId')) {
-        const cookieString = document.cookie;
-        const cookies = cookieString.split('; ').find(row => row.startsWith('accessToken'));
-
-        if (cookies) {
-            accessToken = cookies.split('=')[1];
+    useEffect(() => {
+        const storedUserId = localStorage.getItem('userId');
+        if (storedUserId) {
+            setUserId(storedUserId)
         }
-    }
+    }, [])
 
+    let notEmptyUserData = Object.keys(userData).length !== 0;
+    console.log(notEmptyUserData)
     return (
         <>
+        <div className="header-logo-and-name">
             <HeaderLogo />
             <HeaderName />
-            <HeaderChapters />
-            {accessToken? <Notifications />: null}
-            {accessToken? <UserBalance/> : null}
-            {accessToken ? <ProfileIcon /> : <HeaderLogin />}
-            {accessToken? null: <LoginBtn />}
+            </div>
+            <HeaderChapters userData={userData}/>
+            {notEmptyUserData?  <Notifications />: null}
+            {userData.user_data? <UserBalance/> : null}
+            {notEmptyUserData? <ProfileIcon /> : <HeaderLogin />}
+            {notEmptyUserData? null: <LoginBtn />}
         </>
     );
 }
