@@ -56,9 +56,10 @@ function Cost () {
         <p className="filters-names">{title}</p>
         <select 
                 className={`dropdown-select ${value ? 'active' : ''}`} 
-                onChange={onChange}
+                onChange={e => onChange(e)}
                 value={value}
                 onFocus={handleFocus}
+                name={name}
             >
         <option className="selected-disabled" hidden value=""></option>
             {items.map(item => (
