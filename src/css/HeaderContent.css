@@ -19,6 +19,20 @@
     padding-bottom: 5px;
 }
 
+.header-content{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.header-content.unathorized {
+    justify-content:space-between;
+}
+
+.login-register{
+    margin-right: 10%;
+}
+
 .logo {
     margin-left: 10%;
 }
@@ -34,7 +48,8 @@
 .chapter-executor,
 .chapter-customer,
 .chapter-myresponses,
-.chapter-profile {
+.chapter-profile,
+.chapter-userlist {
     background-color: white;
     padding-top: 15px;
     border: none;
@@ -61,7 +76,8 @@
 .chapter-executor:hover,
 .chapter-customer:hover,
 .chapter-myresponses:hover,
-.chapter-profile:hover {
+.chapter-profile:hover,
+.chapter-userlist:hover {
     /* background-color: #ebebee; */
     cursor:pointer;
     text-decoration: none;

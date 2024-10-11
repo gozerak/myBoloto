@@ -86,7 +86,7 @@ function SelfEmployedWarning({isSelfEmployed, userId, setIsSelfEmployed}) {
 
 export default function ProfilePage () {
     const { userId } = useParams();
-    const { userData, loading} = useUserData({ userId });
+    const { userData, loading} = useUserData( userId );
     const [isSelfEmployed, setIsSelfEmployed] = useState(true)
 
     useEffect(() => {
@@ -134,7 +134,7 @@ export default function ProfilePage () {
         }
         return phoneNumber
     }
-
+    console.log(userData)
     return (
         <div className="profile-page">
             <Header />
@@ -176,8 +176,26 @@ export default function ProfilePage () {
             </div>
             </>
             ) : (
+                userData.manager_data?
+                ( <>
+            <p className="profile-block-title">Профиль пользователя {userData.full_name}</p>
+            <div className="profile-info">
+            <div className="profile-main-info-part">
+                <ProfileElem profileTitle={"Фамилия"} profileDescription={userData.manager_data.surname} />
+                <ProfileElem profileTitle={"Имя"} profileDescription={userData.manager_data.name} />
+                <ProfileElem profileTitle={"Отчество"} profileDescription={userData.manager_data.patronymic} />
+                <ProfileElem profileTitle={"e-mail"} profileDescription={userData.email} />
+                <ProfileElem profileTitle={"Номер телефона"} profileDescription={formatPhoneNumber(userData.manager_data.work_phone)} />
+                <ProfileElem profileTitle={"Должность"} profileDescription={userData.manager_data.job_title} />
+                {/* <ProfileElem profileTitle={"Город"} profileDescription={userData.user_data.city} /> */}
+                {/* <ProfileElem profileTitle={"Дата рождения"} profileDescription={formatDate(userData.user_data.date_of_birth)} /> */}
+            </div>
+            </div>
+            </>
+          ) : (
                 <p>При загрузке данных произошла ошибка! (Скорее всего битый пользователь)</p>
             )
+        )
         }
         </div>
         </div>
