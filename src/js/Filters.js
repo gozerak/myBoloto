@@ -44,7 +44,7 @@ function Cost () {
     )
 }
 
-    export function OtherFilters ({title, handleFocus, items, onChange, value, name }) {
+    export function OtherFilters ({title, handleFocus, items, onChange, value, name, nameOfClass, nameOfDrop }) {
         
         // function handleChange (event) {
         //     setSelectedValue(event.target.value);
@@ -52,10 +52,10 @@ function Cost () {
 
 
     return (
-        <div className="other-filters">
+        <div className={nameOfClass? nameOfClass : "other-filters"}>
         <p className="filters-names">{title}</p>
         <select 
-                className={`dropdown-select ${value ? 'active' : ''}`} 
+                className={`${nameOfDrop? nameOfDrop : 'dropdown-select'} ${value ? 'active' : ''}`} 
                 onChange={e => onChange(e)}
                 value={value}
                 onFocus={handleFocus}
