@@ -12,7 +12,7 @@ import { useUserData } from "../hooks/useUserData";
 
 function HeaderName() {
     return (
-        <p className="header-name">TALENT MARKETPLACE</p>
+        <p className="header-name">KOMOS JOBHUB</p>
     );
 }
 
@@ -58,7 +58,6 @@ export function HeaderChapters(userData) {
             setIsAuthenticated(false);
         }
     }, [isVerified]);
-    console.log(userData)
     return (
         <>
             {userData.userData.user_data? (<NavLink to="/" className={({ isActive }) => isActive ? "chapter-executor active-link" : "chapter-executor"}>
@@ -76,6 +75,10 @@ export function HeaderChapters(userData) {
             <NavLink to={`/profile/${userId}`} className={({ isActive }) => isActive? "chapter-profile active-link": "chapter-profile"}>
             <div id="profile-link" >Профиль</div>
             </NavLink> : null}
+            {userData.userData.manager_data?
+            <NavLink to="/userlist" className={({ isActive }) => isActive ? "chapter-userlist active-link" : "chapter-userlist"}>
+                <div id="for-customer">Список работников</div>
+            </NavLink> : null}
         </>
     );
 }
@@ -92,18 +95,19 @@ export default function HeaderContent() {
     }, [])
 
     let notEmptyUserData = Object.keys(userData).length !== 0;
-    console.log(notEmptyUserData)
     return (
-        <>
-        <div className="header-logo-and-name">
+        <div className={`header-content ${!notEmptyUserData? 'unathorized': ''}`}>
+        <div className={"header-logo-and-name"}>
             <HeaderLogo />
             <HeaderName />
             </div>
             <HeaderChapters userData={userData}/>
             {notEmptyUserData?  <Notifications />: null}
             {userData.user_data? <UserBalance/> : null}
+            <div className="login-register">
             {notEmptyUserData? <ProfileIcon /> : <HeaderLogin />}
             {notEmptyUserData? null: <LoginBtn />}
-        </>
+        </div>
+        </div>
     );
 }

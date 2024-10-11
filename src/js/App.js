@@ -4,6 +4,7 @@ import CustomerPage from './CustomerPage';
 import MyResponsesPage from './MyResponsesPage';
 import SignUpPage from './SignUpPage';
 import ProfilePage from './ProfilePage';
+import UserListPage from './UserListPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
                 <Route path="/myresponses" element={<MyResponsesPage />} />
                 <Route path="/registration" element={<SignUpPage />} />
                 <Route path="/profile/:userId" element={<ProfilePage />} />
+                <Route path='/userlist' element={<UserListPage />} />
             </Routes>
         </Router>
     );

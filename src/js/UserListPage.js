@@ -1,20 +1,13 @@
-export default function () {
-    
-    if (loading) {
-        return (
-        <div className="App">
-          <Header />
-          <Search/>
-          <div>Загрузка...</div>;
-          </div>
-        )
-    }
+import Header from "./Header"
+import Search from "./Search"
+import UserList from "./UserList"
 
+export default function UserListPage () {
     return (
-        <div className="CustomerApp">
+        <div className="user-list-page">
             <Header />
-            <Search refreshOrder={refreshOrder} />
-            <MainCustomerPart jobs={jobs} refreshOrder={refreshOrder} />
+            <Search />
+            <UserList />
             {/* <Footer /> */}
             </div>
     )

@@ -87,7 +87,7 @@ export const fetchMyCreatedJobs = async () => {
         }
     });
     if (!response.ok) {
-        throw new Error("Failed to fetch jobs");
+        throw new Error("Failed to fetch my created jobs");
     }
     const data = await response.json();
     return data;
@@ -102,7 +102,7 @@ export const fetchUserData = async (userId) => {
             }
         });
         if (!response.ok) {
-            throw new Error("Failed to fetch jobs");
+            throw new Error("Failed to user data");
         }
         const data = await response.json();
         return data;
@@ -133,4 +133,19 @@ export const fetchNotifications = async () => {
     const data = await response.json();
     return data;
 }
+}
+
+export const fetchAllWorkers = async () => {
+    const response = await fetch(`${API_BASE_URL}/user_manager/get_all`, {
+        method:"GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+    if (!response.ok) {
+        throw new Error("Failed to fetch all workers");
+    }
+    const data = await response.json();
+    return data;
+
 }
