@@ -225,7 +225,9 @@ function SignUpManager () {
                         Организация
                         <span className="required">*</span>
                         </label>
-                        <OtherFilters 
+                        <OtherFilters
+                        nameOfClass={'other-filters-signup'} 
+                        nameOfDrop={'dropdown-select-signup'}
                         handleFocus ={handleOrganizationFocus} 
                         items={organizations} 
                         value = {formData.manager_data.organization}
@@ -235,7 +237,7 @@ function SignUpManager () {
                         }}
                         />
                         </div>
-                    <button className="registration-cont-back-btn" onClick={() => setStep(2)}>Далее</button>
+                    <button className="registration-cont-btn" onClick={() => setStep(2)}>Далее</button>
                     </div> 
                     </>
                 )
@@ -298,7 +300,7 @@ function SignUpManager () {
                         )}
                     <div className="registration-buttons">
                     <button className="registration-cont-back-btn" onClick={() => setStep(1)}>Назад</button>
-                    <button className="registration-register-btn" onClick={handleSubmit}>Зарегистрироваться</button>
+                    <button className="registration-register-btn" onClick={handleSubmit}>Регистрация</button>
                 </div>
                 </div>
             )
@@ -518,7 +520,7 @@ function SignUpUser () {
                     onChange={handleChangeUserData}
                     required />
                     
-                    <button className="registration-cont-back-btn" onClick={() => setStep(2)}>Далее</button>
+                    <button className="registration-cont-btn" onClick={() => setStep(2)}>Далее</button>
                     </div> 
                     </>
                 )
@@ -729,7 +731,7 @@ function SignUpUser () {
                         )}
                     <div className="registration-buttons">
                     <button className="registration-cont-back-btn" onClick={() => setStep(2)}>Назад</button>
-                    <button className="registration-register-btn" onClick={handleSubmit}>Зарегистрироваться</button>
+                    <button className="registration-register-btn" onClick={handleSubmit}>Регистрация</button>
                 </div>
                 </div>
             )

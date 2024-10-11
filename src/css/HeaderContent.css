@@ -30,7 +30,10 @@
 }
 
 .login-register{
-    margin-right: 10%;
+    display: flex;
+    flex-direction: row;
+    vertical-align: middle;
+    margin-right:5%;
 }
 
 .logo {
@@ -148,8 +151,8 @@
 .sign-up {
     font-size: 16px;
     color: #8A8686;
-    margin-left: 0px;
-    padding-top: 14px;
+    margin-left: 5px;
+    margin-top: 13px;
     text-decoration: none;
     white-space: nowrap;
     /* padding-left:1vw; */

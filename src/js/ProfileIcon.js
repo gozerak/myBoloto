@@ -43,7 +43,7 @@ export default function ProfileIcon() {
 
     return (
         <div className="user-icon-container" ref={dropdownRef}>
-            <div className="user-icon" onClick={toggleDropdown}>
+            <div className={`user-icon ${userId? "unauthorized": "" }`} onClick={toggleDropdown}>
                 {userData ? userData.login : "Loading..."}
             </div>
             {isDropdownOpen && (
