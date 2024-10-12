@@ -23,7 +23,7 @@ function ProfileElem ({ profileTitle, profileDescription }) {
     )
 }
 
-function UserRating ({rating}) {
+export function UserRating ({rating}) {
     const totalStars = 5;
 
     return (
