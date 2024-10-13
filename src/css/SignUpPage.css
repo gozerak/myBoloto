@@ -109,37 +109,37 @@
     flex-direction: row;
 }
 
-.user-sign-up{
-    font-size: 18px;
-    padding-right: 5px;
-    margin-left: 5%;
+.user-or-manager-sign-up {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
 }
 
-.manager-sign-up{
+.user-sign-up, 
+.manager-sign-up {
     font-size: 18px;
-    padding-left: 5px;
-    
+    padding: 10px 20px;
+    margin: 0 5px;
+    color: #6c757d;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    transition: all 0.3s ease;
 }
 
-.manager-sign-up:hover,
-.user-sign-up:hover {
+.user-sign-up:hover,
+.manager-sign-up:hover {
     cursor: pointer;
-    color: #3f3838;
+    background-color: #e9ecef;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.user-sign-up.active,
-.manager-sign-up.active{
-    font-size: 18px;
-    color:#303136;
-    border-top: 1px solid black;
-}
-
-.user-sign-up.active{
-    border-right: 1px solid black;
-}
-
-.manager-sign-up.active{
-    border-left: 1px solid black;
+.user-sign-up.active, 
+.manager-sign-up.active {
+    color: #212529;
+    background-color: #ffffff;
+    border-color: #ced4da;
+    font-weight: bold;
 }
 
 .other-filters-signup{
