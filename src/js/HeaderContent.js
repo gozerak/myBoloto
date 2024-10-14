@@ -5,7 +5,7 @@ import HeaderLogin from "./HeaderLogin";
 import ProfileIcon from "./ProfileIcon";
 import { useEffect, useState } from "react";
 import { fetchUserBalance } from "../services/apiService";
-import { useCheckJWT } from "../hooks/CheckJWT";
+// import { useCheckJWT } from "../hooks/CheckJWT";
 import LoginBtn from "./SignUpBtn";
 import Notifications from "./Notifications";
 import { useUserData } from "../hooks/useUserData";
@@ -42,22 +42,22 @@ function HeaderLogo() {
 }
 
 export function HeaderChapters(userData) {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const isVerified = useCheckJWT();
+    // const [isAuthenticated, setIsAuthenticated] = useState(false);
+    // const isVerified = useCheckJWT();
 
-    let userId;
+    // let userId;
 
-    if (isAuthenticated) {
-        userId= localStorage.getItem("userId");
-    }
+    // if (isAuthenticated) {
+    //     userId= localStorage.getItem("userId");
+    // }
 
-    useEffect(() => {
-        if (isVerified) {
-            setIsAuthenticated(true);
-        } else {
-            setIsAuthenticated(false);
-        }
-    }, [isVerified]);
+    // useEffect(() => {
+    //     if (isVerified) {
+    //         setIsAuthenticated(true);
+    //     } else {
+    //         setIsAuthenticated(false);
+    //     }
+    // }, [isVerified]);
     return (
         <>
             {userData.userData.manager_data? "" : (<NavLink to="/" className={({ isActive }) => isActive ? "chapter-executor active-link" : "chapter-executor"}>
@@ -75,10 +75,10 @@ export function HeaderChapters(userData) {
             <NavLink to="/userlist" className={({ isActive }) => isActive ? "chapter-userlist active-link" : "chapter-userlist"}>
                 <div id="for-customer">Список работников</div>
             </NavLink> : null}
-            {isAuthenticated?
+            {/* {isAuthenticated?
             <NavLink to={`/profile/${userId}`} className={({ isActive }) => isActive? "chapter-profile active-link": "chapter-profile"}>
             <div id="profile-link" >Профиль</div>
-            </NavLink> : null}
+            </NavLink> : null} */}
         </>
     );
 }

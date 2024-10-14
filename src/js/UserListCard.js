@@ -14,7 +14,6 @@ function UserListCardElem ({name, content}) {
 }
 
 export default function UserListCard (userData) {
-    console.log(userData)
     return(
         userData.userData.user_data?
         (<div className="user-list-card">
