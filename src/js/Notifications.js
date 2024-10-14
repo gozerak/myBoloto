@@ -44,6 +44,8 @@ export default function Notifications () {
     const formatDate = (dateStr) => {
         const date = new Date(dateStr);
 
+        date.setHours(date.getHours() + 4);
+
         // Форматирование в нужный вид
         const formattedDate = date.toLocaleString("ru-RU", {
         day: "2-digit",
