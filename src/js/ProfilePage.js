@@ -32,7 +32,7 @@ export function UserRating ({rating}) {
         const fillPercentage = Math.min(Math.max(rating - i, 0), 1) * 100;
         return (
           <div key={i} className="star-wrapper">
-            <img src='../img/Empty_star.svg' alt="empty star" className="star-background" />
+            <img src='../img/Empty_Star.svg' alt="empty star" className="star-background" />
             <img
               src='../img/Filled_star.svg'
               alt="filled star"

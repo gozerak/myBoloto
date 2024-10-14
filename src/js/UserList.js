@@ -18,7 +18,7 @@ export default function UserList () {
         };
         fetchWorkers();
     }, []);
-    console.log(allWorkers)
+    
     return (
         <div className="user-list">
         {allWorkers.length > 0 ? (
