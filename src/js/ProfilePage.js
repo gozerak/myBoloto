@@ -23,12 +23,12 @@ function ProfileElem ({ profileTitle, profileDescription }) {
     )
 }
 
-export function UserRating ({rating}) {
+export function UserRating ({rating, nameOfClass, nameOfTitle}) {
     const totalStars = 5;
 
     return (
         <div className="profile-block-rating"> 
-            <div className="profile-block-rating-stars">{Array.from({ length: totalStars }, (_, i) => {
+            <div className={nameOfClass? nameOfClass:"profile-block-rating-stars"}>{Array.from({ length: totalStars }, (_, i) => {
         const fillPercentage = Math.min(Math.max(rating - i, 0), 1) * 100;
         return (
           <div key={i} className="star-wrapper">
@@ -42,7 +42,7 @@ export function UserRating ({rating}) {
           </div>
         );
       })}</div>
-            <p className="profile-block-rating-title">{rating.toFixed(1)}</p>
+            <p className={nameOfTitle? nameOfTitle :"profile-block-rating-title"}>{rating.toFixed(1)}</p>
         </div>
 
     )

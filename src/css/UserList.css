@@ -25,11 +25,10 @@
 
 .user-list-card {
     display: grid;
-    padding-right: 5vw;
     grid-template-columns: 40% 30% 30%;
     grid-template-rows: 50% 50%;
     height: auto;
-    width: 35%;
+    width: 55%;
     box-shadow: 1px 1px 4px 3px rgba(0, 0, 0, 0.1);
 }
 
