@@ -62,12 +62,14 @@
 .profile-block-rating {
     display: flex;
     flex-direction: row;
+    height: 52px;
 }
 
 .profile-block-rating-title {
-    font-size: 22px;
+    font-size: 20px;
     color: #000743;
     font-weight: 200;
+    height: 20px;
 }
 
 .profile-block-rating-stars {

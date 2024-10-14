@@ -55,20 +55,35 @@ export default function HeaderLogin () {
                         const userData = await response.json()
                         setUserData(userData);
                         console.log('Данные пользователя успешно загружены')
+
+                        setModalOpen(false);
+                if (userData.user_data){
+                    if (location.pathname!== "/"){
+                        navigate("/");
                     }
-                } catch (error) {
-                    console.log ("Error:", error)
-                }
-
-
-                setModalOpen(false);
-                console.log(location)
-                if (location.pathname!== "/"){
-                    navigate("/");
+                    else {
+                        window.location.reload();
+                    }
+            }
+                else if (userData.manager_data) {
+                    if (location.pathname!== "/customer"){
+                        navigate("/customer");
+                    }
+                    else {
+                        window.location.reload();
+                    }
                 }
                 else {
                     window.location.reload();
                 }
+                    }
+                } catch (error) {
+                    console.log ("Error:", error)
+                    setModalOpen(false);
+                }
+
+
+                
                 //Логика получения кукиса
             } else {
                 console.error ('Доступ не получен')
