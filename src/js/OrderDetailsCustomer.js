@@ -63,7 +63,7 @@ export default function OrderDetailsCustomer ({order, refreshOrder}) {
     return (
         <>
         <p className="card-header">{order.job.title}</p>
-        <p className="card-cost">{order.job.price} ₽</p>
+        <p className="card-cost">{order.job.price} ₽/час</p>
         <div className="description-and-status">
         <p className="card-order-description">{order.job.description}</p>
         <p className="card-order-status">{order.job.status ? order.job.status : null}</p>

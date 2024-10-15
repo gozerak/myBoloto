@@ -106,7 +106,7 @@ export default function OrderDetails ({order, respondedJobs}) {
         <>
         {showNotifier? <TemporaryNotifier status={notifierStatus} text={notifierText} />: null}
         <p className="card-header">{order.title}</p>
-        <p className="card-cost">{order.price} ₽</p>
+        <p className="card-cost">{order.price} ₽/час</p>
         <div className="description-and-status">
         <p className="card-order-description">{order.description}</p>
         {/* <p className="card-order-status">{orderStatus ? orderStatus : null}</p> */}
