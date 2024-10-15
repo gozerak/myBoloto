@@ -201,8 +201,9 @@ export default function AddJobButton({ refreshOrder }) {
                         <p className='modal-headers'>
                             Стоимость заказа 
                             </p>
+                            <div className='modal-cost'>
                             <input
-                            className='modal-inputs'
+                            className='modal-input-cost'
                                 autoComplete="off"
                                 type="number"
                                 name="price"
@@ -211,6 +212,8 @@ export default function AddJobButton({ refreshOrder }) {
                                 onWheel={(e) => e.target.blur()}
                                 required
                             />
+                            <p className='modal-input-cost-title'>/час</p>
+                            </div>
                     </div>
                     <div className='modal-forms'>
                                         <p className='modal-headers'>

@@ -77,6 +77,27 @@ select{
     box-shadow: rgba(148, 147, 147, 0.16) 0px 1px 4px;
 }
 
+.modal-input-cost{
+    width: 20%;
+    height: 20px;
+    font-size: 18px;
+    font-family: 'Mulish';
+    border-radius: 4px;
+    outline: none;  
+    margin-top: 5px;
+    border: 1px solid #c2bebe9d;
+    box-shadow: rgba(148, 147, 147, 0.16) 0px 1px 4px;
+}
+
+.modal-input-cost-title {
+    margin-top: 8px;
+}
+
+.modal-cost {
+    display: flex;
+    flex-direction: row;
+}
+
 .modal-forms {
     display: flex;
     flex-direction: column;
