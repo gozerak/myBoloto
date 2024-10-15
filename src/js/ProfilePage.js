@@ -87,13 +87,18 @@ function SelfEmployedWarning({isSelfEmployed, userId, setIsSelfEmployed}) {
 export default function ProfilePage () {
     const { userId } = useParams();
     const { userData, loading} = useUserData( userId );
-    const [isSelfEmployed, setIsSelfEmployed] = useState(true)
+    const [isSelfEmployed, setIsSelfEmployed] = useState(true);
+    const [isThisUserProfileOwner, setIsThisUserProfileOwner ] = useState(false);
 
     useEffect(() => {
         if (userData && userData.user_data) {
           setIsSelfEmployed(userData.user_data.is_self_employed);
         }
-      }, [userData]);
+
+        if (localStorage.getItem('userId')) {
+            setIsThisUserProfileOwner(localStorage.getItem('userId') === userId)
+        }
+      }, [userData, userId]);
 
     if (loading) {
         return (
@@ -147,7 +152,7 @@ export default function ProfilePage () {
             <UserRating rating={userData.user_rating} /> : null } 
             </div>
             <p className="profile-block-title">Основная информация</p>
-                {!isSelfEmployed? <SelfEmployedWarning isSelfEmployed={userData.user_data.is_self_employed} userId= {userId} setIsSelfEmployed={setIsSelfEmployed} /> : ""}
+                {!isThisUserProfileOwner? "" : !isSelfEmployed? <SelfEmployedWarning isSelfEmployed={userData.user_data.is_self_employed} userId= {userId} setIsSelfEmployed={setIsSelfEmployed} /> : ""}
             <div className="profile-info">
             <div className="profile-main-info-part">
                 <ProfileElem profileTitle={"Фамилия"} profileDescription={userData.user_data.surname} />
