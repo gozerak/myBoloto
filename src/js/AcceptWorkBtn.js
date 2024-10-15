@@ -15,6 +15,7 @@ export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder})
     const [hours, setHours] = useState("");
     const [comment, setComment] = useState("");
     const [rating, setRating] = useState(0);
+    const [kpi, setKpi] = useState(0);
     const [showNotifier, setShowNotifier] = useState(false);
     const [notifierStatus, setNotifierStatus] = useState('');
     const [notifierText, setNotifierText] = useState('')
@@ -49,6 +50,7 @@ export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder})
             },
             body: JSON.stringify({
                 hours: hours,
+                kpi: kpi,
             })
             });
             if (response.ok) {
@@ -106,14 +108,27 @@ export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder})
         
     }
 
+    const handleKpiChange = (e) => {
+        let value = parseInt(e.target.value, 10);
+        if (isNaN(value)) {
+            value = 0;
+        } else if (value > 100) {
+            value = 100;
+        } else if (value < 0) {
+            value = 0;
+        }
+        setKpi(value);
+    };
+
     const handleCloseModal = () => {
         setModalOpen(false);
         setHours("");
         setRating(0);
+        setKpi("");
     }
 
     const handleChangeHours = (e) => {
-        setHours(e.target.value)
+        setHours(parseInt(e.target.value))
     }
 
     return (
@@ -123,7 +138,8 @@ export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder})
         <Modal isOpen={isModalOpen} onClose={() => handleCloseModal()}>
             <div className="delete-modal">
             <p className="delete-question">{`Вы действительно хотите подтвердить выполнение заказа ${work} пользователем ${user}?`}</p>
-            <div className="kpi-rating">
+            <div className="kpi-and-hours-and-rating">
+            <div className="hours-rating">
                 <p>Количество часов</p>
                 <div className="kpi">
                     <input 
@@ -136,6 +152,22 @@ export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder})
                     max={100}
                     />
                     {/* <p></p> */}
+                </div>
+                </div>
+                <div className="kpi-rating">
+                <p>KPI</p>
+                <div className="kpi">
+                    <input 
+                    type="number" 
+                    className="kpi-input" 
+                    value={kpi}
+                    onChange={handleKpiChange}
+                    onWheel={(e) => e.target.blur()}
+                    min={0}
+                    max={100}
+                    />
+                    <p>%</p>
+                </div>
                 </div>
                 <div className="rating">
                 <p className="kpi-rating-title">Рейтинг</p>
@@ -161,7 +193,7 @@ export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder})
             </div>
             <div className="delete-buttons">
             <button type='button' className='delete-btn-back' onClick={() => handleCloseModal()}>Отмена</button>
-            <button type='submit' className='delete-btn-submit' onClick={() => handleAcceptWork()} disabled={rating === 0 || hours ===""}>
+            <button type='submit' className='delete-btn-submit' onClick={() => handleAcceptWork()} disabled={rating === 0 || hours ==="" || kpi ===""}>
             {isLoading? "Загрузка...": "Подтвердить"}
             </button>
             </div>
