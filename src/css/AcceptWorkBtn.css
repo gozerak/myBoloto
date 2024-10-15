@@ -15,10 +15,16 @@
     outline: none;
 }
 
+.hours-rating {
+    display: flex;
+    flex-direction: row;
+    margin-right: 17%;
+}
+
 .rating {
     display: flex;
     flex-direction: row;
-    margin-left: 10%;
+    margin-right: 10%;
 }
 
 .kpi-rating-title {
@@ -44,4 +50,10 @@
     outline: none;
     width: 40%;
     margin: auto;
+}
+
+.kpi-and-hours-and-rating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
