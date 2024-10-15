@@ -60,7 +60,6 @@ function Cost () {
                     value={value}
                     onFocus={handleFocus}
                     name={name}
-                    size="7"
                 >
             <option className="selected-disabled" hidden value=""></option>
                 {items.map(item => (
