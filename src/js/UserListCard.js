@@ -20,7 +20,7 @@ export default function UserListCard (userData) {
 
             <UserListCardElem name={"ФИО"} content={userData.userData.full_name}  />
             <UserListCardElem name={"email"} content={userData.userData.email}  />
-            <UserRating rating={userData.userData.user_data.rating? userData.userData.rating : 0} nameOfClass={'user-list-rating-stars'} nameOfTitle={"user-list-block-rating-title"}/>
+            <UserRating rating={userData.userData.user_rating? userData.userData.user_rating : 0} nameOfClass={'user-list-rating-stars'} nameOfTitle={"user-list-block-rating-title"}/>
             <UserListCardElem name={"Город"} content={userData.userData.user_data.city}  />
             <UserListCardElem name={"Дата рождения"} content={userData.userData.user_data.date_of_birth}  />
             <UserListCardElem name={"Номер телефона"} content={userData.userData.user_data.phone_number}  />

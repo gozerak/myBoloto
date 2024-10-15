@@ -53,19 +53,20 @@ function Cost () {
 
     return (
         <div className={nameOfClass? nameOfClass : "other-filters"}>
-        <p className="filters-names">{title}</p>
-        <select 
-                className={`${nameOfDrop? nameOfDrop : 'dropdown-select'} ${value ? 'active' : ''}`} 
-                onChange={e => onChange(e)}
-                value={value}
-                onFocus={handleFocus}
-                name={name}
-            >
-        <option className="selected-disabled" hidden value=""></option>
-            {items.map(item => (
-                    <option className="select-filters" name={name} key={item.id} value={item.id}>{item.title}</option>
-                ))}
-        </select>
+            <p className="filters-names">{title}</p>
+            <select 
+                    className={`${nameOfDrop? nameOfDrop : 'dropdown-select'} ${value ? 'active' : ''}`} 
+                    onChange={e => onChange(e)}
+                    value={value}
+                    onFocus={handleFocus}
+                    name={name}
+                    size="7"
+                >
+            <option className="selected-disabled" hidden value=""></option>
+                {items.map(item => (
+                        <option className="select-filters" name={name} key={item.id} value={item.id}>{item.title}</option>
+                    ))}
+            </select>
         </div>
     )
 }
