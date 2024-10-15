@@ -651,7 +651,7 @@ function SignUpUser () {
                     <LabeledInput
                     title="Водительское удостоверение"
                     name="driver_license"
-                    type="number"
+                    type="text"
                     value={formData.user_data.driver_license}
                     onChange={handleChangeUserData}
                     onWheel={(e) => e.target.blur()}
