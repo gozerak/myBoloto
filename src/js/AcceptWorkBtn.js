@@ -111,7 +111,7 @@ export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder})
     const handleKpiChange = (e) => {
         let value = parseInt(e.target.value, 10);
         if (isNaN(value)) {
-            value = 0;
+            value = "";
         } else if (value > 100) {
             value = 100;
         } else if (value < 0) {
