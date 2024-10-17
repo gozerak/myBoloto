@@ -3,7 +3,7 @@ import { useState, useContext, useEffect} from 'react';
 import { UserContext } from '../js/UserContext';
 import { API_BASE_URL } from '../services/apiService';
 
-export const useCheckJWT = () => {
+export const useCheckJWT = (): boolean => {
     const { setUserData } = useContext(UserContext);
     const [isVerified, setIsVerified] = useState(false);
 
@@ -57,6 +57,6 @@ export const useCheckJWT = () => {
     return isVerified;
 }
 
-export const deleteCookie = (name) => {
+export const deleteCookie = (name: string) => {
     document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 }
