@@ -4,11 +4,17 @@ import { UserContext } from '../js/UserContext';
 import { API_BASE_URL } from '../services/apiService';
 
 export const useCheckJWT = (): boolean => {
-    const { setUserData } = useContext(UserContext);
+    const userContext = useContext(UserContext);
+
+    if (!userContext) {
+        throw new Error("useCheckJWT must be used within a UserProvider");
+    }
+
+    const { setUserData } = userContext;
     const [isVerified, setIsVerified] = useState(false);
 
     useEffect(() => {
-        let authToken = null;
+        let authToken: string | null = null;
 
         if (localStorage.getItem('userId')) {
             const cookieString = document.cookie;

@@ -1,10 +1,19 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { API_BASE_URL } from '../services/apiService';
+import React, { createContext, useState, useEffect, ReactNode } from 'react';
+import { API_BASE_URL, UserData } from '../services/apiService';
 
-export const UserContext = createContext();
+interface UserContextType {
+    userData: UserData | null;
+    setUserData: React.Dispatch<React.SetStateAction<UserData | null>>;
+  }
 
-export const UserProvider = ({ children }) => {
-    const [userData, setUserData] = useState(null);
+export const UserContext = createContext<UserContextType | undefined>(undefined);
+
+interface UserProviderProps {
+    children: ReactNode;
+}
+
+export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
+    const [userData, setUserData] = useState<UserData | null>(null);
 
     useEffect(() => {
         const userId = localStorage.getItem('userId');

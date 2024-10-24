@@ -1,4 +1,5 @@
 import axios from "axios";
+import Notifications from '../js/Notifications';
 
 export const API_BASE_URL = "http://localhost:8000";
 
@@ -149,11 +150,53 @@ export const fetchMyCreatedJobs = async (): Promise<MyCreatedJobsArray> => {
     return data;
 }
 
-interface UserData {
-    
+export interface UserData {
+    is_active: boolean;
+    full_name: string | null;
+    id: string;
+    login: string;
+    email: string;
+    hashed_password: string;
+    user_data: WorkerData | null;
+    manager_data: ManagerData | null;
+    user_rating: number | null;
 }
 
-export const fetchUserData = async (userId: string) => {
+interface WorkerData {
+    citizenship: string;
+    contraindications: string | null;
+    city: string | null;
+    about: string | null;
+    name: string;
+    passport_data: number;
+    education: string | null;
+    surname: string;
+    snils: number;
+    driver_license: string | null;
+    user_id: string;
+    patronymic: string | null;
+    medical_book: boolean;
+    languages: string | null;
+    date_of_birth: string | null;
+    is_self_employed: boolean;
+    id: string;
+    phone_number: number | null;
+    work_experience: string | null;
+    activity_type: string | null;
+}
+
+interface ManagerData {
+    surname: string | null;
+    id: string;
+    patronymic: string | null;
+    work_phone: number | null;
+    name: string | null;
+    job_title: string | null;
+    organization: string | null;
+    user_id: string | null;
+}
+
+export const fetchUserData = async (userId: string): Promise<UserData> => {
         const response = await fetch(`${API_BASE_URL}/user_manager/get_user_by_id?user_id=${userId}`, {
             method:"GET",
             headers: {
@@ -163,13 +206,23 @@ export const fetchUserData = async (userId: string) => {
         if (!response.ok) {
             throw new Error("Failed to user data");
         }
-        const data = await response.json();
+        const data: UserData = await response.json();
         return data;
 
 }
 
-export const fetchNotifications = async () => {
-    let authToken
+interface Notification {
+    notification_data: string;
+    created_at: string;
+    is_read: boolean;
+    id: string;
+    user_id: string
+}
+
+type NotificationArray = Notification[];
+
+export const fetchNotifications = async (): Promise<NotificationArray> => {
+    let authToken: string | undefined;
         if (localStorage.getItem('userId')) {
             const cookieString = document.cookie;
             const cookies = cookieString.split('; ').find(row => row.startsWith('accessToken'));
@@ -178,6 +231,7 @@ export const fetchNotifications = async () => {
                 authToken= (cookies.split('=')[1]);
             } else {
                 console.error("Необходимо перелогиниться");
+                throw new Error('Authentication error: no access token found');
             }
     const response = await fetch(`${API_BASE_URL}/notif/user_unread_notif`, {
         method:"GET",
@@ -189,12 +243,18 @@ export const fetchNotifications = async () => {
     if (!response.ok) {
         throw new Error("Failed to fetch notifications");
     }
-    const data = await response.json();
+    const data: NotificationArray = await response.json();
     return data;
 }
+else {
+    console.error('Пользователь не авторизован');
+    throw new Error('User is not authenticated');
+  }
 }
 
-export const fetchAllWorkers = async () => {
+type UserDataArray = UserData[];
+
+export const fetchAllWorkers = async (): Promise<UserDataArray> => {
     const response = await fetch(`${API_BASE_URL}/user_manager/get_all`, {
         method:"GET",
         headers: {
@@ -204,7 +264,7 @@ export const fetchAllWorkers = async () => {
     if (!response.ok) {
         throw new Error("Failed to fetch all workers");
     }
-    const data = await response.json();
+    const data: UserDataArray = await response.json();
     return data;
 
 }
