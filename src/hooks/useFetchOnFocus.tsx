@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 
-export const useFetchOnFocus = <T>(fetchFunction: () => Promise<T[]>): [T[], () => Promise<void>] => {
+export const useFetchOnFocus = <T,>(fetchFunction: () => Promise<T[]>): [T[], () => Promise<void>] => {
     const [data, setData] = useState<T[]>([]);
     const [isFetched, setIsFetched] = useState(false);
 

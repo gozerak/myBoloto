@@ -1,9 +1,13 @@
+import React from "react"
 import "../css/Search.css"
 import { useLocation } from "react-router-dom"
 import AddJobButton from "./AddJobButton"
 import "../css/AddJobButton.css"
 
-export default function Search ({ jobsLength, refreshOrder }) {
+export default function Search ({ jobsLength, refreshOrder }: {
+    jobsLength?: number;
+    refreshOrder?: () => void;
+}) {
     const location = useLocation();
     const isCustomerPage = location.pathname === "/customer";
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { fetchUserData } from "../services/apiService";
 
 
-export const useUserData = ( userId ) => {
+export const useUserData = ( userId: string ) => {
     const [userData, setUserData] = useState({});
     const [loading, setLoading] = useState(true);
 

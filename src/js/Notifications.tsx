@@ -1,11 +1,12 @@
+import React from "react";
 import { useEffect, useRef, useState } from "react"
 import "../css/Notifications.css"
-import { API_BASE_URL, fetchNotifications } from "../services/apiService";
+import { API_BASE_URL, fetchNotifications, NotificationArray } from "../services/apiService";
 
 export default function Notifications () {
-    const [notifications, setNotifications] = useState([]);
+    const [notifications, setNotifications] = useState<NotificationArray>([]);
     const [listOpened, setListOpened] = useState(false);
-    const [openedNotificationId, setOpenedNotificationId] = useState(null);
+    const [openedNotificationId, setOpenedNotificationId] = useState<string | null>(null);
 
     const notificationListRef = useRef(null);
 
@@ -41,7 +42,7 @@ export default function Notifications () {
       };
     }, [listOpened]);
 
-    const formatDate = (dateStr) => {
+    const formatDate = (dateStr: string) => {
         const date = new Date(dateStr);
 
         date.setHours(date.getHours() + 4);
@@ -58,7 +59,7 @@ export default function Notifications () {
 
     }
 
-    const handleNotificationClick = (id) => {
+    const handleNotificationClick = (id: string) => {
         if (openedNotificationId === id) {
             setOpenedNotificationId(null)
         } else {
@@ -66,7 +67,7 @@ export default function Notifications () {
         }
     };
 
-    const handleMarkAsRead = async (id) => {
+    const handleMarkAsRead = async (id: string) => {
         try {
             const response = await fetch(`${API_BASE_URL}/notif/mark_as_read`, {
                 method: "PATCH",
@@ -94,7 +95,7 @@ export default function Notifications () {
             }
         }
 
-        const handleCloseList = (isListOpened) => {
+        const handleCloseList = (isListOpened: boolean) => {
             setOpenedNotificationId(null)
             setListOpened(isListOpened) 
         }

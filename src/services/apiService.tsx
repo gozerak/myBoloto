@@ -3,13 +3,13 @@ import Notifications from '../js/Notifications';
 
 export const API_BASE_URL = "http://localhost:8000";
 
-interface Job  {
+export interface Job  {
     id:string;
     status_value: string;
     type_value: string;
     title:string;
     price: number;
-    description: string;
+    description?: string;
     started_at: string;
     finished_at: string;
     action_type_id: string;
@@ -76,11 +76,8 @@ export const fetchOrganizations = async (): Promise<Organization[]> => {
     }
 }
 
-interface UserBalance {
-    balance: number;
-}
 
-export const fetchUserBalance = async (): Promise<UserBalance> => {
+export const fetchUserBalance = async (): Promise<number> => {
     let authToken: string | undefined;
         if (localStorage.getItem('userId')) {
             const cookieString = document.cookie;
@@ -102,7 +99,7 @@ export const fetchUserBalance = async (): Promise<UserBalance> => {
     if (!response.ok) {
         throw new Error("Failed to fetch user balance");
     }
-    const data: UserBalance = await response.json();
+    const data: number = await response.json();
     return data;
 }
 
@@ -122,7 +119,7 @@ interface MyCreatedJobs {
     responded_user: RespondedUser;
 }
 
-type MyCreatedJobsArray = MyCreatedJobs[];
+export type MyCreatedJobsArray = MyCreatedJobs[];
 
 export const fetchMyCreatedJobs = async (): Promise<MyCreatedJobsArray> => {
     let authToken: string | undefined;
@@ -157,41 +154,41 @@ export interface UserData {
     login: string;
     email: string;
     hashed_password: string;
-    user_data: WorkerData | null;
-    manager_data: ManagerData | null;
-    user_rating: number | null;
+    user_data?: WorkerData | null;
+    manager_data?: ManagerData | null;
+    user_rating?: number | null;
 }
 
 interface WorkerData {
-    citizenship: string;
-    contraindications: string | null;
-    city: string | null;
-    about: string | null;
+    citizenship?: string;
+    contraindications?: string | null;
+    city?: string | null;
+    about?: string | null;
     name: string;
     passport_data: number;
-    education: string | null;
+    education?: string | null;
     surname: string;
     snils: number;
-    driver_license: string | null;
+    driver_license?: string | null;
     user_id: string;
-    patronymic: string | null;
+    patronymic?: string | null;
     medical_book: boolean;
-    languages: string | null;
+    languages?: string | null;
     date_of_birth: string | null;
     is_self_employed: boolean;
     id: string;
-    phone_number: number | null;
-    work_experience: string | null;
-    activity_type: string | null;
+    phone_number?: number | null;
+    work_experience?: string | null;
+    activity_type?: string | null;
 }
 
 interface ManagerData {
     surname: string | null;
     id: string;
-    patronymic: string | null;
-    work_phone: number | null;
+    patronymic?: string | null;
+    work_phone?: number | null;
     name: string | null;
-    job_title: string | null;
+    job_title?: string | null;
     organization: string | null;
     user_id: string | null;
 }
@@ -219,7 +216,7 @@ interface Notification {
     user_id: string
 }
 
-type NotificationArray = Notification[];
+export type NotificationArray = Notification[];
 
 export const fetchNotifications = async (): Promise<NotificationArray> => {
     let authToken: string | undefined;

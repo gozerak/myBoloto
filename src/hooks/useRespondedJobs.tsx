@@ -4,7 +4,7 @@ import { API_BASE_URL } from "../services/apiService";
 
 export const useRespondedJobs = () => {
     const [userRespondedJobs, setUserRespondedJobs] = useState({})
-    const [authToken, setAuthToken] = useState(null);
+    const [authToken, setAuthToken] = useState<string | null>(null);
 
     useEffect(() => {
         if (localStorage.getItem('userId')) {

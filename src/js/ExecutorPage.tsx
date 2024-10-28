@@ -1,3 +1,4 @@
+import React from "react";
 import Header from "./Header";
 import "../css/ExecutorPage.css";
 import MainPart from "./MainPart";
@@ -6,7 +7,7 @@ import { useJobs } from "../hooks/useJobs";
 import { useRespondedJobs } from "../hooks/useRespondedJobs";
 
 export default function ExecutorPage () {
-  const { jobs, jobsLength, loading } = useJobs(localStorage.getItem('userId'));
+  const { jobs, jobsLength, loading } = useJobs();
   const {userRespondedJobs} = useRespondedJobs();
 
     if (loading) {

@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import {fetchJobs} from "../services/apiService";
+import {fetchJobs, Job} from "../services/apiService";
 
 export const useJobs = () => {
-    const [jobs, setJobs] = useState ([]);
-    const [jobsLength, setJobsLength] = useState(0);
-    const [loading, setLoading] = useState(true);
+    const [jobs, setJobs] = useState<Job[]> ([]);
+    const [jobsLength, setJobsLength] = useState<number>(0);
+    const [loading, setLoading] = useState<boolean>(true);
 
     const isAuthorized = !!localStorage.getItem('userId')
 
