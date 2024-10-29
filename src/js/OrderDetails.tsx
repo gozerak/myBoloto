@@ -1,10 +1,13 @@
-
-import { API_BASE_URL } from "../services/apiService";
+import React from "react";
+import { API_BASE_URL, Job, UserRespondedJobsWithStatus } from "../services/apiService";
 import { useEffect, useState } from "react";
 import { Completed } from "./OrderDetailsCustomer";
 import TemporaryNotifier from "./TemporaryNotifier";
 
-export function Respond ({ onClick, isResponded }) {
+export function Respond ({ onClick, isResponded }: {
+    onClick?: () => void;
+    isResponded: boolean;
+}) {
     return (
         <button
         className={isResponded? "responded-btn" : "respond-btn"} 
@@ -16,26 +19,11 @@ export function Respond ({ onClick, isResponded }) {
     )
 }
 
-// function CustomerPageOrderDetail ({respondedUsers, isCustomerPage, order}) {
-//     return(
-//             <div className="edit-delete-buttons">
-//                 <RespondedList respondedUsers={respondedUsers} isCustomerPage={isCustomerPage} order={order} />
-//                 <DeleteCard cardJob_id= {order.id} />
-//             </div>
-//     )
-// }
-
-// function AcceptWorkResult() {
-//     <div className="">
-//         <p>Ответственный: {}</p>
-//     </div>
-// }
-
-async function handleRespond (order_id, 
-    setIsResopnded,
-    setShowNotifier, 
-    setNotifierStatus, 
-    setNotifierText) {
+async function handleRespond (order_id: string, 
+    setIsResponded: React.Dispatch<React.SetStateAction<boolean>>,
+    setShowNotifier: React.Dispatch<React.SetStateAction<boolean>>, 
+    setNotifierStatus: React.Dispatch<React.SetStateAction<string>>, 
+    setNotifierText: React.Dispatch<React.SetStateAction<string>>) {
     if (!localStorage.getItem('userId')){
         console.log ("Необходимо авторизоваться");
         alert("Необходимо авторизоваться")
@@ -50,7 +38,7 @@ async function handleRespond (order_id,
         });
         if (response.ok) {
             console.log('Вы откликнулись на заявку!');
-            setIsResopnded(true);
+            setIsResponded(true);
             setNotifierStatus('success')
             setNotifierText('Вы успешно откликнулись!')
             setShowNotifier(true)
@@ -73,7 +61,10 @@ async function handleRespond (order_id,
 };
 
 
-export default function OrderDetails ({order, respondedJobs}) {
+export default function OrderDetails ({order, respondedJobs}: {
+    order: Job;
+    respondedJobs: UserRespondedJobsWithStatus[];
+}) {
     
     // const isCustomerPage = location.pathname === "/customer";
     const [isResponded, setIsResponded] = useState(false);
@@ -97,8 +88,9 @@ export default function OrderDetails ({order, respondedJobs}) {
     }, [respondedJobs, order.id]);
 
     useEffect(() => {
-        if (localStorage.getItem("userId")) {
-            setUserId(localStorage.getItem("userId"))
+        let userId: string | null = localStorage.getItem("userId");
+        if (userId) {
+            setUserId(userId)
         }
       }, []);
     
@@ -135,12 +127,12 @@ export default function OrderDetails ({order, respondedJobs}) {
                 {order.status_value ==="Закрыта"? <Completed /> : 
                     userId === order.owner_id ? (<p className="your-order">Ваш заказ</p>):
                         (isResponded? (
-                            <Respond disabled isResponded= {isResponded} />):
+                            <Respond isResponded= {isResponded} />):
                 (<Respond onClick={() => handleRespond(order.id, 
                     setIsResponded, 
                     setShowNotifier, 
                     setNotifierStatus, 
-                    setNotifierText)} isResponded= {isResponded} order={order}/>)
+                    setNotifierText)} isResponded= {isResponded}/>)
                 )}
             </div>
         </>

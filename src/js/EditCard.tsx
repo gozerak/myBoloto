@@ -1,6 +1,7 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import "../css/EditCard.css"
-import { useJobs } from "./JobContext";
+// import { useJobs } from "./JobContext";
 import Modal from "./Modal";
 import { API_BASE_URL } from "../services/apiService";
 
@@ -23,7 +24,7 @@ export default function EditCard({order}) {
 
     useEffect(() => {
         if (order) {
-            const formatDate = (dateString) => {
+            const formatDate = (dateString: string) => {
                 if (!dateString) return "";
                 return new Date(dateString).toISOString().split('T')[0];
             };
@@ -47,7 +48,7 @@ export default function EditCard({order}) {
         }
     }, [order]);
 
-    const { actionTypes, places, organizations } = useJobs();
+    // const { actionTypes, places, organizations } = useJobs();
 
     const handleChange = (e) => {
         const { name, value} = e.target;
@@ -83,7 +84,7 @@ export default function EditCard({order}) {
         clearFinishedAtValue(e.target.checked)
     }
 
-    function clearFinishedAtValue(isChecked) {
+    function clearFinishedAtValue(isChecked: boolean) {
         if (isChecked) {
             setCardData({
                 ...cardData,

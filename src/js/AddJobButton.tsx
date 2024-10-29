@@ -8,7 +8,9 @@ import { API_BASE_URL } from '../services/apiService';
 import { fetchActionTypes, fetchPlaces, fetchOrganizations } from '../services/apiService';
 import TemporaryNotifier from './TemporaryNotifier';
 
-export default function AddJobButton({ refreshOrder }) {
+export default function AddJobButton({ refreshOrder }: {
+    refreshOrder?: () => void;
+}) {
     const [isModalOpen, setModalOpen] = useState(false);
     const [formData, setFormData] = useState({
         title: "",
@@ -91,7 +93,7 @@ export default function AddJobButton({ refreshOrder }) {
         clearFinishedAtValue(e.target.checked)
     }
 
-    function clearFinishedAtValue(isChecked) {
+    function clearFinishedAtValue(isChecked: boolean) {
         if (isChecked) {
             setFormData({
                 ...formData,

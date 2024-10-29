@@ -5,19 +5,21 @@ export const API_BASE_URL = "http://localhost:8000";
 
 export interface Job  {
     id:string;
-    status_value: string;
-    type_value: string;
-    title:string;
     price: number;
+    title:string;
     description?: string;
+    created_at: string;
     started_at: string;
     finished_at: string;
-    action_type_id: string;
-    city_id: string;
     job_location: string;
     is_active: boolean;
     owner_id: string;
-    organization_id: string;
+    type_value: string;
+    status_value: string;
+    action_type: ActionType;
+    city: Place;
+    organization: Organization;
+    status: string;
 }
 
 export const fetchJobs = async (isAuthorized: boolean): Promise<Job[]> => {
@@ -108,14 +110,8 @@ interface RespondedUser {
     full_name: string;
 }
 
-interface DetailedJob extends Job {
-    organization:Organization;
-    action_type: ActionType;
-    city: Place;
-}
-
-interface MyCreatedJobs {
-    job: DetailedJob;
+export interface MyCreatedJobs {
+    job: Job;
     responded_user: RespondedUser;
 }
 
@@ -249,7 +245,7 @@ else {
   }
 }
 
-type UserDataArray = UserData[];
+export type UserDataArray = UserData[];
 
 export const fetchAllWorkers = async (): Promise<UserDataArray> => {
     const response = await fetch(`${API_BASE_URL}/user_manager/get_all`, {
@@ -264,4 +260,26 @@ export const fetchAllWorkers = async (): Promise<UserDataArray> => {
     const data: UserDataArray = await response.json();
     return data;
 
+}
+
+export interface UserRespondedJobsWithStatus {
+    job: Job;
+    status: string;
+    
+}
+
+export const fetchUserRespondedJobs = async (authToken: string):
+Promise<UserRespondedJobsWithStatus[]> => {
+    const response = await fetch(`${API_BASE_URL}/user_manager/get_user_assigned_jobs`, {
+        method:"GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${authToken}`
+        }
+    });
+    if (!response.ok) {
+        throw new Error("Failed to fetch user responded jobs!");
+    }
+    const data: UserRespondedJobsWithStatus[] = await response.json();
+    return data;
 }

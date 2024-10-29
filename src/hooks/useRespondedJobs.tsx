@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { API_BASE_URL } from "../services/apiService";
+import { API_BASE_URL, fetchUserRespondedJobs, UserRespondedJobsWithStatus } from "../services/apiService";
+
 
 
 export const useRespondedJobs = () => {
-    const [userRespondedJobs, setUserRespondedJobs] = useState({})
+    const [userRespondedJobs, setUserRespondedJobs] = useState<UserRespondedJobsWithStatus[]>([]);
     const [authToken, setAuthToken] = useState<string | null>(null);
 
     useEffect(() => {
@@ -15,24 +16,22 @@ export const useRespondedJobs = () => {
                 setAuthToken(cookies.split('=')[1]);
             } else {
                 console.error("Необходимо перелогиниться");
-                setUserRespondedJobs({ error: "Необходимо перелогиниться" });
+                // setUserRespondedJobs([ error: "Необходимо перелогиниться" ]);
             }
         }
     }, []);
 
     useEffect(() => {
         if (authToken) {
-     fetch(`${API_BASE_URL}/user_manager/get_user_assigned_jobs`, {
-        method:"GET",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${authToken}`
-        }
-    })
-    .then (response => response.json())
-    // .then (responseData => responseData.map(responseDataObj => responseDataObj.job))
-    .then(userJobsData => setUserRespondedJobs(userJobsData))
-    .catch(error => console.error("Error fetching user responds: ", error))
+        const getData = async () => {
+            try {
+                const userRespondedData = await fetchUserRespondedJobs(authToken)
+                setUserRespondedJobs(userRespondedData);
+            } catch (error){
+                console.error ("Error fetching user respondedJobs:", error);
+            }
+        };
+        getData()
 }}, [authToken]);
     return {userRespondedJobs};
 }

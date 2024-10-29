@@ -1,6 +1,10 @@
+import React from "react"
 import { UserRating } from "./ProfilePage"
 
-function UserListCardElem ({name, content}) {
+function UserListCardElem ({name, content}: {
+    name: string;
+    content: string
+}) {
     return (
         <div className="user-list-card-elem">
                 <p className="user-list-card-elem-title">

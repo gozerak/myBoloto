@@ -1,3 +1,4 @@
+import React from "react";
 import { Respond } from "./OrderDetails";
 import { Completed } from "./OrderDetailsCustomer";
 
@@ -31,7 +32,7 @@ import { Completed } from "./OrderDetailsCustomer";
         <div className="card-employer-container">
                 <p className="card-employer">Предприятие</p>
                 <p className="card-order-value">{order.job.organization.title}</p>
-                            { order.job.status_value ==="Закрыта"? <Completed/> : <Respond disabled isResponded= {true} />}
+                            { order.job.status_value ==="Закрыта"? <Completed/> : <Respond isResponded= {true} />}
             </div>
         </>
     )

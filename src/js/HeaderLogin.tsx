@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
 import { useContext } from 'react';
@@ -14,9 +15,13 @@ export default function HeaderLogin () {
         username: '',
         password: '',
     });
-    const { setUserData } = useContext(UserContext);
+    const userContext = useContext(UserContext);
+    if (!userContext) {
+        throw new Error("HeaderLogin must be used within a UserProvider");
+    }
+    const { setUserData } = userContext;
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value} = e.target;
         setLoginData ({
             ...loginData,
@@ -24,7 +29,7 @@ export default function HeaderLogin () {
         });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             const response = await fetch(`${API_BASE_URL}/auth/login`, {

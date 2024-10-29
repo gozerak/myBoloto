@@ -1,16 +1,23 @@
+import React from "react";
 import "../css/OrderCard.css";
 import OrderDetails from "./OrderDetails";
 import { useLocation } from "react-router-dom";
 import OrderDetailsCustomer from "./OrderDetailsCustomer";
 import OrderDetailsMyResponses from "./OrderDetailsMyResponses";
+import { Job, MyCreatedJobsArray, UserRespondedJobsWithStatus } from "../services/apiService";
 
-export default function OrderCard ({ jobs, respondedJobs = null, refreshOrder }) {
+export default function OrderCard ({ jobs, respondedJobs, refreshOrder }: {
+    jobs?: Job[] | MyCreatedJobsArray;
+    respondedJobs?: UserRespondedJobsWithStatus[];
+    refreshOrder?: () => void;
+}) {
     const location = useLocation();
     const isCustomerPage = location.pathname === "/customer";
     const isMyResponsesPage = location.pathname === "/myresponses"
     if (!Array.isArray(jobs)) {
         return null;
     }
+    
     return(
     <>
     {isCustomerPage?

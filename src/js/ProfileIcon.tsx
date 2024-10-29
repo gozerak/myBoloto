@@ -1,14 +1,20 @@
+import React from "react";
 import { useContext, useState, useEffect, useRef } from "react";
 import { UserContext } from "./UserContext";
 import "../css/ProfileIcon.css";
 import { NavLink, useNavigate } from "react-router-dom";
 
 export default function ProfileIcon() {
-    const { userData, setUserData } = useContext(UserContext);
     const [isDropdownOpen, setDropdownOpen] = useState(false);
-    const dropdownRef = useRef(null);
+    const dropdownRef = useRef<HTMLDivElement | null>(null);
     const navigate = useNavigate();
+    const userContext = useContext(UserContext);
 
+    if (!userContext) {
+        throw new Error("useContext(UserContext) must be used within a UserProvider");
+    }
+
+    const { userData, setUserData } = userContext;
     const userId = localStorage.getItem('userId');
 
     const toggleDropdown = () => {
@@ -24,8 +30,8 @@ export default function ProfileIcon() {
         window.location.reload();
     };
 
-    const handleClickOutside = (event) => {
-        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
             setDropdownOpen(false);
         }
     };

@@ -1,4 +1,4 @@
-
+import React from "react";
 import "../css/Filters.css";
 import { useFetchOnFocus } from '../hooks/useFetchOnFocus';
 import { fetchActionTypes, fetchPlaces, fetchOrganizations } from '../services/apiService';
@@ -70,7 +70,7 @@ function Cost () {
     )
 }
 
-function TotalFoundButton ({totalOrders}) {
+function TotalFoundButton (totalOrders: number) {
  return (
     <div className="total-found-block">
     <button className="total-found-button">Показать {totalOrders} заказов</button>

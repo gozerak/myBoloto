@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react"
 import "../css/DeleteCard.css"
 import Modal from "./Modal";
@@ -5,7 +6,10 @@ import { useCheckJWT } from "../hooks/CheckJWT";
 import { API_BASE_URL } from "../services/apiService";
 import TemporaryNotifier from "./TemporaryNotifier";
 
-export default function DeleteCard ({cardJob_id, refreshOrder}) {
+export default function DeleteCard ({cardJob_id, refreshOrder}: {
+    cardJob_id: string;
+    refreshOrder: () => void;
+}) {
     const [isModalOpen, setModalOpen] = useState (false);
     const isVerified = useCheckJWT();
     const [isLoading, setIsLoading] = useState(false);

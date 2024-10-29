@@ -8,7 +8,7 @@ export default function Notifications () {
     const [listOpened, setListOpened] = useState(false);
     const [openedNotificationId, setOpenedNotificationId] = useState<string | null>(null);
 
-    const notificationListRef = useRef(null);
+    const notificationListRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
         const getData = async () => {
@@ -23,10 +23,10 @@ export default function Notifications () {
     }, [])
 
     useEffect(() => {
-      const handleClickOutside = (event) => {
+      const handleClickOutside = (event: MouseEvent ) => {
         if (
           notificationListRef.current &&
-          !notificationListRef.current.contains(event.target)
+          !notificationListRef.current.contains(event.target as Node)
         ) {
           setListOpened(false); // Close the notification list
         }

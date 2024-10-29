@@ -1,3 +1,4 @@
+import React from "react";
 import { useUserData } from "../hooks/useUserData";
 import Header from "./Header";
 import "../css/ProfilePage.css";

@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
@@ -29,7 +30,7 @@ function LabeledInput({title, required = false, type = 'text', name, value, onCh
 export default function SignUpPage() {
     const [isUserSignUpPage, setIsUserSignUpPage] = useState(true)
 
-    const handleClick = (bool) => {
+    const handleClick = (bool: boolean) => {
         if (isUserSignUpPage === bool) return
         setIsUserSignUpPage(bool)
     }

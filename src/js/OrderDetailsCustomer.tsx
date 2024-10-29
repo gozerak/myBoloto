@@ -1,12 +1,18 @@
 // import { useLocation } from "react-router-dom"
+import React from "react";
 import DeleteCard from "./DeleteCard";
-import { API_BASE_URL } from "../services/apiService";
+import { API_BASE_URL, Job, MyCreatedJobs, MyCreatedJobsArray } from "../services/apiService";
 import { useEffect, useState } from "react";
 import RespondedList from "./RespondedList";
 import AcceptWorkBtn from "./AcceptWorkBtn";
 
 
-function CustomerPageOrderDetail ({respondedUsers, isCustomerPage, order, refreshOrder}) {
+function CustomerPageOrderDetail ({respondedUsers, isCustomerPage, order, refreshOrder}: {
+  respondedUsers: 
+  isCustomerPage: boolean;
+  order: MyCreatedJobs;
+  refreshOrder?: () => void;
+}) {
     return(
             <div className="edit-delete-buttons">
                 <RespondedList respondedUsers={respondedUsers} isCustomerPage={isCustomerPage} order={order} refreshOrder={refreshOrder} />
@@ -15,7 +21,10 @@ function CustomerPageOrderDetail ({respondedUsers, isCustomerPage, order, refres
     )
 }
 
-function AcceptWorkResult({ order, refreshOrder }) {
+function AcceptWorkResult({ order, refreshOrder }: {
+  order: MyCreatedJobs;
+  refreshOrder?: () => void;
+}) {
   return(
     <div className="accept-work-elem">
         <p className="responsible-customer-card">Ответственный: {order.responded_user.full_name}</p>
@@ -37,7 +46,10 @@ export function Completed () {
 }
 
 
-export default function OrderDetailsCustomer ({order, refreshOrder}) {
+export default function OrderDetailsCustomer ({order, refreshOrder}: {
+  order: MyCreatedJobs;
+  refreshOrder?: () => void;
+}) {
   const [respondedUsers, setRespondedUsers] = useState ({});
   const isCustomerPage = true;
 

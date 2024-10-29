@@ -1,3 +1,4 @@
+import React from "react";
 import Header from "./Header";
 import MainCustomerPart from "./MainCustomerPart";
 import Search from "./Search";

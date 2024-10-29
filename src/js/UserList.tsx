@@ -1,10 +1,11 @@
+import React from "react";
 import { useEffect, useState } from "react";
-import { fetchAllWorkers } from "../services/apiService"
+import { fetchAllWorkers, UserDataArray } from "../services/apiService"
 import UserListCard from "./UserListCard";
 import "../css/UserList.css"
 
 export default function UserList () {
-    const [allWorkers, setAllWorkers] = useState ([])
+    const [allWorkers, setAllWorkers] = useState<UserDataArray>([])
 
     useEffect(() => {
         const fetchWorkers = async () => {
