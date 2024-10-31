@@ -79,13 +79,13 @@ export default function OrderDetails ({order, respondedJobs}: {
         if (Array.isArray(respondedJobs)) {
             // const matchedJob = respondedJobs.find(jobData => jobData.job.id === order.id);
             // setOrderStatus(matchedJob? matchedJob.status : '')
-            const respondedJobIds = respondedJobs.map(job => job.job.id);
-            if (respondedJobIds.includes(order.id)) {
+            const respondedJobIds = respondedJobs.map(job => job.job.job.id);
+            if (respondedJobIds.includes(order.job.id)) {
                 setIsResponded(true);
             }
         }
         else return;
-    }, [respondedJobs, order.id]);
+    }, [respondedJobs, order.job.id]);
 
     useEffect(() => {
         let userId: string | null = localStorage.getItem("userId");
@@ -97,38 +97,38 @@ export default function OrderDetails ({order, respondedJobs}: {
     return (
         <>
         {showNotifier? <TemporaryNotifier status={notifierStatus} text={notifierText} />: null}
-        <p className="card-header">{order.title}</p>
-        <p className="card-cost">{order.price} ₽/час</p>
+        <p className="card-header">{order.job.title}</p>
+        <p className="card-cost">{order.job.price} ₽/час</p>
         <div className="description-and-status">
-        <p className="card-order-description">{order.description}</p>
+        <p className="card-order-description">{order.job.description}</p>
         {/* <p className="card-order-status">{orderStatus ? orderStatus : null}</p> */}
         <p className="card-order-status"></p>
         </div>
         <div className="info-card">
         <p className="card-main-info">Период</p>
-        <p className="card-order-value">{new Date(order.started_at).toLocaleDateString()} {order.finished_at? `- ${new Date(order.finished_at).toLocaleDateString()}`: null}</p>
+        <p className="card-order-value">{new Date(order.job.started_at).toLocaleDateString()} {order.job.finished_at? `- ${new Date(order.job.finished_at).toLocaleDateString()}`: null}</p>
         </div>
         <div className="info-card">
         <p className="card-main-info">Род деятельности</p> 
-        <p className="card-order-value">{order.action_type.title}</p>
+        <p className="card-order-value">{order.job.action_type.title}</p>
         </div>
         <div className="info-card">
         <p className="card-main-info">Город </p> 
-        <p className="card-order-value">{order.city.title}</p>
+        <p className="card-order-value">{order.job.city.title}</p>
         </div>
         <div className="info-card">
         <p className="card-main-info">Адрес</p>
-        <p className="card-order-value">{order.job_location}</p>
+        <p className="card-order-value">{order.job.job_location}</p>
         </div>
         
         <div className="card-employer-container">
                 <p className="card-employer">Предприятие</p>
-                <p className="card-order-value">{order.organization.title}</p>
-                {order.status_value ==="Закрыта"? <Completed /> : 
-                    userId === order.owner_id ? (<p className="your-order">Ваш заказ</p>):
+                <p className="card-order-value">{order.job.organization.title}</p>
+                {order.job.status_value ==="Закрыта"? <Completed /> : 
+                    userId === order.job.owner_id ? (<p className="your-order">Ваш заказ</p>):
                         (isResponded? (
                             <Respond isResponded= {isResponded} />):
-                (<Respond onClick={() => handleRespond(order.id, 
+                (<Respond onClick={() => handleRespond(order.job.id, 
                     setIsResponded, 
                     setShowNotifier, 
                     setNotifierStatus, 

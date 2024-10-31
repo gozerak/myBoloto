@@ -2,10 +2,10 @@ import React from "react"
 import Filters from "./Filters"
 import OrderCard from "./OrderCard"
 import '../css/MainCustomerPart.css'
-import { MyCreatedJobsArray } from "../services/apiService"
+import { Job } from "../services/apiService"
 
 export default function MainCustomerPart({ jobs, refreshOrder }: {
-    jobs: MyCreatedJobsArray;
+    jobs: Job[];
     refreshOrder?: () => void;
 }) {
     return(

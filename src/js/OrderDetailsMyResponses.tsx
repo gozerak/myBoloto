@@ -1,8 +1,11 @@
 import React from "react";
 import { Respond } from "./OrderDetails";
 import { Completed } from "./OrderDetailsCustomer";
+import { Job } from "../services/apiService";
 
- export default function OrderDetailsMyResponses ({ order }) {
+ export default function OrderDetailsMyResponses ({ order }: {
+    order: Job;
+ }) {
 
     return(
 <>
@@ -10,7 +13,7 @@ import { Completed } from "./OrderDetailsCustomer";
         <p className="card-cost">{order.job.price} ₽/час</p>
         <div className="description-and-status">
         <p className="card-order-description">{order.job.description}</p>
-        <p className="card-order-status">{order.status}</p>
+        <p className="card-order-status">{order.job.status}</p>
         </div>
         <div className="info-card">
         <p className="card-main-info">Период</p>

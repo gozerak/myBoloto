@@ -3,7 +3,7 @@ import Notifications from '../js/Notifications';
 
 export const API_BASE_URL = "http://localhost:8000";
 
-export interface Job  {
+export interface JobDetails  {
     id:string;
     price: number;
     title:string;
@@ -19,7 +19,12 @@ export interface Job  {
     action_type: ActionType;
     city: Place;
     organization: Organization;
-    status: string;
+    status?: string;
+}
+
+export interface Job {
+    job: JobDetails;
+    responded_user?: RespondedUser;
 }
 
 export const fetchJobs = async (isAuthorized: boolean): Promise<Job[]> => {
@@ -110,14 +115,8 @@ interface RespondedUser {
     full_name: string;
 }
 
-export interface MyCreatedJobs {
-    job: Job;
-    responded_user: RespondedUser;
-}
 
-export type MyCreatedJobsArray = MyCreatedJobs[];
-
-export const fetchMyCreatedJobs = async (): Promise<MyCreatedJobsArray> => {
+export const fetchMyCreatedJobs = async (): Promise<Job[]> => {
     let authToken: string | undefined;
         if (localStorage.getItem('userId')) {
             const cookieString = document.cookie;
@@ -139,7 +138,7 @@ export const fetchMyCreatedJobs = async (): Promise<MyCreatedJobsArray> => {
     if (!response.ok) {
         throw new Error("Failed to fetch my created jobs");
     }
-    const data: MyCreatedJobsArray = await response.json();
+    const data: Job[] = await response.json();
     return data;
 }
 
@@ -282,4 +281,18 @@ Promise<UserRespondedJobsWithStatus[]> => {
     }
     const data: UserRespondedJobsWithStatus[] = await response.json();
     return data;
+}
+
+export const fetchRespondedUsers = async(id: string): Promise<UserData[]> => {
+    const response = await fetch(`${API_BASE_URL}/jobs/get_job_relationship?job_id=${id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        }
+      });
+      if (!response.ok) {
+        throw new Error("Failed to fetch responded users!");
+    }
+      const data: UserData[] = await response.json();
+      return data;
 }

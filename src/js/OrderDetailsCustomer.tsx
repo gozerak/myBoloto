@@ -1,16 +1,16 @@
 // import { useLocation } from "react-router-dom"
 import React from "react";
 import DeleteCard from "./DeleteCard";
-import { API_BASE_URL, Job, MyCreatedJobs, MyCreatedJobsArray } from "../services/apiService";
+import { API_BASE_URL, fetchRespondedUsers, fetchUserRespondedJobs, Job, UserData } from "../services/apiService";
 import { useEffect, useState } from "react";
 import RespondedList from "./RespondedList";
 import AcceptWorkBtn from "./AcceptWorkBtn";
 
 
 function CustomerPageOrderDetail ({respondedUsers, isCustomerPage, order, refreshOrder}: {
-  respondedUsers: 
+  respondedUsers: UserData[];
   isCustomerPage: boolean;
-  order: MyCreatedJobs;
+  order: Job;
   refreshOrder?: () => void;
 }) {
     return(
@@ -22,7 +22,7 @@ function CustomerPageOrderDetail ({respondedUsers, isCustomerPage, order, refres
 }
 
 function AcceptWorkResult({ order, refreshOrder }: {
-  order: MyCreatedJobs;
+  order: Job;
   refreshOrder?: () => void;
 }) {
   return(
@@ -47,30 +47,11 @@ export function Completed () {
 
 
 export default function OrderDetailsCustomer ({order, refreshOrder}: {
-  order: MyCreatedJobs;
+  order: Job;
   refreshOrder?: () => void;
 }) {
-  const [respondedUsers, setRespondedUsers] = useState ({});
+  const respondedUsers = fetchRespondedUsers(order.job.id);
   const isCustomerPage = true;
-
-    useEffect(() => {
-        const fetchRespondedUsers = async () => {
-          try {
-            const response = await fetch(`${API_BASE_URL}/jobs/get_job_relationship?job_id=${order.job.id}`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              }
-            });
-            const data = await response.json();
-            setRespondedUsers(data);
-          } catch (error) {
-            console.error("Error fetching responded users:", error);
-          }
-        };
-    
-        fetchRespondedUsers();
-      }, [order.job.id]);
     
     return (
         <>
@@ -102,7 +83,7 @@ export default function OrderDetailsCustomer ({order, refreshOrder}: {
                 <p className="card-order-value">{order.job.organization.title}</p>
                  {order.job.status_value ==="Закрыта"?
                   ( <Completed/>):
-                  (order.responded_user.id!== null? <AcceptWorkResult order={order} refreshOrder={refreshOrder}/>:
+                  (order.responded_user? <AcceptWorkResult order={order} refreshOrder={refreshOrder}/>:
                    <CustomerPageOrderDetail respondedUsers={respondedUsers} isCustomerPage={isCustomerPage} order={order} refreshOrder={refreshOrder}/>)}
             </div>
         </>

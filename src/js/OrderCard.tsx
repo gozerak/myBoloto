@@ -4,10 +4,10 @@ import OrderDetails from "./OrderDetails";
 import { useLocation } from "react-router-dom";
 import OrderDetailsCustomer from "./OrderDetailsCustomer";
 import OrderDetailsMyResponses from "./OrderDetailsMyResponses";
-import { Job, MyCreatedJobsArray, UserRespondedJobsWithStatus } from "../services/apiService";
+import { Job, UserRespondedJobsWithStatus } from '../services/apiService';
 
 export default function OrderCard ({ jobs, respondedJobs, refreshOrder }: {
-    jobs?: Job[] | MyCreatedJobsArray;
+    jobs: Job[]
     respondedJobs?: UserRespondedJobsWithStatus[];
     refreshOrder?: () => void;
 }) {
@@ -32,12 +32,12 @@ export default function OrderCard ({ jobs, respondedJobs, refreshOrder }: {
                                 </div>
                                       ))
                       ):
-                        (jobs.map(order => (
-                            <div key={order.id} className="order-card">
+                        (respondedJobs? (jobs.map(order => (
+                            <div key={order.job.id} className="order-card">
                                 <OrderDetails order = {order} respondedJobs = {respondedJobs}/>
                                 </div> 
-                     )) )
-                      )
+                     )) ): null
+                      ))
                       }
     </>
     )
