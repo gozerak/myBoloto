@@ -1,4 +1,4 @@
-import React from "react"
+import React, { ChangeEvent } from "react"
 import { API_BASE_URL } from "../services/apiService"
 import { useState } from "react"
 import "../css/DeleteCard.css"
@@ -8,7 +8,13 @@ import Modal from "./Modal";
 import { useCheckJWT } from "../hooks/CheckJWT";
 import TemporaryNotifier from "./TemporaryNotifier"
 
-export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder}) {
+export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder}: {
+    user: string;
+    work: string;
+    userId: string | null;
+    jobId: string;
+    refreshOrder: () => void;
+}) {
 
     const [isModalOpen, setModalOpen] = useState (false);
     const isVerified = useCheckJWT();
@@ -16,7 +22,7 @@ export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder})
     const [hours, setHours] = useState("");
     const [comment, setComment] = useState("");
     const [rating, setRating] = useState(0);
-    const [kpi, setKpi] = useState(0);
+    const [kpi, setKpi] = useState<number | string>(0);
     const [showNotifier, setShowNotifier] = useState(false);
     const [notifierStatus, setNotifierStatus] = useState('');
     const [notifierText, setNotifierText] = useState('')
@@ -77,7 +83,7 @@ export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder})
         }
     }};
 
-    async function sendRating(authToken) {
+    async function sendRating(authToken: string) {
         try {
             const response = await fetch(`${API_BASE_URL}/user_rating/add`, { method: "POST"
              ,
@@ -109,8 +115,8 @@ export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder})
         
     }
 
-    const handleKpiChange = (e) => {
-        let value = parseInt(e.target.value, 10);
+    const handleKpiChange = (e: ChangeEvent<HTMLInputElement>) => {
+        let value: number | string = parseInt(e.target.value, 10);
         if (isNaN(value)) {
             value = "";
         } else if (value > 100) {
@@ -128,8 +134,8 @@ export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder})
         setKpi("");
     }
 
-    const handleChangeHours = (e) => {
-        setHours(parseInt(e.target.value))
+    const handleChangeHours = (e: ChangeEvent<HTMLInputElement>) => {
+        setHours(e.target.value)
     }
 
     return (
@@ -148,7 +154,7 @@ export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder})
                     className="kpi-input" 
                     value={hours}
                     onChange={handleChangeHours}
-                    onWheel={(e) => e.target.blur()}
+                    onWheel={(e) => (e.target as HTMLElement).blur()}
                     min={0}
                     max={100}
                     />
@@ -163,7 +169,7 @@ export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder})
                     className="kpi-input" 
                     value={kpi}
                     onChange={handleKpiChange}
-                    onWheel={(e) => e.target.blur()}
+                    onWheel={(e) => (e.target as HTMLElement).blur()}
                     min={0}
                     max={100}
                     />

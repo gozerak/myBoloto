@@ -2,21 +2,28 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 import "../css/RespondedList.css";
 import Modal from "./Modal";
-import { API_BASE_URL } from "../services/apiService";
+import { API_BASE_URL, Job, UserData } from "../services/apiService";
 import { NavLink } from "react-router-dom";
 import TemporaryNotifier from "./TemporaryNotifier";
 
-export default function RespondedList({ respondedUsers, isCustomerPage, order, refreshOrder }) {
+export default function RespondedList({ respondedUsers, isCustomerPage, order, refreshOrder }:
+    {
+        respondedUsers: UserData[];
+        isCustomerPage: boolean;
+        order: Job;
+        refreshOrder: () => void;
+    }
+) {
     const [isCardModalOpen, setIsCardModalOpen] = useState(false);
-    const [selectedUser, setSelectedUser] = useState(null); // Убираем начальное значение пустого объекта
+    const [selectedUser, setSelectedUser] = useState<UserData | null>(null); // Убираем начальное значение пустого объекта
     const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Управляем открытием списка
-    const dropdownRef = useRef(null); // Реф для выпадающего списка
+    const dropdownRef = useRef<HTMLDivElement | null>(null); // Реф для выпадающего списка
     const [comment, setComment] = useState('')
     const [showNotifier, setShowNotifier] = useState(false);
     const [notifierStatus, setNotifierStatus] = useState('');
     const [notifierText, setNotifierText] = useState('')
 
-    const handleApprove = async (e, userId, orderId) => {
+    const handleApprove = async (e: React.MouseEvent, userId: string, orderId: string) => {
         e.preventDefault();
 
         let authToken;
@@ -70,7 +77,7 @@ export default function RespondedList({ respondedUsers, isCustomerPage, order, r
         }   
     };
 
-    const sendComment = async (userId) => {
+    const sendComment = async (userId: string) => {
         try {
             const response = await fetch(`${API_BASE_URL}/notif/create`, {
                 method: "POST",
@@ -95,7 +102,7 @@ export default function RespondedList({ respondedUsers, isCustomerPage, order, r
         closeModal();  
     }
 
-    const handleSpanClick = (user) => {
+    const handleSpanClick = (user: UserData) => {
         setSelectedUser(user); // Устанавливаем выбранного пользователя
         setIsCardModalOpen(true); // Открываем модальное окно
     };
@@ -107,8 +114,8 @@ export default function RespondedList({ respondedUsers, isCustomerPage, order, r
 
     // Обработчик клика за пределами dropdown
     useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
                 setIsDropdownOpen(false); // Закрываем список, если клик вне его области
             }
         };

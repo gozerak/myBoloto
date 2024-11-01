@@ -1,15 +1,24 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import { API_BASE_URL, fetchOrganizations } from "../services/apiService";
-import "../css/SignUpPage.css"
-import InputMask from 'react-input-mask';
+import "../css/SignUpPage.css";
 import TemporaryNotifier from "./TemporaryNotifier";
 import { OtherFilters } from "./Filters";
 import { useFetchOnFocus } from "../hooks/useFetchOnFocus";
+import InputMask from 'react-input-mask';
 
-function LabeledInput({title, required = false, type = 'text', name, value, onChange, onBlur }) {
+function LabeledInput({title, required = false, type = 'text', name, value, onChange, onBlur, onWheel }: {
+    title: string;
+    required?: boolean;
+    type: string;
+    name: string;
+    value: string | boolean | number;
+    onChange: (e?: React.ChangeEvent) => void;
+    onBlur?: (e: React.ChangeEvent) => void;
+    onWheel?: (e:React.WheelEvent) => void;
+}) {
     return(
        <div className="registration-elem">
         <label className="registration-label">{title}
@@ -19,7 +28,7 @@ function LabeledInput({title, required = false, type = 'text', name, value, onCh
         className={type!=="checkbox"?"registration-input": "registration-checkbox"}
         type={type}
         name={name}
-        value={value}
+        data-value={value}
         onChange={onChange}
         onBlur={onBlur}
         required={required} />
@@ -72,7 +81,7 @@ function SignUpManager () {
         }
     })
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.ChangeEvent | React.MouseEvent) => {
         e.preventDefault();
         setPasswordError(false);
         setFormError(false);
@@ -115,11 +124,11 @@ function SignUpManager () {
         }
     }
 
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setFormData({...formData, [e.target.name]: e.target.value});
     };
 
-    const handleChangeManagerData = (e) => {
+    const handleChangeManagerData = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
         setFormData({
             ...formData,
             manager_data: {
@@ -127,7 +136,7 @@ function SignUpManager () {
                  [e.target.name]: e.target.value}})
     }
 
-    const handleChangeManagerSpecialData = (e) => {
+    const handleChangeManagerSpecialData = (e: ChangeEvent<HTMLInputElement>) => {
         setFormData({
             ...formData,
             manager_data: {
@@ -262,7 +271,7 @@ function SignUpManager () {
                     onChange={handleChange}
                     onBlur={(e) => {
                         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // простая регулярка для email
-                        if (!emailPattern.test(e.target.value)) {
+                        if (!emailPattern.test((e.target as HTMLTextAreaElement).value)) {
                             setFormData({
                                 ...formData, email: "" }) // сбрасываем, если формат неверный
                           alert("Введите корректный email");
@@ -354,11 +363,11 @@ function SignUpUser () {
         }
     })
 
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement> ) => {
         setFormData({...formData, [e.target.name]: e.target.value});
     };
 
-    const handleChangeUserData = (e) => {
+    const handleChangeUserData = (e: ChangeEvent<HTMLInputElement>) => {
         setFormData({
             ...formData,
             user_data: {
@@ -366,7 +375,7 @@ function SignUpUser () {
                  [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value}})
     }
 
-    const handleChangeUserSpecialData = (e) => {
+    const handleChangeUserSpecialData = (e: ChangeEvent<HTMLInputElement>) => {
         setFormData({
             ...formData,
             user_data: {
@@ -374,7 +383,7 @@ function SignUpUser () {
                  [e.target.name]: e.target.value.replace(/\D/g, ''),}})
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         setPasswordError(false);
         setFormError(false);
@@ -655,7 +664,7 @@ function SignUpUser () {
                     type="text"
                     value={formData.user_data.driver_license}
                     onChange={handleChangeUserData}
-                    onWheel={(e) => e.target.blur()}
+                    onWheel={(e) => (e.target as HTMLElement).blur()}
                     />
 
                     <LabeledInput
@@ -693,7 +702,7 @@ function SignUpUser () {
                     onChange={handleChange}
                     onBlur={(e) => {
                         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // простая регулярка для email
-                        if (!emailPattern.test(e.target.value)) {
+                        if (!emailPattern.test((e.target as HTMLTextAreaElement).value)) {
                             setFormData({
                                 ...formData, email: "" }) // сбрасываем, если формат неверный
                           alert("Введите корректный email");

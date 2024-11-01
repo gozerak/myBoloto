@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { API_BASE_URL, fetchUserRespondedJobs, UserRespondedJobsWithStatus } from "../services/apiService";
+import { API_BASE_URL, fetchUserRespondedJobs, Job, UserRespondedJobsWithStatus } from "../services/apiService";
 
 
 
 export const useRespondedJobs = () => {
-    const [userRespondedJobs, setUserRespondedJobs] = useState<UserRespondedJobsWithStatus[]>([]);
+    const [userRespondedJobs, setUserRespondedJobs] = useState<Job[]>([]);
     const [authToken, setAuthToken] = useState<string | null>(null);
 
     useEffect(() => {

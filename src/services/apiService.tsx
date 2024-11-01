@@ -25,6 +25,7 @@ export interface JobDetails  {
 export interface Job {
     job: JobDetails;
     responded_user?: RespondedUser;
+    status?: string;
 }
 
 export const fetchJobs = async (isAuthorized: boolean): Promise<Job[]> => {
@@ -68,7 +69,7 @@ export const fetchPlaces = async (): Promise<Place[]> => {
     }
 }
 
-interface Organization {
+export interface Organization {
     id: string;
     title: string;
 }
@@ -110,7 +111,7 @@ export const fetchUserBalance = async (): Promise<number> => {
     return data;
 }
 
-interface RespondedUser {
+export interface RespondedUser {
     id: string | null;
     full_name: string;
 }
@@ -268,7 +269,7 @@ export interface UserRespondedJobsWithStatus {
 }
 
 export const fetchUserRespondedJobs = async (authToken: string):
-Promise<UserRespondedJobsWithStatus[]> => {
+Promise<Job[]> => {
     const response = await fetch(`${API_BASE_URL}/user_manager/get_user_assigned_jobs`, {
         method:"GET",
         headers: {
@@ -279,7 +280,7 @@ Promise<UserRespondedJobsWithStatus[]> => {
     if (!response.ok) {
         throw new Error("Failed to fetch user responded jobs!");
     }
-    const data: UserRespondedJobsWithStatus[] = await response.json();
+    const data: Job[] = await response.json();
     return data;
 }
 

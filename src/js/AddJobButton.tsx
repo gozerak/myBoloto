@@ -1,6 +1,6 @@
 import '../css/AddJobButton.css'
 
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import Modal from "./Modal";
 import "../css/AddJobButton.css";
 import { useFetchOnFocus } from '../hooks/useFetchOnFocus';
@@ -9,7 +9,7 @@ import { fetchActionTypes, fetchPlaces, fetchOrganizations } from '../services/a
 import TemporaryNotifier from './TemporaryNotifier';
 
 export default function AddJobButton({ refreshOrder }: {
-    refreshOrder?: () => void;
+    refreshOrder: () => void;
 }) {
     const [isModalOpen, setModalOpen] = useState(false);
     const [formData, setFormData] = useState({
@@ -35,14 +35,14 @@ export default function AddJobButton({ refreshOrder }: {
     const [notifierStatus, setNotifierStatus] = useState('');
     const [notifierText, setNotifierText] = useState('')
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
         const { name, value} = e.target;
         setFormData({
             ...formData,
             [name]:  value,
         });
     };
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if(!localStorage.getItem('userId')){
@@ -88,7 +88,7 @@ export default function AddJobButton({ refreshOrder }: {
         }
     }};
 
-    const handleIsChecked = async (e) => {
+    const handleIsChecked = async (e: ChangeEvent<HTMLInputElement>) => {
         setIsChecked(e.target.checked)
         clearFinishedAtValue(e.target.checked)
     }
@@ -211,7 +211,7 @@ export default function AddJobButton({ refreshOrder }: {
                                 name="price"
                                 value={formData.price}
                                 onChange={handleChange}
-                                onWheel={(e) => e.target.blur()}
+                                onWheel={(e) => (e.target as HTMLTextAreaElement).blur()}
                                 required
                             />
                             <p className='modal-input-cost-title'>/час</p>

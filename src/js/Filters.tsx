@@ -1,14 +1,14 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import "../css/Filters.css";
 import { useFetchOnFocus } from '../hooks/useFetchOnFocus';
-import { fetchActionTypes, fetchPlaces, fetchOrganizations } from '../services/apiService';
+import { fetchActionTypes, fetchPlaces, fetchOrganizations, Organization } from '../services/apiService';
 
 
 function Sortby () {
     return (
         <div>
         <p className="sort-name">Сортировать</p>
-        <select className="dropdown-select" id="sortby" defaultValue={null}>
+        <select className="dropdown-select" id="sortby" data-defaultValue={null}>
             <option hidden value=""></option>
             <option>По дате</option>
             <option>По стоимости</option>
@@ -32,25 +32,29 @@ function Date () {
 
 function Cost () {
     return (
-        <div autoComplete="off">
-        <p className="filters-names">Уровень дохода</p>
-        <div className="cost-block">
-        <input type="number" onWheel={(e) => e.target.blur()}  className="input-cost" placeholder="Цена от"/>
-        <div className="dash">-</div>
-        <input type="number" onWheel={(e) => e.target.blur()}  className="input-cost" placeholder="до"/>
-        <p className="ruble">₽</p>
-        </div>
+        <div data-autoComplete="off">
+            <p className="filters-names">Уровень дохода</p>
+            <div className="cost-block">
+                <input type="number" onWheel={(e) => (e.target as HTMLTextAreaElement).blur()}  className="input-cost" placeholder="Цена от"/>
+                <div className="dash">-</div>
+                <input type="number" onWheel={(e) => (e.target as HTMLTextAreaElement).blur()}  className="input-cost" placeholder="до"/>
+                <p className="ruble">₽</p>
+            </div>
         </div>
     )
 }
 
-    export function OtherFilters ({title, handleFocus, items, onChange, value, name, nameOfClass, nameOfDrop }) {
+    export function OtherFilters ({title, handleFocus, items, onChange, value, name, nameOfClass, nameOfDrop }: {
+        title?:string;
+        handleFocus: () => void;
+        items: Organization[];
+        onChange: (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => void;
+        value?: string;
+        name?: string;
+        nameOfClass?: string;
+        nameOfDrop?: string;
+    }) {
         
-        // function handleChange (event) {
-        //     setSelectedValue(event.target.value);
-        // }
-
-
     return (
         <div className={nameOfClass? nameOfClass : "other-filters"}>
             <p className="filters-names">{title}</p>
@@ -63,19 +67,23 @@ function Cost () {
                 >
             <option className="selected-disabled" hidden value=""></option>
                 {items.map(item => (
-                        <option className="select-filters" name={name} key={item.id} value={item.id}>{item.title}</option>
+                        <option className="select-filters" data-name={name} key={item.id} value={item.id}>{item.title}</option>
                     ))}
             </select>
         </div>
     )
 }
 
-function TotalFoundButton (totalOrders: number) {
+function TotalFoundButton ({totalOrders}: {totalOrders: number}) {
  return (
     <div className="total-found-block">
     <button className="total-found-button">Показать {totalOrders} заказов</button>
     </div>
  )
+}
+
+function handleChangeFilterValue(e: React.ChangeEvent) {
+    console.log(e)
 }
 
 
@@ -89,9 +97,9 @@ export default function Filters () {
         <Sortby />
         <Date />
         <Cost />
-        <OtherFilters title="Вид деятельности" handleFocus ={handleActionTypeFocus} items={actionTypes}/>
-        <OtherFilters title="Город" handleFocus ={handlePlaceFocus} items={places}/>
-        <OtherFilters title="Организация" handleFocus ={handleOrganizationFocus} items={organizations}/>
+        <OtherFilters title="Вид деятельности" handleFocus ={handleActionTypeFocus} items={actionTypes} onChange={handleChangeFilterValue}/>
+        <OtherFilters title="Город" handleFocus ={handlePlaceFocus} items={places} onChange={handleChangeFilterValue}/>
+        <OtherFilters title="Организация" handleFocus ={handleOrganizationFocus} items={organizations} onChange={handleChangeFilterValue}/>
         <TotalFoundButton totalOrders={5}/>
         </div>
     )

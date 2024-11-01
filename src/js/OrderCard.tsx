@@ -20,7 +20,7 @@ export default function OrderCard ({ jobs, respondedJobs, refreshOrder }: {
     
     return(
     <>
-    {isCustomerPage?
+    {isCustomerPage && refreshOrder?
         (jobs.map(order => (
             <div key={order.job.id} className="order-card">
                 <OrderDetailsCustomer order = {order} refreshOrder={refreshOrder}/>

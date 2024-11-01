@@ -1,9 +1,13 @@
 import React, { useEffect } from "react";
 import "../css/Modal.css";
 
-export default function Modal({ isOpen, onClose, children }) {
+export default function Modal({ isOpen, onClose, children }: {
+    isOpen: boolean;
+    onClose: () => void;
+    children: React.ReactNode
+}) {
     useEffect(() => {
-        const handleEscape = (event) => {
+        const handleEscape = (event: KeyboardEvent) => {
             if (event.key === "Escape") {
                 onClose();
             }

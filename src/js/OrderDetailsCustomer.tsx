@@ -1,7 +1,7 @@
 // import { useLocation } from "react-router-dom"
 import React from "react";
 import DeleteCard from "./DeleteCard";
-import { API_BASE_URL, fetchRespondedUsers, fetchUserRespondedJobs, Job, UserData } from "../services/apiService";
+import { API_BASE_URL, fetchRespondedUsers, fetchUserRespondedJobs, Job, RespondedUser, UserData } from "../services/apiService";
 import { useEffect, useState } from "react";
 import RespondedList from "./RespondedList";
 import AcceptWorkBtn from "./AcceptWorkBtn";
@@ -11,7 +11,7 @@ function CustomerPageOrderDetail ({respondedUsers, isCustomerPage, order, refres
   respondedUsers: UserData[];
   isCustomerPage: boolean;
   order: Job;
-  refreshOrder?: () => void;
+  refreshOrder: () => void;
 }) {
     return(
             <div className="edit-delete-buttons">
@@ -23,8 +23,9 @@ function CustomerPageOrderDetail ({respondedUsers, isCustomerPage, order, refres
 
 function AcceptWorkResult({ order, refreshOrder }: {
   order: Job;
-  refreshOrder?: () => void;
+  refreshOrder: () => void;
 }) {
+  if(hasRespondedUser(order)){
   return(
     <div className="accept-work-elem">
         <p className="responsible-customer-card">Ответственный: {order.responded_user.full_name}</p>
@@ -34,6 +35,7 @@ function AcceptWorkResult({ order, refreshOrder }: {
         </div>
     </div>
   )
+}
 }
 
 export function Completed () {
@@ -45,12 +47,29 @@ export function Completed () {
   )
 }
 
+function hasRespondedUser(order: Job): order is Job & { responded_user: RespondedUser } {
+  return order.responded_user !== undefined;
+}
+
+
 
 export default function OrderDetailsCustomer ({order, refreshOrder}: {
   order: Job;
-  refreshOrder?: () => void;
+  refreshOrder: () => void;
 }) {
-  const respondedUsers = fetchRespondedUsers(order.job.id);
+  const [respondedUsers, setRespondedUsers] = useState<UserData[]>([]);
+  useEffect(() => {
+    const loadRespondedUsers = async () => {
+      try {
+        const users = await fetchRespondedUsers(order.job.id);
+        setRespondedUsers(users);
+      } catch (error) {
+        console.error("Failed to fetch responded users:", error);
+      }
+    };
+    loadRespondedUsers();
+  }, [order.job.id]);
+
   const isCustomerPage = true;
     
     return (

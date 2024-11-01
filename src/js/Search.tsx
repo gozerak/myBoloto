@@ -20,7 +20,7 @@ export default function Search ({ jobsLength, refreshOrder }: {
         <input type="text" autoComplete="off" placeholder="Type here..." className="search-bar"></input>
         <button type="submit" className="submit">Найти</button>
         </form>
-        {isCustomerPage? <AddJobButton refreshOrder={refreshOrder} /> :null}
+        {isCustomerPage && refreshOrder? <AddJobButton refreshOrder={refreshOrder} /> :null}
         </div>
         <p className="total-found">
             {isCustomerPage? "Ваши заявки:":
