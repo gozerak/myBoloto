@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import {fetchMyCreatedJobs, MyCreatedJobsArray} from "../services/apiService";
+import {fetchMyCreatedJobs, Job} from "../services/apiService";
 
 export const useMyCreatedJobs = () => {
-    const [jobs, setJobs] = useState<MyCreatedJobsArray> ([]);
+    const [jobs, setJobs] = useState<Job[]> ([]);
     // const [jobsLength, setJobsLength] = useState(0);
     const [loading, setLoading] = useState(true);
 

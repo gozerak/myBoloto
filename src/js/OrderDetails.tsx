@@ -1,5 +1,5 @@
 import React from "react";
-import { API_BASE_URL, Job, UserRespondedJobsWithStatus } from "../services/apiService";
+import { API_BASE_URL, Job} from "../services/apiService";
 import { useEffect, useState } from "react";
 import { Completed } from "./OrderDetailsCustomer";
 import TemporaryNotifier from "./TemporaryNotifier";
@@ -63,7 +63,7 @@ async function handleRespond (order_id: string,
 
 export default function OrderDetails ({order, respondedJobs}: {
     order: Job;
-    respondedJobs: UserRespondedJobsWithStatus[];
+    respondedJobs: Job[];
 }) {
     
     // const isCustomerPage = location.pathname === "/customer";
@@ -79,7 +79,7 @@ export default function OrderDetails ({order, respondedJobs}: {
         if (Array.isArray(respondedJobs)) {
             // const matchedJob = respondedJobs.find(jobData => jobData.job.id === order.id);
             // setOrderStatus(matchedJob? matchedJob.status : '')
-            const respondedJobIds = respondedJobs.map(job => job.job.job.id);
+            const respondedJobIds = respondedJobs.map(job => job.job.id);
             if (respondedJobIds.includes(order.job.id)) {
                 setIsResponded(true);
             }

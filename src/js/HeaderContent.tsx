@@ -79,16 +79,16 @@ export default function HeaderContent() {
         }
     }, [])
 
-    let emptyUserData = Object.keys(userData).length === 0;
+    let emptyUserData = userData === null;
     return (
         <div className={`header-content ${emptyUserData? 'unathorized': ''}`}>
         <div className={"header-logo-and-name"}>
             <HeaderLogo />
             <HeaderName />
             </div>
-            <HeaderChapters userData={userData}/>
+            {userData? <HeaderChapters userData={userData}/> : null}
             {emptyUserData?  null: <Notifications />}
-            {userData.user_data? <UserBalance/> : null}
+            {userData?.user_data? <UserBalance/> : null}
             <div className="login-register">
             {emptyUserData? <HeaderLogin /> : <ProfileIcon /> }
             {emptyUserData? <LoginBtn /> : null  }

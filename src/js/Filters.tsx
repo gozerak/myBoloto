@@ -8,7 +8,7 @@ function Sortby () {
     return (
         <div>
         <p className="sort-name">Сортировать</p>
-        <select className="dropdown-select" id="sortby" data-defaultValue={null}>
+        <select className="dropdown-select" id="sortby" data-defaultvalue={null}>
             <option hidden value=""></option>
             <option>По дате</option>
             <option>По стоимости</option>
@@ -32,7 +32,7 @@ function Date () {
 
 function Cost () {
     return (
-        <div data-autoComplete="off">
+        <div data-autocomplete="off">
             <p className="filters-names">Уровень дохода</p>
             <div className="cost-block">
                 <input type="number" onWheel={(e) => (e.target as HTMLTextAreaElement).blur()}  className="input-cost" placeholder="Цена от"/>

@@ -2,12 +2,12 @@ import React from "react";
 import "../css/MainPart.css";
 import OrderCard from "./OrderCard";
 import Filters from "./Filters";
-import { Job, UserRespondedJobsWithStatus } from "../services/apiService";
+import { Job} from "../services/apiService";
 
 
 export default function MainPart ({ jobs, respondedJobs }: {
     jobs: Job[];
-    respondedJobs: UserRespondedJobsWithStatus[];
+    respondedJobs: Job[];
 }) {
     return (
         <div className="main">

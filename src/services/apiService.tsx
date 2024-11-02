@@ -161,10 +161,10 @@ interface WorkerData {
     city?: string | null;
     about?: string | null;
     name: string;
-    passport_data: number;
+    passport_data: string;
     education?: string | null;
     surname: string;
-    snils: number;
+    snils: string;
     driver_license?: string | null;
     user_id: string;
     patronymic?: string | null;
@@ -173,7 +173,7 @@ interface WorkerData {
     date_of_birth: string | null;
     is_self_employed: boolean;
     id: string;
-    phone_number?: number | null;
+    phone_number?: string | null;
     work_experience?: string | null;
     activity_type?: string | null;
 }
@@ -182,7 +182,7 @@ interface ManagerData {
     surname: string | null;
     id: string;
     patronymic?: string | null;
-    work_phone?: number | null;
+    work_phone?: string | null;
     name: string | null;
     job_title?: string | null;
     organization: string | null;
@@ -260,12 +260,6 @@ export const fetchAllWorkers = async (): Promise<UserDataArray> => {
     const data: UserDataArray = await response.json();
     return data;
 
-}
-
-export interface UserRespondedJobsWithStatus {
-    job: Job;
-    status: string;
-    
 }
 
 export const fetchUserRespondedJobs = async (authToken: string):

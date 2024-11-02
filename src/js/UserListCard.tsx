@@ -18,7 +18,7 @@ function UserListCardElem ({name, content}: {
     )
 }
 
-export default function UserListCard (userData: UserData) {
+export default function UserListCard ({userData}: {userData: UserData}) {
     return(
         userData.user_data?
         (<div className="user-list-card">

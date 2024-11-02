@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import { fetchUserData } from "../services/apiService";
+import { fetchUserData, UserData } from "../services/apiService";
 
 
 export const useUserData = ( userId: string ) => {
-    const [userData, setUserData] = useState({});
+    const [userData, setUserData] = useState<UserData | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {

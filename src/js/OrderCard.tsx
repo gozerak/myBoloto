@@ -4,11 +4,11 @@ import OrderDetails from "./OrderDetails";
 import { useLocation } from "react-router-dom";
 import OrderDetailsCustomer from "./OrderDetailsCustomer";
 import OrderDetailsMyResponses from "./OrderDetailsMyResponses";
-import { Job, UserRespondedJobsWithStatus } from '../services/apiService';
+import { Job} from '../services/apiService';
 
 export default function OrderCard ({ jobs, respondedJobs, refreshOrder }: {
     jobs: Job[]
-    respondedJobs?: UserRespondedJobsWithStatus[];
+    respondedJobs?: Job[];
     refreshOrder?: () => void;
 }) {
     const location = useLocation();

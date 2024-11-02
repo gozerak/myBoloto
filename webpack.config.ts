@@ -25,7 +25,7 @@ module.exports = {
     ],
   },
   devServer: {
-    static: path.resolve(__dirname, 'dist'),
+    static: path.resolve(__dirname, 'public'),
     hot: true,
     open: true,
     historyApiFallback: true, // Для работы с React Router

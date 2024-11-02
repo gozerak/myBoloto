@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { API_BASE_URL, fetchUserRespondedJobs, Job, UserRespondedJobsWithStatus } from "../services/apiService";
+import { API_BASE_URL, fetchUserRespondedJobs, Job} from "../services/apiService";
 
 
 

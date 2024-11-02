@@ -7,7 +7,11 @@ import { useEffect, useState } from "react";
 import { API_BASE_URL } from "../services/apiService";
 
 
-function ProfileElem ({ profileTitle, profileDescription }) {
+function ProfileElem ({ profileTitle, profileDescription, onChange }: {
+    profileTitle: string;
+    profileDescription?: string | boolean | null;
+    onChange?: () => void; 
+}) {
     return (
         <div className="profile-element">
             <p className="profile-title">{profileTitle}</p>
@@ -24,7 +28,11 @@ function ProfileElem ({ profileTitle, profileDescription }) {
     )
 }
 
-export function UserRating ({rating, nameOfClass, nameOfTitle}) {
+export function UserRating ({rating, nameOfClass, nameOfTitle}: {
+    rating: number;
+    nameOfClass?: string;
+    nameOfTitle?: string;
+}) {
     const totalStars = 5;
 
     return (
@@ -49,7 +57,11 @@ export function UserRating ({rating, nameOfClass, nameOfTitle}) {
     )
 }
 
-function SelfEmployedWarning({isSelfEmployed, userId, setIsSelfEmployed}) {
+function SelfEmployedWarning({isSelfEmployed, userId, setIsSelfEmployed}: {
+    isSelfEmployed: boolean;
+    userId: string;
+    setIsSelfEmployed: (bol: boolean) => void;
+}) {
     const handleSelfEmployed = async () => {
         if(isSelfEmployed) return;
         try {
@@ -86,8 +98,8 @@ function SelfEmployedWarning({isSelfEmployed, userId, setIsSelfEmployed}) {
 }
 
 export default function ProfilePage () {
-    const { userId } = useParams();
-    const { userData, loading} = useUserData( userId );
+    const { userId }= useParams<{userId: string}>();
+    const { userData, loading} = useUserData( userId?? "" );
     const [isSelfEmployed, setIsSelfEmployed] = useState(true);
     const [isThisUserProfileOwner, setIsThisUserProfileOwner ] = useState(false);
 
@@ -110,7 +122,7 @@ export default function ProfilePage () {
         )
     }
 
-    function formatPassport (passportData) {
+    function formatPassport (passportData: string) {
         if (passportData) {
         const series= passportData.slice(0,4);
         const number = passportData.slice(4);
@@ -120,20 +132,22 @@ export default function ProfilePage () {
         else return;
     }
 
-    function formatSnils (snils) {
+    function formatSnils (snils: string) {
         if (snils) {
             return (`${snils.slice(0,3)}-${snils.slice (3,6)}-${snils.slice(6,9)} ${snils.slice(9)}`)
         }
         else return;
     }
 
-    function formatDate(dateString) {
+    function formatDate(dateString: string | null | undefined) {
+        if (dateString){
         const [year, month, day] = dateString.split("-");
         return `${day}.${month}.${year}`;
+    }
       }
 
-    function formatPhoneNumber (phoneNumber) {
-        if (phoneNumber.length === 11) {
+    function formatPhoneNumber (phoneNumber: string | null | undefined) {
+        if (phoneNumber && phoneNumber.length === 11) {
             const formatted = phoneNumber.replace(/(\d)(\d{3})(\d{3})(\d{2})(\d{2})/,
                  '+$1 ($2) $3 $4-$5');
             return formatted;  
@@ -145,7 +159,7 @@ export default function ProfilePage () {
         <div className="profile-page">
             <Header />
             <div className="profile-main">
-            {userData.user_data?
+            {userData?.user_data?
             (<>
             <div className="profile-block-title-rating">
             <p className="profile-block-title">Профиль пользователя {userData.full_name}</p> 
@@ -153,7 +167,7 @@ export default function ProfilePage () {
             <UserRating rating={userData.user_rating} /> : null } 
             </div>
             <p className="profile-block-title">Основная информация</p>
-                {!isThisUserProfileOwner? "" : !isSelfEmployed? <SelfEmployedWarning isSelfEmployed={userData.user_data.is_self_employed} userId= {userId} setIsSelfEmployed={setIsSelfEmployed} /> : ""}
+                {!isThisUserProfileOwner?  "" : !isSelfEmployed && userId? <SelfEmployedWarning isSelfEmployed={userData.user_data.is_self_employed} userId= {userId} setIsSelfEmployed={setIsSelfEmployed} /> : ""}
             <div className="profile-info">
             <div className="profile-main-info-part">
                 <ProfileElem profileTitle={"Фамилия"} profileDescription={userData.user_data.surname} />
@@ -170,7 +184,7 @@ export default function ProfilePage () {
                 <ProfileElem profileTitle={"Паспортные данные"} profileDescription={formatPassport(userData.user_data.passport_data)} />
                 <ProfileElem profileTitle={"СНИЛС"} profileDescription={formatSnils(userData.user_data.snils)} />
                 <ProfileElem profileTitle={"Медицинская книжка"} profileDescription={userData.user_data.medical_book} />
-                <ProfileElem profileTitle={"Самозанятый"} profileDescription={userData.user_data.is_self_employed} onChange={() => setIsSelfEmployed(userData.user_data.is_self_employed)} />
+                <ProfileElem profileTitle={"Самозанятый"} profileDescription={userData.user_data.is_self_employed} onChange={() => setIsSelfEmployed(userData.user_data?.is_self_employed?? false)} />
                 <ProfileElem profileTitle={"Образование"} profileDescription={userData.user_data.education} />
                 <ProfileElem profileTitle={"Опыт работы"} profileDescription={userData.user_data.work_experience} />
                 <ProfileElem profileTitle={"Противопоказания"} profileDescription={userData.user_data.contraindications} />
@@ -182,7 +196,7 @@ export default function ProfilePage () {
             </div>
             </>
             ) : (
-                userData.manager_data?
+                userData?.manager_data?
                 ( <>
             <p className="profile-block-title">Профиль пользователя {userData.full_name}</p>
             <div className="profile-info">
