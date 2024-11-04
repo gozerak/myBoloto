@@ -57,6 +57,7 @@ export default function OrderDetailsCustomer ({order, refreshOrder}: {
   order: Job;
   refreshOrder: () => void;
 }) {
+  console.log(order.responded_user === null)
   const [respondedUsers, setRespondedUsers] = useState<UserData[]>([]);
   useEffect(() => {
     const loadRespondedUsers = async () => {

@@ -8,6 +8,27 @@ import Modal from "./Modal";
 import { useCheckJWT } from "../hooks/CheckJWT";
 import TemporaryNotifier from "./TemporaryNotifier"
 
+
+function AcceptWorkInput({value, onChange} : {
+    value: string | number;
+    onChange: (e: ChangeEvent<HTMLInputElement>)=> void;
+}) {
+    return(
+        <div className="kpi">
+            <input
+            type="number" 
+            className="kpi-input" 
+            value={value}
+            onChange={onChange}
+            onWheel={(e) => (e.target as HTMLElement).blur()}
+            min={0}
+            max={100}
+            />
+        </div>
+    )
+}
+
+
 export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder}: {
     user: string;
     work: string;
@@ -148,33 +169,16 @@ export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder}:
             <div className="kpi-and-hours-and-rating">
             <div className="hours-rating">
                 <p>Количество часов</p>
-                <div className="kpi">
-                    <input 
-                    type="number" 
-                    className="kpi-input" 
-                    value={hours}
-                    onChange={handleChangeHours}
-                    onWheel={(e) => (e.target as HTMLElement).blur()}
-                    min={0}
-                    max={100}
-                    />
-                    {/* <p></p> */}
-                </div>
+                <AcceptWorkInput
+                    value="hours"
+                    onChange={handleChangeHours} />
                 </div>
                 <div className="kpi-rating">
-                <p>KPI</p>
-                <div className="kpi">
-                    <input 
-                    type="number" 
-                    className="kpi-input" 
+                    <p>KPI</p>
+                    <AcceptWorkInput
                     value={kpi}
-                    onChange={handleKpiChange}
-                    onWheel={(e) => (e.target as HTMLElement).blur()}
-                    min={0}
-                    max={100}
-                    />
+                    onChange={handleKpiChange} />
                     <p>%</p>
-                </div>
                 </div>
                 <div className="rating">
                 <p className="kpi-rating-title">Рейтинг</p>

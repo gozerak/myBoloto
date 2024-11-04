@@ -33,4 +33,3 @@ export default function UserListCard ({userData}: {userData: UserData}) {
         </div>) : ""
     )
 }
-//

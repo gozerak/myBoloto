@@ -54,7 +54,7 @@ export const fetchActionTypes = async (): Promise<ActionType[]> => {
     }
 }
 
-interface Place {
+export interface Place {
     title: string;
     id: string;  
 }
