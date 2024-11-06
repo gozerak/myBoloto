@@ -42,29 +42,36 @@ function HeaderLogo() {
     );
 }
 
-export function HeaderChapters({userData}:{userData: UserData}) {
+export function HeaderChapters({userData}:{userData?: UserData}) {
     return (
-        <>
-            {userData.manager_data? "" : (<NavLink to="/" className={({ isActive }) => isActive ? "chapter-executor active-link" : "chapter-executor"}>
+        userData ? (
+            <>
+                {!userData.manager_data && (
+                    <NavLink to="/" className={({ isActive }) => isActive ? "chapter-executor active-link" : "chapter-executor"}>
+                        <div id="for-executor">Поиск работы</div>
+                    </NavLink>
+                )}
+                {userData.manager_data && (
+                    <NavLink to="/customer" className={({ isActive }) => isActive ? "chapter-customer active-link" : "chapter-customer"}>
+                        <div id="for-customer">Мои заказы</div>
+                    </NavLink>
+                )}
+                {userData.user_data && (
+                    <NavLink to="/myresponses" className={({ isActive }) => isActive ? "chapter-myresponses active-link" : "chapter-myresponses"}>
+                        <div id="myresponses">Мои отклики</div>
+                    </NavLink>
+                )}
+                {userData.manager_data && (
+                    <NavLink to="/userlist" className={({ isActive }) => isActive ? "chapter-userlist active-link" : "chapter-userlist"}>
+                        <div id="for-customer">Список работников</div>
+                    </NavLink>
+                )}
+            </>
+        ) : (
+            <NavLink to="/" className={({ isActive }) => isActive ? "chapter-executor active-link" : "chapter-executor"}>
                 <div id="for-executor">Поиск работы</div>
-            </NavLink>)}
-            {userData.manager_data?
-            <NavLink to="/customer" className={({ isActive }) => isActive ? "chapter-customer active-link" : "chapter-customer"}>
-                <div id="for-customer">Мои заказы</div>
-            </NavLink> : null}
-            {userData.user_data?
-            <NavLink to="/myresponses" className={({ isActive }) => isActive? "chapter-myresponses active-link": "chapter-myresponses"}>
-                <div id="myresponses">Мои отклики</div>
-            </NavLink> : null} 
-            {userData.manager_data?
-            <NavLink to="/userlist" className={({ isActive }) => isActive ? "chapter-userlist active-link" : "chapter-userlist"}>
-                <div id="for-customer">Список работников</div>
-            </NavLink> : null}
-            {/* {isAuthenticated?
-            <NavLink to={`/profile/${userId}`} className={({ isActive }) => isActive? "chapter-profile active-link": "chapter-profile"}>
-            <div id="profile-link" >Профиль</div>
-            </NavLink> : null} */}
-        </>
+            </NavLink>
+        )
     );
 }
 
@@ -86,7 +93,7 @@ export default function HeaderContent() {
             <HeaderLogo />
             <HeaderName />
             </div>
-            {userData? <HeaderChapters userData={userData}/> : null}
+            <HeaderChapters userData={userData ?? undefined}/>
             {emptyUserData?  null: <Notifications />}
             {userData?.user_data? <UserBalance/> : null}
             <div className="login-register">

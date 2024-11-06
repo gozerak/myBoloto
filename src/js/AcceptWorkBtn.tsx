@@ -40,10 +40,10 @@ export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder}:
     const [isModalOpen, setModalOpen] = useState (false);
     const isVerified = useCheckJWT();
     const [isLoading, setIsLoading] = useState(false);
-    const [hours, setHours] = useState("");
+    const [hours, setHours] = useState<number | string>("");
     const [comment, setComment] = useState("");
     const [rating, setRating] = useState(0);
-    const [kpi, setKpi] = useState<number | string>(0);
+    const [kpi, setKpi] = useState<number | string>("");
     const [showNotifier, setShowNotifier] = useState(false);
     const [notifierStatus, setNotifierStatus] = useState('');
     const [notifierText, setNotifierText] = useState('')
@@ -158,7 +158,12 @@ export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder}:
     }
 
     const handleChangeHours = (e: ChangeEvent<HTMLInputElement>) => {
-        setHours(e.target.value)
+        const value = parseInt(e.target.value, 10);
+        if (!isNaN(value)) {
+            setHours(value);
+        } else {
+            setHours(0);
+        }
     }
 
     return (
@@ -172,7 +177,7 @@ export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder}:
             <div className="hours-rating">
                 <p>Количество часов</p>
                 <AcceptWorkInput
-                    value="hours"
+                    value={hours}
                     onChange={handleChangeHours} />
                 </div>
                 <div className="kpi-rating">
@@ -206,7 +211,7 @@ export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder}:
             </div>
             <div className="delete-buttons">
             <button type='button' className='delete-btn-back' onClick={() => handleCloseModal()}>Отмена</button>
-            <button type='submit' className='delete-btn-submit' onClick={() => handleAcceptWork()} disabled={rating === 0 || hours ==="" || kpi ===""}>
+            <button type='submit' className='delete-btn-submit' onClick={() => handleAcceptWork()} disabled={rating === 0 || hours ===0 || hours ==="" || kpi ===""}>
             {isLoading? "Загрузка...": "Подтвердить"}
             </button>
             </div>
