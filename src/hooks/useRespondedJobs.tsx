@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { API_BASE_URL, fetchUserRespondedJobs, Job} from "../services/apiService";
 
 
-
+//получение работ, на которые откликнулся пользователь
 export const useRespondedJobs = () => {
     const [userRespondedJobs, setUserRespondedJobs] = useState<Job[]>([]);
     const [authToken, setAuthToken] = useState<string | null>(null);

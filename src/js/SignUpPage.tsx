@@ -9,12 +9,13 @@ import { OtherFilters } from "./Filters";
 import { useFetchOnFocus } from "../hooks/useFetchOnFocus";
 import InputMask from 'react-input-mask';
 
+//Поля инпутов
 function LabeledInput({title, required = false, type = 'text', name, value, onChange, onBlur, onWheel }: {
     title: string;
     required?: boolean;
     type: string;
     name: string;
-    value: string | boolean | number;
+    value: string | boolean;
     onChange: (e?: React.ChangeEvent) => void;
     onBlur?: (e: React.ChangeEvent) => void;
     onWheel?: (e:React.WheelEvent) => void;
@@ -28,7 +29,7 @@ function LabeledInput({title, required = false, type = 'text', name, value, onCh
         className={type!=="checkbox"?"registration-input": "registration-checkbox"}
         type={type}
         name={name}
-        data-value={value}
+        value={String(value)}
         onChange={onChange}
         onBlur={onBlur}
         required={required} />
@@ -55,7 +56,7 @@ export default function SignUpPage() {
         </div>
     )
 }
-
+//регистрация менеджера
 function SignUpManager () {
     const [step, setStep] = useState(1);
     const navigate = useNavigate();
@@ -98,7 +99,7 @@ function SignUpManager () {
             setFormError(true);
             return;
         }
-
+        //Записывание ФИО
         const updatedFormData = {
             ...formData,
             full_name: `${formData.manager_data.surname.trim()} ${formData.manager_data.name.trim()} ${formData.manager_data.patronymic.trim()}`
@@ -123,19 +124,23 @@ function SignUpManager () {
             navigate("/");
         }
     }
-
+    //Записывание значения выбранного поля
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        console.log(formData)
         setFormData({...formData, [e.target.name]: e.target.value});
     };
-
+    //Записывание значения выбранного поля
     const handleChangeManagerData = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
+        console.log(e.target.name)
+        console.log(e.target.value)
+        console.log(formData)
         setFormData({
             ...formData,
             manager_data: {
                 ...formData.manager_data,
                  [e.target.name]: e.target.value}})
     }
-
+    //Записывание значения выбранного поля, где важно кол-во символов (номер телефона)
     const handleChangeManagerSpecialData = (e: ChangeEvent<HTMLInputElement>) => {
         setFormData({
             ...formData,
@@ -326,7 +331,7 @@ function SignUpManager () {
             </div>
     )
 }
-
+//Регистрация обычного пользователя
 function SignUpUser () {
     const [step, setStep] = useState(1);
     const navigate = useNavigate();
@@ -362,11 +367,11 @@ function SignUpUser () {
             languages: ""
         }
     })
-
+    //Записывание значения выбранного поля
     const handleChange = (e: ChangeEvent<HTMLInputElement> ) => {
         setFormData({...formData, [e.target.name]: e.target.value});
     };
-
+    //Записывание значения выбранного поля
     const handleChangeUserData = (e: ChangeEvent<HTMLInputElement>) => {
         setFormData({
             ...formData,
@@ -374,7 +379,7 @@ function SignUpUser () {
                 ...formData.user_data,
                  [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value}})
     }
-
+    //Записывание значения выбранного поля, где важно количество символов (номер телефона, паспорт, снилс)
     const handleChangeUserSpecialData = (e: ChangeEvent<HTMLInputElement>) => {
         setFormData({
             ...formData,

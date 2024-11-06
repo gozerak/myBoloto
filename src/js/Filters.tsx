@@ -81,7 +81,7 @@ function TotalFoundButton ({totalOrders}: {totalOrders: number}) {
     </div>
  )
 }
-
+//убрал тут пока что логику, надо будет сделать подстановку выбранного значения
 function handleChangeFilterValue(e: React.ChangeEvent) {
     console.log(e)
 }

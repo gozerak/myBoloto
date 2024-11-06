@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import "../css/Modal.css";
 
+
+//модалка, которая используется для вывода попапже
 export default function Modal({ isOpen, onClose, children }: {
     isOpen: boolean;
     onClose: () => void;

@@ -4,6 +4,7 @@ import { UserContext } from "./UserContext";
 import "../css/ProfileIcon.css";
 import { NavLink, useNavigate } from "react-router-dom";
 
+//Имя пользователя, выпадающий список Профиль и Выйти
 export default function ProfileIcon() {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);

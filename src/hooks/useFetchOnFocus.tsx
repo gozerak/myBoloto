@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react';
 
+
+//получение данных для выпадающих списков, в Filters и AddJobButton для Organization, activityType, city
 export const useFetchOnFocus = <T,>(fetchFunction: () => Promise<T[]>): [T[], () => Promise<void>] => {
     const [data, setData] = useState<T[]>([]);
     const [isFetched, setIsFetched] = useState(false);

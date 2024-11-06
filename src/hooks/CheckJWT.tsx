@@ -3,6 +3,8 @@ import { useState, useContext, useEffect} from 'react';
 import { UserContext } from '../js/UserContext';
 import { API_BASE_URL } from '../services/apiService';
 
+
+//проверка JWT
 export const useCheckJWT = (): boolean => {
     const userContext = useContext(UserContext);
 

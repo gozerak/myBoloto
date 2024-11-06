@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom"
 import AddJobButton from "./AddJobButton"
 import "../css/AddJobButton.css"
 
+//Строка поиска, надо дорабатывать, пока клиент
 export default function Search ({ jobsLength, refreshOrder }: {
     jobsLength?: number;
     refreshOrder?: () => void;

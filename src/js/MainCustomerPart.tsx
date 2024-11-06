@@ -4,6 +4,7 @@ import OrderCard from "./OrderCard"
 import '../css/MainCustomerPart.css'
 import { Job } from "../services/apiService"
 
+//страница менеджера (Мои заказы)
 export default function MainCustomerPart({ jobs, refreshOrder }: {
     jobs: Job[];
     refreshOrder?: () => void;

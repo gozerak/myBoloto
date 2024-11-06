@@ -1,6 +1,7 @@
 import React from "react"
 import "../css/TemporaryNotifier.css"
 
+//Всплывающее уведомление
 export default function TemporaryNotifier ({ status, text  }: {
     status: string;
     text: string;

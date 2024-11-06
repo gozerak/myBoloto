@@ -7,6 +7,7 @@ import Modal from './Modal';
 import { UserContext } from './UserContext';
 import { API_BASE_URL } from '../services/apiService';
 
+//Элементы Вход/Регистрация, форма для ввода логина и пароля
 export default function HeaderLogin () {
     const [isModalOpen, setModalOpen] = useState(false);
     const location = useLocation();
@@ -62,6 +63,7 @@ export default function HeaderLogin () {
                         console.log('Данные пользователя успешно загружены')
 
                         setModalOpen(false);
+                //Переход на главную страницу или перезагрузка
                 if (userData.user_data){
                     if (location.pathname!== "/"){
                         navigate("/");
@@ -89,7 +91,6 @@ export default function HeaderLogin () {
 
 
                 
-                //Логика получения кукиса
             } else {
                 console.error ('Доступ не получен')
             }

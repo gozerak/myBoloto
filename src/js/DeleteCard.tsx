@@ -6,6 +6,8 @@ import { useCheckJWT } from "../hooks/CheckJWT";
 import { API_BASE_URL } from "../services/apiService";
 import TemporaryNotifier from "./TemporaryNotifier";
 
+
+//удаление карточки работы (для менеджера)
 export default function DeleteCard ({cardJob_id, refreshOrder}: {
     cardJob_id: string;
     refreshOrder: () => void;

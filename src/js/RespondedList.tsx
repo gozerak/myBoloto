@@ -6,6 +6,7 @@ import { API_BASE_URL, Job, UserData } from "../services/apiService";
 import { NavLink } from "react-router-dom";
 import TemporaryNotifier from "./TemporaryNotifier";
 
+//Список откликнувшихся
 export default function RespondedList({ respondedUsers, isCustomerPage, order, refreshOrder }:
     {
         respondedUsers: UserData[];
@@ -23,6 +24,7 @@ export default function RespondedList({ respondedUsers, isCustomerPage, order, r
     const [notifierStatus, setNotifierStatus] = useState('');
     const [notifierText, setNotifierText] = useState('')
 
+    //Подтвердить выбранного пользователя на работу
     const handleApprove = async (e: React.MouseEvent, userId: string, orderId: string) => {
         e.preventDefault();
 
@@ -57,10 +59,8 @@ export default function RespondedList({ respondedUsers, isCustomerPage, order, r
                     if (comment) {
                         sendComment (userId)
                     }
-                    else {
                         closeModal();
-                        refreshOrder(); 
-                    }
+                        refreshOrder();
 
                 } else {
                     console.error("Ошибка выполнения запроса:", response.status);
@@ -172,8 +172,6 @@ export default function RespondedList({ respondedUsers, isCustomerPage, order, r
                         <div className="delete-buttons">
                             <NavLink 
                             to={`/profile/${selectedUser.id}`}
-                            // target="_blank"
-                            // rel="noopener noreferrer"
                             >
                                 <button className="respond-btn-profile">Профиль</button>
                             </NavLink>

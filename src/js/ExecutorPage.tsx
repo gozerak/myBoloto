@@ -6,6 +6,7 @@ import Search from "./Search";
 import { useJobs } from "../hooks/useJobs";
 import { useRespondedJobs } from "../hooks/useRespondedJobs";
 
+//страница пользователя (Поиск работы)
 export default function ExecutorPage () {
   const { jobs, jobsLength, loading } = useJobs();
   const {userRespondedJobs} = useRespondedJobs();

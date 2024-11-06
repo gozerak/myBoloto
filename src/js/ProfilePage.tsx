@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { API_BASE_URL } from "../services/apiService";
 
-
+//Страница профиля
 function ProfileElem ({ profileTitle, profileDescription, onChange }: {
     profileTitle: string;
     profileDescription?: string | boolean | null;
@@ -57,6 +57,7 @@ export function UserRating ({rating, nameOfClass, nameOfTitle}: {
     )
 }
 
+//установление статуса самозанятого, на будущее развивать логику
 function SelfEmployedWarning({isSelfEmployed, userId, setIsSelfEmployed}: {
     isSelfEmployed: boolean;
     userId: string;
@@ -95,6 +96,22 @@ function SelfEmployedWarning({isSelfEmployed, userId, setIsSelfEmployed}: {
         <button className="set-is-employed" onClick={() => handleSelfEmployed ()}>Тык</button>    
         </>
         )
+}
+
+export function formatDate(dateString: string | null | undefined) {
+    if (dateString){
+    const [year, month, day] = dateString.split("-");
+    return `${day}.${month}.${year}`;
+}
+  }
+
+export function formatPhoneNumber (phoneNumber: string | null | undefined) {
+    if (phoneNumber && phoneNumber.length === 11) {
+        const formatted = phoneNumber.replace(/(\d)(\d{3})(\d{3})(\d{2})(\d{2})/,
+             '+$1 ($2) $3 $4-$5');
+        return formatted;  
+    }
+    return phoneNumber
 }
 
 export default function ProfilePage () {

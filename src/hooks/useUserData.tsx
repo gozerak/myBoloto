@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { fetchUserData, UserData } from "../services/apiService";
 
-
+//получение данных о пользователе, для профиля и тд
 export const useUserData = ( userId: string ) => {
     const [userData, setUserData] = useState<UserData | null>(null);
     const [loading, setLoading] = useState(true);

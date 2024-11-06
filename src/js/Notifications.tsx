@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react"
 import "../css/Notifications.css"
 import { API_BASE_URL, fetchNotifications, NotificationArray } from "../services/apiService";
 
+
+//Уведомления (колокольчик) 
 export default function Notifications () {
     const [notifications, setNotifications] = useState<NotificationArray>([]);
     const [listOpened, setListOpened] = useState(false);
@@ -10,6 +12,7 @@ export default function Notifications () {
 
     const notificationListRef = useRef<HTMLDivElement | null>(null);
 
+    //получение уведомлений по api
     useEffect(() => {
         const getData = async () => {
             try {
@@ -22,6 +25,7 @@ export default function Notifications () {
         getData();
     }, [])
 
+    //Логика закрытия списка уведомлений при нажатии лкм за пределами уведомлений
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent ) => {
         if (
@@ -58,7 +62,7 @@ export default function Notifications () {
         return formattedDate;
 
     }
-
+    //для вывода кликабельной кнопки Прочитано у выбранного уведомления
     const handleNotificationClick = (id: string) => {
         if (openedNotificationId === id) {
             setOpenedNotificationId(null)

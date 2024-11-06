@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect, ReactNode } from 'react';
 import { API_BASE_URL, UserData } from '../services/apiService';
 
+//для получения данных о пользователе, например в useCheckJWT
 interface UserContextType {
     userData: UserData | null;
     setUserData: React.Dispatch<React.SetStateAction<UserData | null>>;

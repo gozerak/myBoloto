@@ -1,7 +1,8 @@
 import React from "react"
-import { UserRating } from "./ProfilePage"
+import { UserRating, formatDate, formatPhoneNumber } from './ProfilePage';
 import { UserData } from "../services/apiService";
 
+//Карточка пользователя на странице Список работников 
 function UserListCardElem ({name, content}: {
     name: string;
     content: string | number | null | undefined;
@@ -27,8 +28,8 @@ export default function UserListCard ({userData}: {userData: UserData}) {
             <UserListCardElem name={"email"} content={userData.email}  />
             <UserRating rating={userData.user_rating? userData.user_rating : 0} nameOfClass={'user-list-rating-stars'} nameOfTitle={"user-list-block-rating-title"}/>
             <UserListCardElem name={"Город"} content={userData.user_data.city}  />
-            <UserListCardElem name={"Дата рождения"} content={userData.user_data.date_of_birth}  />
-            <UserListCardElem name={"Номер телефона"} content={userData.user_data.phone_number}  />
+            <UserListCardElem name={"Дата рождения"} content={formatDate(userData.user_data.date_of_birth)}  />
+            <UserListCardElem name={"Номер телефона"} content={formatPhoneNumber(userData.user_data.phone_number)}  />
             
         </div>) : ""
     )

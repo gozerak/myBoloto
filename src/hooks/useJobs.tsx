@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import {fetchJobs, Job} from "../services/apiService";
 
+//получение списка работ
 export const useJobs = () => {
     const [jobs, setJobs] = useState<Job[]> ([]);
     const [jobsLength, setJobsLength] = useState<number>(0);

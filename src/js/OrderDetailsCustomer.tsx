@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import RespondedList from "./RespondedList";
 import AcceptWorkBtn from "./AcceptWorkBtn";
 
-
+//Подтвердить на работу и удалить
 function CustomerPageOrderDetail ({respondedUsers, isCustomerPage, order, refreshOrder}: {
   respondedUsers: UserData[];
   isCustomerPage: boolean;
@@ -20,7 +20,7 @@ function CustomerPageOrderDetail ({respondedUsers, isCustomerPage, order, refres
             </div>
     )
 }
-
+//Подтвердить выполение работы
 function AcceptWorkResult({ order, refreshOrder }: {
   order: Job;
   refreshOrder: () => void;
@@ -52,12 +52,13 @@ function hasRespondedUser(order: Job): order is Job & { responded_user: Responde
 }
 
 
-
+//карточка на странице Мои заказы
 export default function OrderDetailsCustomer ({order, refreshOrder}: {
+  //заказ содержит работу и ответсвенного за работу
   order: Job;
   refreshOrder: () => void;
 }) {
-  console.log(order.responded_user === null)
+  //получение списка откликнувшихся
   const [respondedUsers, setRespondedUsers] = useState<UserData[]>([]);
   useEffect(() => {
     const loadRespondedUsers = async () => {
@@ -70,7 +71,7 @@ export default function OrderDetailsCustomer ({order, refreshOrder}: {
     };
     loadRespondedUsers();
   }, [order.job.id]);
-
+  console.log(respondedUsers)
   const isCustomerPage = true;
     
     return (
@@ -103,7 +104,7 @@ export default function OrderDetailsCustomer ({order, refreshOrder}: {
                 <p className="card-order-value">{order.job.organization.title}</p>
                  {order.job.status_value ==="Закрыта"?
                   ( <Completed/>):
-                  (order.responded_user? <AcceptWorkResult order={order} refreshOrder={refreshOrder}/>:
+                  (order.responded_user?.id!== null? <AcceptWorkResult order={order} refreshOrder={refreshOrder}/>:
                    <CustomerPageOrderDetail respondedUsers={respondedUsers} isCustomerPage={isCustomerPage} order={order} refreshOrder={refreshOrder}/>)}
             </div>
         </>

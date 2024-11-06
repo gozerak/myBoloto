@@ -7,8 +7,12 @@ import OrderDetailsMyResponses from "./OrderDetailsMyResponses";
 import { Job} from '../services/apiService';
 
 export default function OrderCard ({ jobs, respondedJobs, refreshOrder }: {
-    jobs: Job[]
+    //список работ
+    jobs: Job[];
+    //список, кто откликнулся на работы
     respondedJobs?: Job[];
+    //функция для обновления списка работ после выполнения какого то действия (добавление работы,
+    //подтверждение пользователя на работу, закрытие работы)
     refreshOrder?: () => void;
 }) {
     const location = useLocation();

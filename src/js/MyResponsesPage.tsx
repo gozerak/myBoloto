@@ -5,6 +5,8 @@ import Search from "./Search";
 import MainMyResponsesPart from "./MainMyResponsesPart";
 import { useRespondedJobs } from "../hooks/useRespondedJobs";
 
+
+//страница пользователя (Мои отклики)
 export default function MyResponsesPage () {
     const {userRespondedJobs} = useRespondedJobs();
     return (

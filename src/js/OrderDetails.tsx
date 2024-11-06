@@ -18,7 +18,7 @@ export function Respond ({ onClick, isResponded }: {
             </button>
     )
 }
-
+//Функция для того, чтобы откликнуться
 async function handleRespond (order_id: string, 
     setIsResponded: React.Dispatch<React.SetStateAction<boolean>>,
     setShowNotifier: React.Dispatch<React.SetStateAction<boolean>>, 
@@ -60,25 +60,21 @@ async function handleRespond (order_id: string,
     }
 };
 
-
+//Карточка для страницы Поиск работы
 export default function OrderDetails ({order, respondedJobs}: {
     order: Job;
     respondedJobs: Job[];
 }) {
     
-    // const isCustomerPage = location.pathname === "/customer";
     const [isResponded, setIsResponded] = useState(false);
     const [userId, setUserId] = useState ("")
     const [showNotifier, setShowNotifier] = useState(false);
     const [notifierStatus, setNotifierStatus] = useState('');
-    const [notifierText, setNotifierText] = useState('')
-    // const [respondedUsers, setRespondedUsers] = useState ({});
-    // const [orderStatus, setOrderStatus] = useState('');
+    const [notifierText, setNotifierText] = useState('');
 
+    //проверка на отображения Вы уже откликнулись
     useEffect(() => {
         if (Array.isArray(respondedJobs)) {
-            // const matchedJob = respondedJobs.find(jobData => jobData.job.id === order.id);
-            // setOrderStatus(matchedJob? matchedJob.status : '')
             const respondedJobIds = respondedJobs.map(job => job.job.id);
             if (respondedJobIds.includes(order.job.id)) {
                 setIsResponded(true);

@@ -5,6 +5,8 @@ import Search from "./Search";
 import '../css/CustomerPage.css'
 import { useMyCreatedJobs } from "../hooks/useMyCreatedJobs";
 
+
+//страница менеджера (Мои заказы)
 export default function CustomerPage() {
     const { jobs, loading, refreshOrder } = useMyCreatedJobs();
 

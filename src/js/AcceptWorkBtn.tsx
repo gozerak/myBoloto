@@ -8,7 +8,7 @@ import Modal from "./Modal";
 import { useCheckJWT } from "../hooks/CheckJWT";
 import TemporaryNotifier from "./TemporaryNotifier"
 
-
+//компонент для ввода данных
 function AcceptWorkInput({value, onChange} : {
     value: string | number;
     onChange: (e: ChangeEvent<HTMLInputElement>)=> void;
@@ -28,7 +28,7 @@ function AcceptWorkInput({value, onChange} : {
     )
 }
 
-
+//подтверждение выполнения работы
 export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder}: {
     user: string;
     work: string;
@@ -84,6 +84,7 @@ export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder}:
             if (response.ok) {
                 console.log("Вы подтвердили выполнение работы!");
                 sendRating(authToken)
+                //показ всплывающего окна об успешном выполнении действия
                 setNotifierStatus('success')
             setNotifierText('Вы подтвердили выполнение работы!')
             setShowNotifier(true)
@@ -92,6 +93,7 @@ export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder}:
               }, 5000)
             } else {
                 console.error("Ошибка подтверждения выполнения работы");
+                //показ всплывающего окна об ошибке выполнении действия
                 setNotifierStatus('error')
             setNotifierText('Ошибка подтверждения выполнения работы')
             setShowNotifier(true)
@@ -103,7 +105,7 @@ export default function AcceptWorkBtn({user, work, userId, jobId, refreshOrder}:
             console.error("Error:", error);
         }
     }};
-
+    //рейтинг отправляется отдельно, т.к. рейтинг привязан к пользователю, а не к работе
     async function sendRating(authToken: string) {
         try {
             const response = await fetch(`${API_BASE_URL}/user_rating/add`, { method: "POST"

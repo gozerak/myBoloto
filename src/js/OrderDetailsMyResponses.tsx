@@ -3,6 +3,7 @@ import { Respond } from "./OrderDetails";
 import { Completed } from "./OrderDetailsCustomer";
 import { Job } from "../services/apiService";
 
+//Мои отклики
  export default function OrderDetailsMyResponses ({ order }: {
     order: Job;
  }) {

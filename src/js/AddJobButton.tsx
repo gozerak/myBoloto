@@ -228,7 +228,7 @@ export default function AddJobButton({ refreshOrder }: {
                             onWheel={(e) => (e.target as HTMLTextAreaElement).blur()}
                             required
                         />
-                        <p className='modal-input-cost-title'>/час</p>
+                        <p className='modal-input-cost-title'>₽/час</p>
                         </div>
                     </div>
 

@@ -4,9 +4,10 @@ import { fetchAllWorkers, UserDataArray } from "../services/apiService"
 import UserListCard from "./UserListCard";
 import "../css/UserList.css"
 
+//Страница Список работников
 export default function UserList () {
     const [allWorkers, setAllWorkers] = useState<UserDataArray>([])
-
+    //Получение списка всех пользователей
     useEffect(() => {
         const fetchWorkers = async () => {
             try {

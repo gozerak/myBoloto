@@ -4,7 +4,7 @@ import OrderCard from "./OrderCard";
 import Filters from "./Filters";
 import { Job } from "../services/apiService";
 
-
+//страница пользователя (Мои отклики)
 export default function MainMyResponsesPart ({ jobs }: {
     jobs: Job[];
 }) {
