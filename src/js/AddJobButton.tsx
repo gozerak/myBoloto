@@ -213,6 +213,7 @@ export default function AddJobButton({ refreshOrder }: {
                     onChange={handleChange}
                     onFocus={handleActionTypeFocus}
                     items={actionTypes} />
+                    
                     <div className='modal-forms'>
                         <p className='modal-headers'>
                             Стоимость заказа 

@@ -69,7 +69,7 @@ select{
     width: 80%;
     height: 20px;
     font-size: 18px;
-    font-family: 'Mulish';
+    font-family: 'Helvetica';
     border-radius: 4px;
     outline: none;  
     margin-top: 5px;
@@ -81,7 +81,7 @@ select{
     width: 20%;
     height: 20px;
     font-size: 18px;
-    font-family: 'Mulish';
+    font-family: 'Helvetica';
     border-radius: 4px;
     outline: none;  
     margin-top: 5px;
